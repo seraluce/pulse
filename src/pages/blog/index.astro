@@ -43,8 +43,6 @@ const posts = (await getCollection('blog')).sort(
 								)}
 							</div>
 							<h2 class="blog-card-title">{post.data.title}</h2>
-							<p class="blog-card-desc">{post.data.description}</p>
-							<span class="blog-card-link">阅读全文 →</span>
 						</a>
 					))}
 				</div>
@@ -162,29 +160,8 @@ const posts = (await getCollection('blog')).sort(
 		font-size: 18px;
 		font-weight: 600;
 		letter-spacing: -0.02em;
-		margin-bottom: 8px;
 		line-height: 1.4;
-		padding: 0 24px;
-	}
-
-	.blog-card-desc {
-		font-size: 14px;
-		line-height: 1.7;
-		color: var(--color-text-secondary);
-		margin-bottom: 16px;
-		padding: 0 24px;
-	}
-
-	.blog-card-link {
-		font-size: 13px;
-		color: var(--color-text-tertiary);
-		transition: color var(--transition-fast);
-		display: block;
 		padding: 0 24px 24px;
-	}
-
-	.blog-card:hover .blog-card-link {
-		color: var(--color-text);
 	}
 
 	@media (max-width: 768px) {
