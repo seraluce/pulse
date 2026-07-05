@@ -7,9 +7,10 @@ const links = {
 		{ label: '数据驱动', href: '/services' },
 	],
 	company: [
-		{ label: '关于我们', href: '/#about' },
+		{ label: '关于我们', href: '/about' },
 		{ label: '服务', href: '/services' },
-		{ label: '联系', href: '/#contact' },
+		{ label: '案例', href: '/cases' },
+		{ label: '联系', href: '/contact' },
 	],
 };
 ---
@@ -63,7 +64,7 @@ const links = {
 
 <style>
 	.footer {
-		border-top: 1px solid var(--color-border-light);
+		border-top: 1px solid var(--color-border);
 		background: var(--color-bg-secondary);
 	}
 
@@ -84,9 +85,7 @@ const links = {
 		margin-bottom: 12px;
 	}
 
-	.footer-logo svg {
-		color: var(--color-text);
-	}
+	.footer-logo svg { color: var(--color-text); }
 
 	.footer-desc {
 		font-size: 14px;
@@ -102,10 +101,10 @@ const links = {
 	}
 
 	.footer-col h4 {
-		font-size: 13px;
+		font-size: 12px;
 		font-weight: 600;
 		text-transform: uppercase;
-		letter-spacing: 0.08em;
+		letter-spacing: 0.1em;
 		color: var(--color-text-tertiary);
 		margin-bottom: 16px;
 	}
@@ -120,7 +119,7 @@ const links = {
 	.footer-col a {
 		font-size: 14px;
 		color: var(--color-text-secondary);
-		transition: color var(--transition);
+		transition: color var(--transition-fast);
 	}
 
 	.footer-col a:hover {
@@ -132,7 +131,7 @@ const links = {
 		justify-content: space-between;
 		align-items: center;
 		padding: 24px 0;
-		border-top: 1px solid var(--color-border-light);
+		border-top: 1px solid var(--color-border);
 	}
 
 	.footer-bottom p {
@@ -148,7 +147,7 @@ const links = {
 	.footer-bottom-links a {
 		font-size: 13px;
 		color: var(--color-text-tertiary);
-		transition: color var(--transition);
+		transition: color var(--transition-fast);
 	}
 
 	.footer-bottom-links a:hover {

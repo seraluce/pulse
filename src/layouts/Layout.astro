@@ -11,7 +11,6 @@
 		<link rel="preload" href="/fonts/PingFangSC-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
 		<link rel="stylesheet" href="/fonts/index.css" />
 		<script is:inline>
-			// 深色模式初始化 - 防止闪烁
 			(function() {
 				const theme = localStorage.getItem('theme');
 				if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -26,49 +25,55 @@
 </html>
 
 <style is:global>
-	/* ===== CSS 变量 ===== */
 	:root {
 		--color-bg: #ffffff;
-		--color-bg-secondary: #f7f7f7;
-		--color-bg-tertiary: #f0f0f0;
-		--color-text: #1a1a1a;
+		--color-bg-secondary: #fafafa;
+		--color-bg-tertiary: #f5f5f5;
+		--color-text: #000000;
 		--color-text-secondary: #666666;
-		--color-text-tertiary: #999999;
-		--color-border: #e0e0e0;
-		--color-border-light: #eeeeee;
-		--color-accent: #1a1a1a;
+		--color-text-tertiary: #888888;
+		--color-border: #eaeaea;
+		--color-border-light: #f0f0f0;
+		--color-accent: #000000;
 		--color-accent-hover: #333333;
 		--color-card-bg: #ffffff;
-		--color-card-shadow: rgba(0, 0, 0, 0.06);
-		--color-overlay: rgba(255, 255, 255, 0.8);
+		--color-card-shadow: rgba(0, 0, 0, 0.04);
+		--color-card-shadow-hover: rgba(0, 0, 0, 0.08);
+		--color-overlay: rgba(255, 255, 255, 0.85);
+		--color-highlight: #0070f3;
 
 		--font-sans: 'PingFangSC-Regular-woff2', 'PingFangSC-Medium-woff2', 'PingFangSC-Semibold-woff2', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 		--font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
 
 		--max-width: 1200px;
 		--header-height: 64px;
+		--radius-sm: 6px;
 		--radius: 8px;
 		--radius-lg: 12px;
-		--transition: 0.25s ease;
+		--radius-xl: 16px;
+		--transition: 0.2s ease;
+		--transition-fast: 0.15s ease;
+		--transition-slow: 0.4s ease;
 	}
 
 	:root.dark {
-		--color-bg: #0a0a0a;
+		--color-bg: #000000;
 		--color-bg-secondary: #111111;
 		--color-bg-tertiary: #1a1a1a;
-		--color-text: #f0f0f0;
-		--color-text-secondary: #a0a0a0;
+		--color-text: #ededed;
+		--color-text-secondary: #888888;
 		--color-text-tertiary: #666666;
-		--color-border: #2a2a2a;
-		--color-border-light: #1e1e1e;
-		--color-accent: #f0f0f0;
+		--color-border: #222222;
+		--color-border-light: #1a1a1a;
+		--color-accent: #ffffff;
 		--color-accent-hover: #cccccc;
-		--color-card-bg: #111111;
+		--color-card-bg: #0a0a0a;
 		--color-card-shadow: rgba(0, 0, 0, 0.3);
-		--color-overlay: rgba(10, 10, 10, 0.8);
+		--color-card-shadow-hover: rgba(255, 255, 255, 0.05);
+		--color-overlay: rgba(0, 0, 0, 0.8);
+		--color-highlight: #0070f3;
 	}
 
-	/* ===== 全局重置 ===== */
 	*, *::before, *::after {
 		box-sizing: border-box;
 		margin: 0;
@@ -86,13 +91,15 @@
 		background-color: var(--color-bg);
 		color: var(--color-text);
 		line-height: 1.6;
-		transition: background-color var(--transition), color var(--transition);
+		transition: background-color var(--transition-slow), color var(--transition);
 		min-height: 100vh;
+		overflow-x: hidden;
 	}
 
 	a {
 		color: inherit;
 		text-decoration: none;
+		transition: color var(--transition-fast);
 	}
 
 	img {
@@ -107,7 +114,6 @@
 		font-family: inherit;
 	}
 
-	/* ===== 工具类 ===== */
 	.container {
 		width: 100%;
 		max-width: var(--max-width);
@@ -119,6 +125,47 @@
 		padding: 100px 0;
 	}
 
+	.gradient-text {
+		color: var(--color-text-secondary);
+	}
+
+	.animate-on-scroll {
+		opacity: 0;
+		transform: translateY(24px);
+		transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.animate-on-scroll.visible {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	.animate-on-scroll.delay-1 { transition-delay: 0.1s; }
+	.animate-on-scroll.delay-2 { transition-delay: 0.2s; }
+	.animate-on-scroll.delay-3 { transition-delay: 0.3s; }
+	.animate-on-scroll.delay-4 { transition-delay: 0.4s; }
+	.animate-on-scroll.delay-5 { transition-delay: 0.5s; }
+
+	@keyframes float {
+		0%, 100% { transform: translateY(0); }
+		50% { transform: translateY(-10px); }
+	}
+
+	@keyframes pulse-ring {
+		0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+		100% { transform: translate(-50%, -50%) scale(1.15); opacity: 0; }
+	}
+
+	@keyframes shimmer {
+		0% { background-position: -200% 0; }
+		100% { background-position: 200% 0; }
+	}
+
+	@keyframes fade-in-up {
+		from { opacity: 0; transform: translateY(20px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+
 	@media (max-width: 768px) {
 		.container {
 			padding: 0 16px;
@@ -128,3 +175,17 @@
 		}
 	}
 </style>
+
+<script>
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach(entry => {
+			if (entry.isIntersecting) {
+				entry.target.classList.add('visible');
+			}
+		});
+	}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+	document.addEventListener('DOMContentLoaded', () => {
+		document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+	});
+</script>

@@ -13,8 +13,9 @@
 
 		<nav class="nav-desktop">
 			<a href="/services">服务</a>
-			<a href="/#about">关于</a>
-			<a href="/#contact">联系</a>
+			<a href="/cases">案例</a>
+			<a href="/about">关于</a>
+			<a href="/contact">联系</a>
 		</nav>
 
 		<div class="header-actions">
@@ -26,23 +27,25 @@
 					<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
 				</svg>
 			</button>
-			<a href="#contact" class="btn btn-primary">开始合作</a>
+			<a href="/contact" class="btn-header">开始合作</a>
 			<button class="menu-toggle" aria-label="菜单">
 				<span></span><span></span><span></span>
 			</button>
 		</div>
 	</div>
 
-	<!-- 移动端菜单 -->
 	<div class="nav-mobile">
 		<nav>
 			<a href="/services">服务</a>
-			<a href="/#about">关于</a>
-			<a href="/#contact">联系</a>
-			<a href="/#contact" class="btn btn-primary mobile-cta">开始合作</a>
+			<a href="/cases">案例</a>
+			<a href="/about">关于</a>
+			<a href="/contact">联系</a>
+			<a href="/contact" class="btn-mobile-cta">开始合作</a>
 		</nav>
 	</div>
 </header>
+
+<div class="nav-backdrop"></div>
 
 <style is:global>
 	.header {
@@ -51,14 +54,16 @@
 		left: 0;
 		right: 0;
 		height: var(--header-height);
-		background: var(--color-bg);
-		border-bottom: 1px solid var(--color-border-light);
+		background: var(--color-overlay);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border-bottom: 1px solid transparent;
 		z-index: 1000;
-		transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+		transition: background var(--transition), border-color var(--transition);
 	}
 
 	.header.scrolled {
-		box-shadow: 0 1px 8px var(--color-card-shadow);
+		border-bottom-color: var(--color-border);
 	}
 
 	.header-inner {
@@ -78,45 +83,30 @@
 		color: var(--color-text);
 	}
 
-	.logo svg {
-		color: var(--color-text);
-	}
+	.logo svg { color: var(--color-text); }
 
 	.nav-desktop {
 		display: flex;
-		gap: 32px;
+		gap: 4px;
 	}
 
 	.nav-desktop a {
 		font-size: 14px;
 		color: var(--color-text-secondary);
-		transition: color var(--transition);
-		position: relative;
-	}
-
-	.nav-desktop a::after {
-		content: '';
-		position: absolute;
-		bottom: -4px;
-		left: 0;
-		width: 0;
-		height: 1px;
-		background: var(--color-text);
-		transition: width var(--transition);
+		padding: 6px 12px;
+		border-radius: var(--radius);
+		transition: color var(--transition-fast), background var(--transition-fast);
 	}
 
 	.nav-desktop a:hover {
 		color: var(--color-text);
-	}
-
-	.nav-desktop a:hover::after {
-		width: 100%;
+		background: var(--color-bg-tertiary);
 	}
 
 	.header-actions {
 		display: flex;
 		align-items: center;
-		gap: 12px;
+		gap: 8px;
 	}
 
 	.theme-toggle {
@@ -127,7 +117,7 @@
 		justify-content: center;
 		border-radius: var(--radius);
 		color: var(--color-text-secondary);
-		transition: color var(--transition), background var(--transition);
+		transition: color var(--transition-fast), background var(--transition-fast);
 	}
 
 	.theme-toggle:hover {
@@ -139,27 +129,22 @@
 	:root.dark .icon-sun { display: none; }
 	:root.dark .icon-moon { display: block; }
 
-	.btn {
+	.btn-header {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		padding: 4px 20px;
+		padding: 7px 16px;
 		font-size: 14px;
 		font-weight: 500;
 		border-radius: var(--radius);
-		transition: all var(--transition);
+		background: var(--color-accent);
+		color: var(--color-bg);
+		transition: background var(--transition-fast);
 		white-space: nowrap;
 	}
 
-	.btn-primary {
-		background: var(--color-accent);
-		color: var(--color-bg);
-		border: 1px solid var(--color-accent);
-	}
-
-	.btn-primary:hover {
+	.btn-header:hover {
 		background: var(--color-accent-hover);
-		border-color: var(--color-accent-hover);
 	}
 
 	.menu-toggle {
@@ -179,18 +164,25 @@
 		height: 1.5px;
 		background: var(--color-text);
 		transition: all var(--transition);
+		transform-origin: center;
 	}
 
 	.nav-mobile {
-		display: none;
 		position: fixed;
 		top: var(--header-height);
-		left: 0;
-		right: 0;
+		right: -100%;
+		width: 280px;
+		bottom: 0;
 		background: var(--color-bg);
-		border-bottom: 1px solid var(--color-border);
-		padding: 16px 24px 24px;
+		border-left: 1px solid var(--color-border);
+		padding: 24px;
 		z-index: 999;
+		transition: right var(--transition);
+		overflow-y: auto;
+	}
+
+	.header.menu-open .nav-mobile {
+		right: 0;
 	}
 
 	.nav-mobile nav {
@@ -201,30 +193,43 @@
 
 	.nav-mobile a {
 		display: block;
-		padding: 12px 0;
+		padding: 12px 16px;
 		font-size: 15px;
 		color: var(--color-text-secondary);
-		border-bottom: 1px solid var(--color-border-light);
-		transition: color var(--transition);
+		border-radius: var(--radius);
+		transition: color var(--transition-fast), background var(--transition-fast);
 	}
 
 	.nav-mobile a:hover {
 		color: var(--color-text);
+		background: var(--color-bg-tertiary);
 	}
 
-	.nav-mobile .mobile-cta {
+	.btn-mobile-cta {
 		margin-top: 12px;
 		text-align: center;
-		color: var(--color-bg);
-		background: var(--color-accent);
-		padding: 12px;
-		border-radius: var(--radius);
-		border-bottom: none;
+		color: var(--color-bg) !important;
+		background: var(--color-accent) !important;
+		font-weight: 500;
 	}
 
-	/* 菜单激活状态 */
-	.header.menu-open .nav-mobile {
-		display: block;
+	.btn-mobile-cta:hover {
+		background: var(--color-accent-hover) !important;
+	}
+
+	.nav-backdrop {
+		position: fixed;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.4);
+		z-index: 998;
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity var(--transition), visibility var(--transition);
+	}
+
+	.header.menu-open ~ .nav-backdrop {
+		opacity: 1;
+		visibility: visible;
 	}
 
 	.header.menu-open .menu-toggle span:nth-child(1) {
@@ -239,34 +244,37 @@
 
 	@media (max-width: 768px) {
 		.nav-desktop { display: none; }
-		.header-actions .btn { display: none; }
+		.header-actions .btn-header { display: none; }
 		.menu-toggle { display: flex; }
 	}
 </style>
 
 <script>
-	// 深色模式切换
 	document.querySelector('.theme-toggle')?.addEventListener('click', () => {
 		document.documentElement.classList.toggle('dark');
 		const isDark = document.documentElement.classList.contains('dark');
 		localStorage.setItem('theme', isDark ? 'dark' : 'light');
 	});
 
-	// 滚动阴影
 	const header = document.querySelector('.header');
 	window.addEventListener('scroll', () => {
 		header?.classList.toggle('scrolled', window.scrollY > 10);
 	});
 
-	// 移动端菜单
-	document.querySelector('.menu-toggle')?.addEventListener('click', () => {
-		document.querySelector('.header')?.classList.toggle('menu-open');
+	const menuToggle = document.querySelector('.menu-toggle');
+	const backdrop = document.querySelector('.nav-backdrop');
+
+	menuToggle?.addEventListener('click', () => {
+		header?.classList.toggle('menu-open');
 	});
 
-	// 点击导航链接后关闭菜单
+	backdrop?.addEventListener('click', () => {
+		header?.classList.remove('menu-open');
+	});
+
 	document.querySelectorAll('.nav-mobile a').forEach(link => {
 		link.addEventListener('click', () => {
-			document.querySelector('.header')?.classList.remove('menu-open');
+			header?.classList.remove('menu-open');
 		});
 	});
 </script>

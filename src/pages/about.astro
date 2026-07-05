@@ -1,0 +1,437 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
+
+const values = [
+	{ title: '客户至上', desc: '始终将客户需求放在首位，以创造价值为导向。', icon: 'heart' },
+	{ title: '专业精进', desc: '持续学习行业前沿知识，保持专业领先。', icon: 'star' },
+	{ title: '诚信合作', desc: '以透明、真诚的态度对待每一位合作伙伴。', icon: 'shield' },
+	{ title: '创新驱动', desc: '拥抱变化，用创新思维解决复杂问题。', icon: 'bulb' },
+];
+
+const milestones = [
+	{ year: '2015', title: '创立起航', desc: '公司正式成立，专注于企业战略咨询服务。' },
+	{ year: '2017', title: '团队壮大', desc: '核心团队扩展至20人，覆盖多个专业领域。' },
+	{ year: '2018', title: '业务拓展', desc: '正式进入数字化转型领域。' },
+	{ year: '2020', title: '技术突破', desc: '自研智能化平台上线，服务效率提升300%。' },
+	{ year: '2021', title: '规模增长', desc: '服务客户突破300家，涵盖多个行业。' },
+	{ year: '2024', title: '智能时代', desc: '推出AI驱动的智能服务平台。' },
+];
+
+const team = [
+	{ name: '张明', role: '创始人 & CEO', desc: '15年企业咨询经验' },
+	{ name: '李华', role: '技术总监', desc: '前大厂技术负责人' },
+	{ name: '王芳', role: '设计总监', desc: '国际设计大奖获得者' },
+	{ name: '陈伟', role: '运营总监', desc: '10年数字营销经验' },
+];
+
+const iconSvg: Record<string, string> = {
+	heart: '<path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>',
+	star: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
+	shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+	bulb: '<path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12.7V17h8v-2.3A7 7 0 0012 2z"/>',
+};
+---
+
+<Layout>
+	<Header />
+	<main>
+		<section class="page-hero">
+			<div class="container">
+				<span class="section-tag animate-on-scroll">ABOUT US</span>
+				<h1 class="animate-on-scroll delay-1">关于 Grateful Group</h1>
+				<p class="animate-on-scroll delay-2">感恩每一次合作，珍惜每一份信任。我们以专业创造价值，用真诚赢得信赖。</p>
+			</div>
+		</section>
+
+		<section class="story section">
+			<div class="container">
+				<div class="story-grid">
+					<div class="story-content animate-on-scroll">
+						<h2>我们的故事</h2>
+						<p>Grateful Group 创立于2015年，源于一个简单的信念：企业值得拥有真正理解自己需求的合作伙伴。</p>
+						<p>从最初的企业战略咨询，到如今覆盖数字化转型、品牌建设、数据驱动的全方位服务平台，我们始终坚持以客户价值为核心驱动力。</p>
+						<p>近十年来，我们服务了超过500家企业客户，横跨金融、科技、零售、制造等多个行业。</p>
+					</div>
+					<div class="story-stats animate-on-scroll delay-2">
+						<div class="stat-card">
+							<span class="stat-num">500+</span>
+							<span class="stat-label">服务客户</span>
+						</div>
+						<div class="stat-card">
+							<span class="stat-num">50+</span>
+							<span class="stat-label">专业团队</span>
+						</div>
+						<div class="stat-card">
+							<span class="stat-num">98%</span>
+							<span class="stat-label">满意度</span>
+						</div>
+						<div class="stat-card">
+							<span class="stat-num">10+</span>
+							<span class="stat-label">年深耕</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="values section">
+			<div class="container">
+				<div class="section-header animate-on-scroll">
+					<span class="section-tag">OUR VALUES</span>
+					<h2>核心价值观</h2>
+					<p>指引我们前行的信念</p>
+				</div>
+				<div class="values-grid">
+					{values.map((v, i) => (
+						<div class={`value-card animate-on-scroll delay-${i + 1}`}>
+							<div class="value-icon" set:html={`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${iconSvg[v.icon]}</svg>`}></div>
+							<h3>{v.title}</h3>
+							<p>{v.desc}</p>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="timeline-section section">
+			<div class="container">
+				<div class="section-header animate-on-scroll">
+					<span class="section-tag">OUR JOURNEY</span>
+					<h2>发展历程</h2>
+				</div>
+				<div class="timeline">
+					<div class="timeline-center-line"></div>
+					{milestones.map((m, i) => (
+						<div class={`timeline-row ${i % 2 === 0 ? 'left' : 'right'} animate-on-scroll delay-${(i % 3) + 1}`}>
+							<div class="timeline-card">
+								<span class="timeline-year">{m.year}</span>
+								<h3>{m.title}</h3>
+								<p>{m.desc}</p>
+							</div>
+							<div class="timeline-node"></div>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="team section">
+			<div class="container">
+				<div class="section-header animate-on-scroll">
+					<span class="section-tag">OUR TEAM</span>
+					<h2>核心团队</h2>
+				</div>
+				<div class="team-grid">
+					{team.map((t, i) => (
+						<div class={`team-card animate-on-scroll delay-${i + 1}`}>
+							<div class="team-avatar">{t.name[0]}</div>
+							<h3>{t.name}</h3>
+							<span class="team-role">{t.role}</span>
+							<p>{t.desc}</p>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<CTA />
+	</main>
+	<Footer />
+</Layout>
+
+<style>
+	.page-hero {
+		padding-top: calc(var(--header-height) + 80px);
+		padding-bottom: 80px;
+		text-align: center;
+	}
+
+	.section-tag {
+		display: inline-block;
+		font-size: 12px;
+		letter-spacing: 0.15em;
+		color: var(--color-text-tertiary);
+		margin-bottom: 16px;
+		text-transform: uppercase;
+	}
+
+	.page-hero h1 {
+		font-size: clamp(32px, 4.5vw, 48px);
+		font-weight: 700;
+		letter-spacing: -0.03em;
+		margin-bottom: 16px;
+	}
+
+	.page-hero p {
+		font-size: 17px;
+		color: var(--color-text-secondary);
+		max-width: 560px;
+		margin: 0 auto;
+		line-height: 1.7;
+	}
+
+	.section-header {
+		text-align: center;
+		margin-bottom: 56px;
+	}
+
+	.section-header h2 {
+		font-size: clamp(28px, 3.5vw, 40px);
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		margin-bottom: 12px;
+	}
+
+	.section-header p {
+		font-size: 16px;
+		color: var(--color-text-secondary);
+	}
+
+	/* Story */
+	.story { background: var(--color-bg); }
+
+	.story-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 80px;
+		align-items: center;
+	}
+
+	.story-content h2 {
+		font-size: clamp(24px, 3vw, 36px);
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		margin-bottom: 24px;
+	}
+
+	.story-content p {
+		font-size: 15px;
+		line-height: 1.8;
+		color: var(--color-text-secondary);
+		margin-bottom: 16px;
+	}
+
+	.story-stats {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 16px;
+	}
+
+	.stat-card {
+		padding: 28px 24px;
+		background: var(--color-card-bg);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		text-align: center;
+	}
+
+	.stat-num {
+		display: block;
+		font-size: 32px;
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		margin-bottom: 4px;
+	}
+
+	.stat-label {
+		font-size: 13px;
+		color: var(--color-text-tertiary);
+	}
+
+	/* Values */
+	.values { background: var(--color-bg-secondary); }
+
+	.values-grid {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 1px;
+		background: var(--color-border);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		overflow: hidden;
+	}
+
+	.value-card {
+		padding: 36px 24px;
+		background: var(--color-card-bg);
+		text-align: center;
+		transition: background var(--transition-fast);
+	}
+
+	.value-card:hover {
+		background: var(--color-bg-tertiary);
+	}
+
+	.value-icon {
+		width: 48px;
+		height: 48px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius);
+		margin: 0 auto 16px;
+		color: var(--color-text);
+	}
+
+	.value-card h3 {
+		font-size: 16px;
+		font-weight: 600;
+		margin-bottom: 8px;
+	}
+
+	.value-card p {
+		font-size: 14px;
+		color: var(--color-text-secondary);
+		line-height: 1.6;
+	}
+
+	/* Timeline */
+	.timeline-section { background: var(--color-bg); }
+
+	.timeline {
+		position: relative;
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.timeline-center-line {
+		position: absolute;
+		left: 50%;
+		top: 0;
+		bottom: 0;
+		width: 1px;
+		background: var(--color-border);
+		transform: translateX(-50%);
+	}
+
+	.timeline-row {
+		position: relative;
+		display: flex;
+		margin-bottom: 32px;
+	}
+
+	.timeline-row.left {
+		justify-content: flex-start;
+		padding-right: calc(50% + 32px);
+		text-align: right;
+	}
+
+	.timeline-row.right {
+		justify-content: flex-end;
+		padding-left: calc(50% + 32px);
+	}
+
+	.timeline-node {
+		position: absolute;
+		left: 50%;
+		top: 20px;
+		width: 12px;
+		height: 12px;
+		border-radius: 50%;
+		background: var(--color-text);
+		border: 3px solid var(--color-bg);
+		transform: translateX(-50%);
+		z-index: 1;
+	}
+
+	.timeline-card {
+		padding: 24px;
+		background: var(--color-card-bg);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+	}
+
+	.timeline-year {
+		font-size: 12px;
+		font-weight: 600;
+		color: var(--color-text-tertiary);
+		letter-spacing: 0.08em;
+		margin-bottom: 6px;
+		display: block;
+	}
+
+	.timeline-card h3 {
+		font-size: 16px;
+		font-weight: 600;
+		margin-bottom: 6px;
+	}
+
+	.timeline-card p {
+		font-size: 14px;
+		color: var(--color-text-secondary);
+		line-height: 1.6;
+	}
+
+	/* Team */
+	.team { background: var(--color-bg-secondary); }
+
+	.team-grid {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 24px;
+	}
+
+	.team-card {
+		text-align: center;
+		padding: 36px 20px;
+		background: var(--color-card-bg);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+	}
+
+	.team-avatar {
+		width: 64px;
+		height: 64px;
+		border-radius: 50%;
+		background: var(--color-accent);
+		color: var(--color-bg);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 auto 16px;
+		font-size: 22px;
+		font-weight: 700;
+	}
+
+	.team-card h3 {
+		font-size: 16px;
+		font-weight: 600;
+		margin-bottom: 4px;
+	}
+
+	.team-role {
+		font-size: 13px;
+		color: var(--color-text-tertiary);
+		display: block;
+		margin-bottom: 8px;
+	}
+
+	.team-card p {
+		font-size: 13px;
+		color: var(--color-text-tertiary);
+	}
+
+	@media (max-width: 900px) {
+		.story-grid { grid-template-columns: 1fr; gap: 40px; }
+		.values-grid { grid-template-columns: repeat(2, 1fr); }
+		.team-grid { grid-template-columns: repeat(2, 1fr); }
+		.timeline-center-line { left: 20px; }
+		.timeline-row.left,
+		.timeline-row.right {
+			justify-content: flex-start;
+			padding-left: 52px;
+			padding-right: 0;
+			text-align: left;
+		}
+		.timeline-node { left: 20px; }
+	}
+
+	@media (max-width: 480px) {
+		.values-grid { grid-template-columns: 1fr; }
+		.team-grid { grid-template-columns: 1fr; }
+	}
+</style>

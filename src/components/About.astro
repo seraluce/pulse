@@ -10,7 +10,7 @@ const milestones = [
 <section id="about" class="about section">
 	<div class="container">
 		<div class="about-grid">
-			<div class="about-content">
+			<div class="about-content animate-on-scroll">
 				<span class="section-tag">ABOUT US</span>
 				<h2>关于 Grateful Group</h2>
 				<p class="about-lead">
@@ -24,10 +24,13 @@ const milestones = [
 					我们相信，真正的合作不只是交付成果，而是与客户共同成长。这也是"Grateful"的含义
 					—— 感恩每一次合作，珍惜每一份信任。
 				</p>
+				<a href="/about" class="about-link">
+					了解更多 →
+				</a>
 			</div>
-			<div class="about-timeline">
+			<div class="about-timeline animate-on-scroll delay-2">
 				<div class="timeline-line"></div>
-				{milestones.map((m, i) => (
+				{milestones.map((m) => (
 					<div class="timeline-item">
 						<div class="timeline-dot"></div>
 						<div class="timeline-year">{m.year}</div>
@@ -57,6 +60,7 @@ const milestones = [
 		letter-spacing: 0.15em;
 		color: var(--color-text-tertiary);
 		margin-bottom: 16px;
+		text-transform: uppercase;
 	}
 
 	.about-content h2 {
@@ -81,7 +85,21 @@ const milestones = [
 		margin-bottom: 16px;
 	}
 
-	/* 时间线 */
+	.about-link {
+		display: inline-block;
+		font-size: 14px;
+		font-weight: 500;
+		color: var(--color-text);
+		margin-top: 8px;
+		border-bottom: 1px solid var(--color-border);
+		padding-bottom: 2px;
+		transition: border-color var(--transition-fast);
+	}
+
+	.about-link:hover {
+		border-color: var(--color-text);
+	}
+
 	.about-timeline {
 		position: relative;
 		padding-left: 32px;

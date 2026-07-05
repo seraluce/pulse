@@ -13,8 +13,8 @@
 				我们为企业提供全方位的数字化解决方案，从战略规划到落地执行，帮助您在竞争中脱颖而出。
 			</p>
 			<div class="hero-actions">
-				<a href="#contact" class="btn btn-primary">立即咨询</a>
-				<a href="#features" class="btn btn-outline">了解更多</a>
+				<a href="/contact" class="btn btn-primary">立即咨询</a>
+				<a href="/services" class="btn btn-outline">了解更多</a>
 			</div>
 			<div class="hero-stats">
 				<div class="stat">
@@ -108,7 +108,7 @@
 		font-size: 15px;
 		font-weight: 500;
 		border-radius: var(--radius);
-		transition: all var(--transition);
+		transition: all var(--transition-fast);
 	}
 
 	.btn-primary {
@@ -161,7 +161,6 @@
 		background: var(--color-border);
 	}
 
-	/* 线条装饰图形 */
 	.hero-visual {
 		display: flex;
 		justify-content: center;
@@ -183,24 +182,9 @@
 		transform: translate(-50%, -50%);
 	}
 
-	.ring-1 {
-		width: 200px;
-		height: 200px;
-		border-color: var(--color-border);
-	}
-
-	.ring-2 {
-		width: 300px;
-		height: 300px;
-		border-color: var(--color-border-light);
-	}
-
-	.ring-3 {
-		width: 400px;
-		height: 400px;
-		border-color: var(--color-border-light);
-		opacity: 0.5;
-	}
+	.ring-1 { width: 200px; height: 200px; }
+	.ring-2 { width: 300px; height: 300px; border-color: var(--color-border-light); }
+	.ring-3 { width: 400px; height: 400px; border-color: var(--color-border-light); opacity: 0.5; }
 
 	.line-dot {
 		position: absolute;
@@ -214,10 +198,6 @@
 	.dot-2 { top: 0; left: 50%; transform: translate(-50%, -50%); }
 	.dot-3 { top: 50%; right: 0; transform: translate(50%, -50%); }
 	.dot-4 { bottom: 0; left: 50%; transform: translate(-50%, 50%); }
-
-	:root.dark .line-dot {
-		background: var(--color-text);
-	}
 
 	@media (max-width: 900px) {
 		.hero-inner {

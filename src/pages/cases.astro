@@ -1,0 +1,275 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
+
+const cases = [
+	{
+		title: '某金融集团数字化升级',
+		category: '数字化转型',
+		desc: '为大型金融集团打造端到端数字化平台，实现业务流程全面在线化。',
+		tags: ['金融科技', '平台开发', '用户体验'],
+		result: '效率提升 200%',
+	},
+	{
+		title: '新零售品牌全案策划',
+		category: '品牌建设',
+		desc: '从品牌定位到视觉设计，帮助新消费品牌在竞争中脱颖而出。',
+		tags: ['品牌策略', '视觉设计', '营销传播'],
+		result: '品牌认知度 +180%',
+	},
+	{
+		title: '制造业智能数据平台',
+		category: '数据驱动',
+		desc: '构建工业级数据采集与分析平台，助力制造企业实现智能制造转型。',
+		tags: ['数据分析', 'IoT', '智能制造'],
+		result: '成本降低 35%',
+	},
+	{
+		title: '电商平台增长方案',
+		category: '增长运营',
+		desc: '通过精细化运营策略和数据驱动优化，实现用户和营收双增长。',
+		tags: ['用户增长', '转化优化', '数据运营'],
+		result: 'GMV 增长 150%',
+	},
+	{
+		title: '医疗行业战略咨询',
+		category: '战略咨询',
+		desc: '为医疗科技企业制定市场进入战略，明确产品定位和商业化路径。',
+		tags: ['市场研究', '战略规划', '商业模式'],
+		result: '6个月内实现盈利',
+	},
+	{
+		title: '教育科技平台重构',
+		category: '数字化转型',
+		desc: '对传统教育平台进行技术架构重构和体验升级，支撑百万级并发。',
+		tags: ['架构升级', '性能优化', '体验设计'],
+		result: '系统可用性 99.99%',
+	},
+];
+---
+
+<Layout>
+	<Header />
+	<main>
+		<section class="page-hero">
+			<div class="container">
+				<span class="section-tag animate-on-scroll">OUR WORK</span>
+				<h1 class="animate-on-scroll delay-1">精选案例</h1>
+				<p class="animate-on-scroll delay-2">每一个项目都是我们与客户共同创造的成果</p>
+			</div>
+		</section>
+
+		<section class="cases section">
+			<div class="container">
+				<div class="cases-grid">
+					{cases.map((c, i) => (
+						<div class={`case-card animate-on-scroll delay-${(i % 3) + 1}`}>
+							<div class="case-header">
+								<span class="case-category">{c.category}</span>
+								<span class="case-result">{c.result}</span>
+							</div>
+							<h3>{c.title}</h3>
+							<p>{c.desc}</p>
+							<div class="case-tags">
+								{c.tags.map(tag => <span class="case-tag">{tag}</span>)}
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="process section">
+			<div class="container">
+				<div class="section-header animate-on-scroll">
+					<span class="section-tag">HOW WE WORK</span>
+					<h2>工作流程</h2>
+					<p>清晰透明的合作流程，确保每个项目高效交付</p>
+				</div>
+				<div class="process-steps">
+					{[
+						{ num: '01', title: '需求沟通', desc: '深入了解您的业务目标、挑战和期望' },
+						{ num: '02', title: '方案策划', desc: '制定针对性的解决方案和实施计划' },
+						{ num: '03', title: '执行落地', desc: '专业团队高效执行，全程透明可控' },
+						{ num: '04', title: '持续优化', desc: '交付后持续跟踪效果，迭代优化' },
+					].map((step, i) => (
+						<div class={`process-step animate-on-scroll delay-${i + 1}`}>
+							<span class="step-num">{step.num}</span>
+							<h3>{step.title}</h3>
+							<p>{step.desc}</p>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<CTA />
+	</main>
+	<Footer />
+</Layout>
+
+<style>
+	.page-hero {
+		padding-top: calc(var(--header-height) + 80px);
+		padding-bottom: 80px;
+		text-align: center;
+	}
+
+	.section-tag {
+		display: inline-block;
+		font-size: 12px;
+		letter-spacing: 0.15em;
+		color: var(--color-text-tertiary);
+		margin-bottom: 16px;
+		text-transform: uppercase;
+	}
+
+	.page-hero h1 {
+		font-size: clamp(32px, 4.5vw, 48px);
+		font-weight: 700;
+		letter-spacing: -0.03em;
+		margin-bottom: 16px;
+	}
+
+	.page-hero p {
+		font-size: 17px;
+		color: var(--color-text-secondary);
+		max-width: 520px;
+		margin: 0 auto;
+		line-height: 1.7;
+	}
+
+	.cases { background: var(--color-bg); }
+
+	.cases-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 24px;
+	}
+
+	.case-card {
+		padding: 32px 28px;
+		background: var(--color-card-bg);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+	}
+
+	.case-card:hover {
+		border-color: var(--color-text);
+		box-shadow: 0 4px 24px var(--color-card-shadow);
+	}
+
+	.case-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 16px;
+	}
+
+	.case-category {
+		font-size: 12px;
+		font-weight: 500;
+		color: var(--color-text-secondary);
+		padding: 4px 10px;
+		border: 1px solid var(--color-border);
+		border-radius: 100px;
+	}
+
+	.case-result {
+		font-size: 13px;
+		font-weight: 600;
+		color: var(--color-text);
+	}
+
+	.case-card h3 {
+		font-size: 18px;
+		font-weight: 600;
+		margin-bottom: 8px;
+		letter-spacing: -0.01em;
+	}
+
+	.case-card p {
+		font-size: 14px;
+		line-height: 1.7;
+		color: var(--color-text-secondary);
+		margin-bottom: 16px;
+	}
+
+	.case-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 6px;
+	}
+
+	.case-tag {
+		font-size: 11px;
+		padding: 3px 8px;
+		background: var(--color-bg-tertiary);
+		color: var(--color-text-tertiary);
+		border-radius: 4px;
+	}
+
+	.process { background: var(--color-bg-secondary); }
+
+	.section-header {
+		text-align: center;
+		margin-bottom: 56px;
+	}
+
+	.section-header h2 {
+		font-size: clamp(28px, 3.5vw, 40px);
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		margin-bottom: 12px;
+	}
+
+	.section-header p {
+		font-size: 16px;
+		color: var(--color-text-secondary);
+	}
+
+	.process-steps {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 24px;
+	}
+
+	.process-step {
+		text-align: center;
+		padding: 32px 20px;
+	}
+
+	.step-num {
+		display: block;
+		font-size: 40px;
+		font-weight: 800;
+		color: var(--color-text-tertiary);
+		margin-bottom: 16px;
+		opacity: 0.4;
+	}
+
+	.process-step h3 {
+		font-size: 17px;
+		font-weight: 600;
+		margin-bottom: 8px;
+	}
+
+	.process-step p {
+		font-size: 14px;
+		color: var(--color-text-secondary);
+		line-height: 1.6;
+	}
+
+	@media (max-width: 900px) {
+		.cases-grid { grid-template-columns: repeat(2, 1fr); }
+		.process-steps { grid-template-columns: repeat(2, 1fr); }
+	}
+
+	@media (max-width: 560px) {
+		.cases-grid { grid-template-columns: 1fr; }
+		.process-steps { grid-template-columns: 1fr; }
+	}
+</style>
