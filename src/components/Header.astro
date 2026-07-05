@@ -1,11 +1,7 @@
 ---
-interface Props {
-	transparent?: boolean;
-}
-const { transparent = false } = Astro.props;
 ---
 
-<header class:list={['header', { transparent }]}>
+<header class="header">
 	<div class="container header-inner">
 		<a href="/" class="logo">
 			<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -55,18 +51,14 @@ const { transparent = false } = Astro.props;
 		left: 0;
 		right: 0;
 		height: var(--header-height);
-		background: var(--color-overlay);
-		backdrop-filter: blur(12px);
-		-webkit-backdrop-filter: blur(12px);
+		background: var(--color-bg);
 		border-bottom: 1px solid var(--color-border-light);
 		z-index: 1000;
-		transition: background var(--transition), border-color var(--transition);
+		transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
 	}
 
-	.header.transparent {
-		background: transparent;
-		backdrop-filter: none;
-		border-bottom-color: transparent;
+	.header.scrolled {
+		box-shadow: 0 1px 8px var(--color-card-shadow);
 	}
 
 	.header-inner {
@@ -258,6 +250,12 @@ const { transparent = false } = Astro.props;
 		document.documentElement.classList.toggle('dark');
 		const isDark = document.documentElement.classList.contains('dark');
 		localStorage.setItem('theme', isDark ? 'dark' : 'light');
+	});
+
+	// 滚动阴影
+	const header = document.querySelector('.header');
+	window.addEventListener('scroll', () => {
+		header?.classList.toggle('scrolled', window.scrollY > 10);
 	});
 
 	// 移动端菜单
