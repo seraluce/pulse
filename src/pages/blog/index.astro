@@ -107,7 +107,6 @@ const posts = (await getCollection('blog')).sort(
 		text-decoration: none;
 		color: inherit;
 		overflow: hidden;
-		aspect-ratio: 1 / 1;
 	}
 
 	.blog-card:hover {
@@ -117,9 +116,8 @@ const posts = (await getCollection('blog')).sort(
 
 	.blog-card-cover {
 		width: 100%;
-		flex: 7;
+		aspect-ratio: 16 / 9;
 		overflow: hidden;
-		min-height: 0;
 	}
 
 	.blog-card-cover img {
@@ -134,13 +132,10 @@ const posts = (await getCollection('blog')).sort(
 	}
 
 	.blog-card-body {
-		flex: 3;
+		padding: 16px;
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
-		padding: 10px 14px;
-		gap: 6px;
-		overflow: hidden;
+		gap: 8px;
 	}
 
 	.blog-card-meta {
@@ -151,26 +146,26 @@ const posts = (await getCollection('blog')).sort(
 	}
 
 	.blog-card-meta time {
-		font-size: 11px;
+		font-size: 12px;
 		color: var(--color-text-tertiary);
 	}
 
 	.blog-tags {
 		display: flex;
-		gap: 5px;
+		gap: 6px;
 		flex-wrap: wrap;
 	}
 
 	.blog-tag {
 		font-size: 10px;
-		padding: 1px 6px;
+		padding: 2px 8px;
 		border-radius: 100px;
 		border: 1px solid var(--color-border);
 		color: var(--color-text-tertiary);
 	}
 
 	.blog-card-title {
-		font-size: 14px;
+		font-size: 16px;
 		font-weight: 600;
 		letter-spacing: -0.02em;
 		line-height: 1.4;
@@ -189,22 +184,6 @@ const posts = (await getCollection('blog')).sort(
 	@media (max-width: 768px) {
 		.blog-grid {
 			grid-template-columns: 1fr;
-		}
-		.blog-card {
-			aspect-ratio: unset;
-		}
-		.blog-card-cover {
-			flex: unset;
-			aspect-ratio: 16 / 9;
-		}
-		.blog-card-body {
-			flex: unset;
-			padding: 16px 20px;
-			gap: 8px;
-		}
-		.blog-card-title {
-			font-size: 16px;
-			-webkit-line-clamp: unset;
 		}
 		.page-hero {
 			padding-bottom: 40px;
