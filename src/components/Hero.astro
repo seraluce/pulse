@@ -2,13 +2,6 @@
 ---
 
 <section class="hero">
-	<div class="hero-ripple-bg">
-		<div class="ripple ripple-1"></div>
-		<div class="ripple ripple-2"></div>
-		<div class="ripple ripple-3"></div>
-		<div class="ripple ripple-4"></div>
-		<div class="ripple-core"></div>
-	</div>
 	<div class="container hero-inner">
 		<div class="hero-content">
 			<div class="hero-badge">专业 · 高效 · 可靠</div>
@@ -40,6 +33,15 @@
 				</div>
 			</div>
 		</div>
+		<div class="hero-visual">
+			<div class="hero-ripple-bg">
+				<div class="ripple ripple-1"></div>
+				<div class="ripple ripple-2"></div>
+				<div class="ripple ripple-3"></div>
+				<div class="ripple ripple-4"></div>
+				<div class="ripple-core"></div>
+			</div>
+		</div>
 	</div>
 </section>
 
@@ -48,87 +50,13 @@
 		min-height: 100dvh;
 		display: flex;
 		align-items: center;
-		justify-content: center;
 		padding-top: var(--header-height);
-		position: relative;
-		overflow: hidden;
-		text-align: center;
-	}
-
-	/* 涟漪背景层 */
-	.hero-ripple-bg {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		width: 900px;
-		height: 900px;
-		pointer-events: none;
-		z-index: 0;
-	}
-
-	.ripple {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		width: 40px;
-		height: 40px;
-		border-radius: 50%;
-		border: 3px solid var(--color-border);
-		transform: translate(-50%, -50%);
-		opacity: 0;
-		animation: ripple-expand 6s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-	}
-
-	.ripple-1 { animation-delay: 0s; }
-	.ripple-2 { animation-delay: 1.5s; }
-	.ripple-3 { animation-delay: 3s; }
-	.ripple-4 { animation-delay: 4.5s; }
-
-	@keyframes ripple-expand {
-		0% {
-			width: 40px;
-			height: 40px;
-			opacity: 0.8;
-			border-width: 3px;
-		}
-		100% {
-			width: 900px;
-			height: 900px;
-			opacity: 0;
-			border-width: 1px;
-		}
-	}
-
-	.ripple-core {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		width: 16px;
-		height: 16px;
-		border-radius: 50%;
-		background: var(--color-text);
-		transform: translate(-50%, -50%);
-		animation: core-pulse 2s ease-in-out infinite;
-		opacity: 0.4;
-	}
-
-	@keyframes core-pulse {
-		0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.4; }
-		50% { transform: translate(-50%, -50%) scale(1.6); opacity: 0.15; }
 	}
 
 	.hero-inner {
-		position: relative;
-		z-index: 1;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-
-	.hero-content {
-		display: flex;
-		flex-direction: column;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 60px;
 		align-items: center;
 	}
 
@@ -144,7 +72,7 @@
 	}
 
 	.hero h1 {
-		font-size: clamp(36px, 5.5vw, 64px);
+		font-size: clamp(36px, 5vw, 56px);
 		font-weight: 700;
 		line-height: 1.15;
 		letter-spacing: -0.03em;
@@ -159,7 +87,7 @@
 		font-size: 17px;
 		line-height: 1.7;
 		color: var(--color-text-secondary);
-		max-width: 520px;
+		max-width: 480px;
 		margin-bottom: 36px;
 	}
 
@@ -230,54 +158,155 @@
 		background: var(--color-border);
 	}
 
-	@media (max-width: 768px) {
+	/* 涟漪 — 桌面端右侧背景 */
+	.hero-visual {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.hero-ripple-bg {
+		position: relative;
+		width: 520px;
+		height: 520px;
+	}
+
+	.ripple {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		border: 5px solid var(--color-text);
+		opacity: 0;
+		transform: translate(-50%, -50%);
+		animation: ripple-expand 6s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+	}
+
+	.ripple-1 { animation-delay: 0s; }
+	.ripple-2 { animation-delay: 1.5s; }
+	.ripple-3 { animation-delay: 3s; }
+	.ripple-4 { animation-delay: 4.5s; }
+
+	@keyframes ripple-expand {
+		0% {
+			width: 40px;
+			height: 40px;
+			opacity: 0.25;
+			border-width: 5px;
+		}
+		50% {
+			opacity: 0.15;
+			border-width: 3px;
+		}
+		100% {
+			width: 520px;
+			height: 520px;
+			opacity: 0;
+			border-width: 1px;
+		}
+	}
+
+	.ripple-core {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 18px;
+		height: 18px;
+		border-radius: 50%;
+		background: var(--color-text);
+		transform: translate(-50%, -50%);
+		animation: core-pulse 2s ease-in-out infinite;
+	}
+
+	@keyframes core-pulse {
+		0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+		50% { transform: translate(-50%, -50%) scale(1.8); opacity: 0.2; }
+	}
+
+	/* 移动端：涟漪作为全屏背景 */
+	@media (max-width: 900px) {
+		.hero-inner {
+			grid-template-columns: 1fr;
+			text-align: center;
+		}
+		.hero-desc { margin-left: auto; margin-right: auto; margin-bottom: 28px; }
+		.hero-actions { justify-content: center; margin-bottom: 36px; }
+		.hero-stats { justify-content: center; }
+
+		.hero {
+			position: relative;
+			overflow: hidden;
+		}
+
+		.hero-visual {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			pointer-events: none;
+			z-index: 0;
+		}
+
 		.hero-ripple-bg {
-			width: 600px;
-			height: 600px;
+			width: 700px;
+			height: 700px;
+		}
+
+		.hero-inner {
+			position: relative;
+			z-index: 1;
 		}
 
 		@keyframes ripple-expand {
 			0% {
 				width: 30px;
 				height: 30px;
-				opacity: 0.7;
-				border-width: 2.5px;
+				opacity: 0.2;
+				border-width: 4px;
+			}
+			50% {
+				opacity: 0.12;
+				border-width: 3px;
 			}
 			100% {
-				width: 600px;
-				height: 600px;
+				width: 700px;
+				height: 700px;
 				opacity: 0;
-				border-width: 0.5px;
+				border-width: 1px;
 			}
 		}
-
-		.hero-actions { flex-direction: column; width: 100%; max-width: 300px; }
-		.btn { width: 100%; }
 	}
 
 	@media (max-width: 480px) {
+		.hero-actions { flex-direction: column; }
+		.hero-stats { flex-wrap: wrap; gap: 16px; }
+		.hero h1 { font-size: clamp(28px, 8vw, 40px); }
+		.hero-desc { font-size: 15px; }
+
 		.hero-ripple-bg {
-			width: 450px;
-			height: 450px;
+			width: 500px;
+			height: 500px;
 		}
 
 		@keyframes ripple-expand {
 			0% {
 				width: 24px;
 				height: 24px;
-				opacity: 0.6;
-				border-width: 2px;
+				opacity: 0.18;
+				border-width: 4px;
+			}
+			50% {
+				opacity: 0.1;
+				border-width: 2.5px;
 			}
 			100% {
-				width: 450px;
-				height: 450px;
+				width: 500px;
+				height: 500px;
 				opacity: 0;
-				border-width: 0.5px;
+				border-width: 1px;
 			}
 		}
-
-		.hero-stats { flex-wrap: wrap; gap: 16px; justify-content: center; }
-		.hero h1 { font-size: clamp(28px, 8vw, 40px); }
-		.hero-desc { font-size: 15px; }
 	}
 </style>
