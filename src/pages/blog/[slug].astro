@@ -52,11 +52,9 @@ const nextPost = allPosts[currentIndex - 1];
 						</div>
 					)}
 				</div>
-				{post.data.image && (
-					<div class="post-cover">
-						<img src={post.data.image} alt={post.data.title} />
-					</div>
-				)}
+				<div class="post-cover">
+					<img src={`/cover/${post.id}`} alt={post.data.title} />
+				</div>
 			</header>
 
 			<div class="container">

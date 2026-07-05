@@ -1,3 +1,7 @@
 /og/*
   Content-Type: image/svg+xml
   Cache-Control: public, max-age=86400
+
+/cover/*
+  Content-Type: image/svg+xml
+  Cache-Control: public, max-age=86400
