@@ -18,7 +18,7 @@ export const onRequestPost: PagesFunction = async (context) => {
 		const emailService = {
 			apiKey: context.env.EMAIL_API_KEY,
 			from: context.env.EMAIL_FROM || 'noreply@gratefulgroup.com',
-			to: context.env.EMAIL_TO || 'hello@gratefulgroup.com',
+			to: context.env.EMAIL_TO || 'seraluce@163.com',
 		};
 
 		await fetch('https://api.resend.com/emails', {

@@ -17,7 +17,7 @@ export default async function handler(request: VercelRequest, response: VercelRe
 	const emailService = {
 		apiKey: process.env.EMAIL_API_KEY,
 		from: process.env.EMAIL_FROM || 'noreply@gratefulgroup.com',
-		to: process.env.EMAIL_TO || 'hello@gratefulgroup.com',
+		to: process.env.EMAIL_TO || 'seraluce@163.com',
 	};
 
 	await fetch('https://api.resend.com/emails', {
