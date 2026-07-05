@@ -450,27 +450,20 @@ const iconSvg: Record<string, string> = {
 			const data = Object.fromEntries(formData.entries());
 
 			try {
-				let response = await fetch('/api/contact', {
+				const response = await fetch(form.action, {
 					method: 'POST',
-					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify(data),
-				});
-
-				if (response.ok) {
-					onSuccess();
-					return;
-				}
-
-				response = await fetch(form.action, {
-					method: 'POST',
-					headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+					headers: {
+						'Content-Type': 'application/json',
+						'Accept': 'application/json',
+					},
 					body: JSON.stringify(data),
 				});
 
 				if (response.ok) {
 					onSuccess();
 				} else {
-					showToast('发送失败，请稍后重试', 'fail');
+					const result = await response.json().catch(() => null);
+					showToast(result?.error || '发送失败，请稍后重试', 'fail');
 				}
 			} catch {
 				showToast('网络错误，请检查连接后重试', 'fail');
