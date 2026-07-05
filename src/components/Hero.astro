@@ -39,6 +39,8 @@
 				<div class="ripple ripple-2"></div>
 				<div class="ripple ripple-3"></div>
 				<div class="ripple ripple-4"></div>
+				<div class="ripple ripple-5"></div>
+				<div class="ripple ripple-6"></div>
 				<div class="ripple-core"></div>
 			</div>
 		</div>
@@ -167,8 +169,8 @@
 
 	.hero-ripple-bg {
 		position: relative;
-		width: 520px;
-		height: 520px;
+		width: 700px;
+		height: 700px;
 	}
 
 	.ripple {
@@ -181,13 +183,15 @@
 		border: 5px solid var(--color-text);
 		opacity: 0;
 		transform: translate(-50%, -50%);
-		animation: ripple-expand 6s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+		animation: ripple-expand 8s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 	}
 
 	.ripple-1 { animation-delay: 0s; }
-	.ripple-2 { animation-delay: 1.5s; }
-	.ripple-3 { animation-delay: 3s; }
-	.ripple-4 { animation-delay: 4.5s; }
+	.ripple-2 { animation-delay: 1.33s; }
+	.ripple-3 { animation-delay: 2.66s; }
+	.ripple-4 { animation-delay: 4s; }
+	.ripple-5 { animation-delay: 5.33s; }
+	.ripple-6 { animation-delay: 6.66s; }
 
 	@keyframes ripple-expand {
 		0% {
@@ -201,8 +205,8 @@
 			border-width: 3px;
 		}
 		100% {
-			width: 520px;
-			height: 520px;
+			width: 700px;
+			height: 700px;
 			opacity: 0;
 			border-width: 1px;
 		}
@@ -212,8 +216,8 @@
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		width: 18px;
-		height: 18px;
+		width: 8px;
+		height: 8px;
 		border-radius: 50%;
 		background: var(--color-text);
 		transform: translate(-50%, -50%);
@@ -250,8 +254,8 @@
 		}
 
 		.hero-ripple-bg {
-			width: 700px;
-			height: 700px;
+			width: 900px;
+			height: 900px;
 		}
 
 		.hero-inner {
@@ -271,8 +275,8 @@
 				border-width: 3px;
 			}
 			100% {
-				width: 700px;
-				height: 700px;
+				width: 900px;
+				height: 900px;
 				opacity: 0;
 				border-width: 1px;
 			}
@@ -286,8 +290,8 @@
 		.hero-desc { font-size: 15px; }
 
 		.hero-ripple-bg {
-			width: 500px;
-			height: 500px;
+			width: 700px;
+			height: 700px;
 		}
 
 		@keyframes ripple-expand {
@@ -302,8 +306,8 @@
 				border-width: 2.5px;
 			}
 			100% {
-				width: 500px;
-				height: 500px;
+				width: 700px;
+				height: 700px;
 				opacity: 0;
 				border-width: 1px;
 			}
