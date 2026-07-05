@@ -157,22 +157,31 @@ const links = {
 	@media (max-width: 768px) {
 		.footer-top {
 			grid-template-columns: 1fr;
-			gap: 40px;
-			padding: 48px 0 36px;
+			gap: 28px;
+			padding: 36px 0 24px;
 		}
 		.footer-links {
 			grid-template-columns: repeat(2, 1fr);
+			gap: 20px;
 		}
 		.footer-bottom {
 			flex-direction: column;
-			gap: 12px;
+			gap: 10px;
 			text-align: center;
+			padding: 16px 0;
 		}
 	}
 
 	@media (max-width: 480px) {
 		.footer-links {
-			grid-template-columns: 1fr;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 16px;
+		}
+		.footer-col h4 {
+			margin-bottom: 10px;
+		}
+		.footer-col ul {
+			gap: 8px;
 		}
 	}
 </style>
