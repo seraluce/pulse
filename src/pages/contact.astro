@@ -116,6 +116,7 @@ const iconSvg: Record<string, string> = {
 			</div>
 		</section>
 	</main>
+	<div class="form-toast" id="formToast"></div>
 	<Footer />
 </Layout>
 
@@ -265,6 +266,66 @@ const iconSvg: Record<string, string> = {
 		border-color: var(--color-text);
 	}
 
+	.form-group input.error,
+	.form-group select.error,
+	.form-group textarea.error {
+		border-color: #ef4444;
+		animation: shake 0.4s ease;
+	}
+
+	@keyframes shake {
+		0%, 100% { transform: translateX(0); }
+		20%, 60% { transform: translateX(-6px); }
+		40%, 80% { transform: translateX(6px); }
+	}
+
+	/* 提交反馈 */
+	.form-toast {
+		position: fixed;
+		top: 100px;
+		left: 50%;
+		transform: translateX(-50%) translateY(-20px);
+		padding: 14px 28px;
+		border-radius: var(--radius);
+		font-size: 14px;
+		font-weight: 500;
+		opacity: 0;
+		visibility: hidden;
+		transition: all 0.3s ease;
+		z-index: 9999;
+		pointer-events: none;
+	}
+
+	.form-toast.show {
+		opacity: 1;
+		visibility: visible;
+		transform: translateX(-50%) translateY(0);
+	}
+
+	.form-toast.success {
+		background: #f0fdf4;
+		color: #166534;
+		border: 1px solid #bbf7d0;
+	}
+
+	.form-toast.fail {
+		background: #fef2f2;
+		color: #991b1b;
+		border: 1px solid #fecaca;
+	}
+
+	:root.dark .form-toast.success {
+		background: #052e16;
+		color: #86efac;
+		border-color: #166534;
+	}
+
+	:root.dark .form-toast.fail {
+		background: #350a0a;
+		color: #fca5a5;
+		border-color: #991b1b;
+	}
+
 	.form-group input::placeholder,
 	.form-group textarea::placeholder {
 		color: var(--color-text-tertiary);
@@ -355,9 +416,31 @@ const iconSvg: Record<string, string> = {
 
 <script>
 	const form = document.getElementById('contactForm') as HTMLFormElement;
-	if (form) {
+	const toast = document.getElementById('formToast') as HTMLDivElement;
+
+	if (form && toast) {
+		// 输入时清除错误状态
+		form.querySelectorAll('input, select, textarea').forEach(el => {
+			el.addEventListener('input', () => el.classList.remove('error'));
+		});
+
 		form.addEventListener('submit', async (e) => {
 			e.preventDefault();
+
+			// 验证必填字段
+			let hasError = false;
+			form.querySelectorAll('[required]').forEach(el => {
+				if (!(el as HTMLInputElement).value.trim()) {
+					el.classList.add('error');
+					hasError = true;
+				}
+			});
+
+			if (hasError) {
+				showToast('请填写所有必填项', 'fail');
+				return;
+			}
+
 			const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
 			const originalText = btn.textContent;
 			btn.disabled = true;
@@ -367,7 +450,6 @@ const iconSvg: Record<string, string> = {
 			const data = Object.fromEntries(formData.entries());
 
 			try {
-				// 尝试平台 API（Vercel / Cloudflare）
 				let response = await fetch('/api/contact', {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },
@@ -375,50 +457,40 @@ const iconSvg: Record<string, string> = {
 				});
 
 				if (response.ok) {
-					showSuccess();
+					onSuccess();
 					return;
 				}
 
-				// API 不可用，回退到 Formspree
 				response = await fetch(form.action, {
 					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-						'Accept': 'application/json',
-					},
+					headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
 					body: JSON.stringify(data),
 				});
 
 				if (response.ok) {
-					showSuccess();
+					onSuccess();
 				} else {
-					showError();
+					showToast('发送失败，请稍后重试', 'fail');
 				}
 			} catch {
-				showError();
+				showToast('网络错误，请检查连接后重试', 'fail');
 			} finally {
 				btn.disabled = false;
 				btn.textContent = originalText;
 			}
 
-			function showSuccess() {
+			function onSuccess() {
 				form.reset();
-				btn.textContent = '已发送！';
-				btn.style.background = '#22c55e';
-				setTimeout(() => {
-					btn.textContent = originalText;
-					btn.style.background = '';
-				}, 3000);
-			}
-
-			function showError() {
-				btn.textContent = '发送失败，请重试';
-				btn.style.background = '#ef4444';
-				setTimeout(() => {
-					btn.textContent = originalText;
-					btn.style.background = '';
-				}, 3000);
+				form.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
+				showToast('留言已收到，我们会尽快回复您！', 'success');
 			}
 		});
+	}
+
+	function showToast(msg: string, type: 'success' | 'fail') {
+		if (!toast) return;
+		toast.textContent = msg;
+		toast.className = `form-toast ${type} show`;
+		setTimeout(() => toast.classList.remove('show'), 4000);
 	}
 </script>
