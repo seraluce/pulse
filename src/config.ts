@@ -1,6 +1,7 @@
 export const site = {
 	// 基本信息
 	title: 'Grateful Group',
+	slogan: '专业企业服务平台',
 	description: '专业企业服务平台，提供战略咨询、数字化转型、品牌建设、数据驱动等全方位解决方案，助力企业持续增长。',
 	url: 'https://gratefulgroup.com',
 	lang: 'zh-CN',
@@ -41,7 +42,9 @@ export type PageMeta = {
 };
 
 export function getPageMeta(meta: PageMeta = {}) {
-	const title = meta.title ? `${meta.title} - ${site.title}` : site.title;
+	const title = meta.title && meta.title !== '首页'
+		? `${meta.title} - ${site.title}`
+		: `${site.title} - ${site.slogan}`;
 	const description = meta.description || site.description;
 	const url = meta.path ? `${site.url}${meta.path}` : site.url;
 	const image = meta.image ? `${site.url}${meta.image}` : `${site.url}${site.ogImage}`;
