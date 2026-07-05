@@ -24,11 +24,12 @@ const posts = (await getCollection('blog')).sort(
 			<div class="container">
 				<div class="blog-grid">
 					{posts.map((post) => (
-						<a href={`/blog/${post.id}`} class="blog-card animate-on-scroll">
+						<a href={`/blog/${post.id}`} class="blog-card animate-on-scroll" title={post.data.title}>
 							<div class="blog-card-cover">
 								<img src={`/cover/${post.id}`} alt={post.data.title} />
 							</div>
 							<div class="blog-card-body">
+								<h2 class="blog-card-title">{post.data.title}</h2>
 								<div class="blog-card-meta">
 									<time datetime={post.data.pubDate.toISOString()}>
 										{post.data.pubDate.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' })}
@@ -95,6 +96,7 @@ const posts = (await getCollection('blog')).sort(
 	}
 
 	.blog-card {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		background: var(--color-card-bg);
@@ -159,6 +161,18 @@ const posts = (await getCollection('blog')).sort(
 		border-radius: 100px;
 		border: 1px solid var(--color-border);
 		color: var(--color-text-tertiary);
+	}
+
+	.blog-card-title {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border-width: 0;
 	}
 
 	@media (max-width: 900px) {
