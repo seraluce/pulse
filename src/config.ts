@@ -28,6 +28,9 @@ export const site = {
 	// Logo 尺寸
 	logoWidth: 28,
 	logoHeight: 28,
+
+	// 表单服务
+	formspreeEndpoint: 'https://formspree.io/f/YOUR_FORM_ID',
 };
 
 export type PageMeta = {

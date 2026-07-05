@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { site } from '../config';
 
 const contactInfo = [
 	{ icon: 'mail', title: '邮箱', value: 'hello@gratefulgroup.com', href: 'mailto:hello@gratefulgroup.com' },
@@ -49,7 +50,9 @@ const iconSvg: Record<string, string> = {
 					</div>
 
 					<div class="contact-form-wrap animate-on-scroll delay-2">
-						<form class="contact-form" id="contactForm">
+						<form class="contact-form" id="contactForm" action={site.formspreeEndpoint} method="POST" data-netlify="true" netlify-honeypot="bot-field">
+							<input type="hidden" name="form-name" value="contact" />
+							<p hidden><label>Don't fill this out: <input name="bot-field" /></label></p>
 							<div class="form-row">
 								<div class="form-group">
 									<label for="name">姓名</label>
@@ -349,3 +352,73 @@ const iconSvg: Record<string, string> = {
 		.contact-form-wrap { padding: 24px; }
 	}
 </style>
+
+<script>
+	const form = document.getElementById('contactForm') as HTMLFormElement;
+	if (form) {
+		form.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+			const originalText = btn.textContent;
+			btn.disabled = true;
+			btn.textContent = '发送中...';
+
+			const formData = new FormData(form);
+			const data = Object.fromEntries(formData.entries());
+
+			try {
+				// 尝试平台 API（Vercel / Cloudflare）
+				let response = await fetch('/api/contact', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify(data),
+				});
+
+				if (response.ok) {
+					showSuccess();
+					return;
+				}
+
+				// API 不可用，回退到 Formspree
+				response = await fetch(form.action, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						'Accept': 'application/json',
+					},
+					body: JSON.stringify(data),
+				});
+
+				if (response.ok) {
+					showSuccess();
+				} else {
+					showError();
+				}
+			} catch {
+				showError();
+			} finally {
+				btn.disabled = false;
+				btn.textContent = originalText;
+			}
+
+			function showSuccess() {
+				form.reset();
+				btn.textContent = '已发送！';
+				btn.style.background = '#22c55e';
+				setTimeout(() => {
+					btn.textContent = originalText;
+					btn.style.background = '';
+				}, 3000);
+			}
+
+			function showError() {
+				btn.textContent = '发送失败，请重试';
+				btn.style.background = '#ef4444';
+				setTimeout(() => {
+					btn.textContent = originalText;
+					btn.style.background = '';
+				}, 3000);
+			}
+		});
+	}
+</script>
