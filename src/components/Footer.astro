@@ -1,4 +1,6 @@
 ---
+import { site } from '../config';
+
 const links = {
 	services: [
 		{ label: '战略咨询', href: '/services' },
@@ -20,13 +22,11 @@ const links = {
 		<div class="footer-top">
 			<div class="footer-brand">
 				<a href="/" class="footer-logo">
-					<svg width="24" height="24" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<rect x="1" y="1" width="26" height="26" rx="6" stroke="currentColor" stroke-width="1.5"/>
-						<path d="M8 14h12M14 8v12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-					</svg>
-					<span>Grateful Group</span>
+					<img src={site.logo.light} alt={site.title} width={24} height={24} class="logo-light" />
+					<img src={site.logo.dark} alt={site.title} width={24} height={24} class="logo-dark" />
+					<span>{site.title}</span>
 				</a>
-				<p class="footer-desc">专业企业服务平台，助力企业持续增长。</p>
+				<p class="footer-desc">{site.description.slice(0, 30)}…</p>
 			</div>
 
 			<div class="footer-links">
@@ -85,7 +85,10 @@ const links = {
 		margin-bottom: 12px;
 	}
 
-	.footer-logo svg { color: var(--color-text); }
+	.footer-logo img { display: block; }
+	.footer-logo .logo-dark { display: none; }
+	:root.dark .footer-logo .logo-light { display: none; }
+	:root.dark .footer-logo .logo-dark { display: block; }
 
 	.footer-desc {
 		font-size: 14px;

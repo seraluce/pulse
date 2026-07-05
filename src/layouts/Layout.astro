@@ -58,8 +58,9 @@ const jsonLd = {
 		{site.twitter && <meta name="twitter:site" content={site.twitter} />}
 
 		<!-- Favicons -->
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" type="image/svg+xml" href={site.favicon} />
+		<link rel="icon" href={site.faviconIco} />
+		<link rel="apple-touch-icon" href={site.appleTouchIcon} />
 
 		<!-- Fonts -->
 		<link rel="preload" href="/fonts/PingFangSC-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />

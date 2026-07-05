@@ -1,14 +1,13 @@
 ---
+import { site } from '../config';
 ---
 
 <header class="header">
 	<div class="container header-inner">
 		<a href="/" class="logo">
-			<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<rect x="1" y="1" width="26" height="26" rx="6" stroke="currentColor" stroke-width="1.5"/>
-				<path d="M8 14h12M14 8v12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-			</svg>
-			<span>Grateful Group</span>
+			<img src={site.logo.light} alt={site.title} width={site.logoWidth} height={site.logoHeight} class="logo-light" />
+			<img src={site.logo.dark} alt={site.title} width={site.logoWidth} height={site.logoHeight} class="logo-dark" />
+			<span>{site.title}</span>
 		</a>
 
 		<nav class="nav-desktop">
@@ -101,7 +100,13 @@
 		color: var(--color-text);
 	}
 
-	.logo svg { color: var(--color-text); }
+	.logo img {
+		display: block;
+	}
+
+	.logo-dark { display: none; }
+	:root.dark .logo-light { display: none; }
+	:root.dark .logo-dark { display: block; }
 
 	.nav-desktop {
 		display: flex;
