@@ -2,6 +2,7 @@
 title: '品牌建设：从0到1的实战指南'
 description: '品牌不只是一个 logo 和 slogan，它是用户对企业的整体感知。本文从品牌定位、视觉系统、传播策略三个维度，分享品牌建设的实战方法论。'
 pubDate: 2026-06-10
+image: '/images/blog/brand-building.png'
 tags: ['品牌建设', '市场营销', '企业战略']
 author: 'Grateful Group'
 ---

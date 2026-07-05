@@ -2,6 +2,7 @@
 title: '数据驱动决策：让数据为业务说话'
 description: '数据驱动不是口号，而是一种工作方式。本文分享如何搭建数据体系、选择关键指标、培养数据文化，让数据真正服务于业务决策。'
 pubDate: 2026-05-28
+image: '/images/blog/data-driven.png'
 tags: ['数据驱动', '数据分析', '企业增长']
 author: 'Grateful Group'
 ---

@@ -2,6 +2,7 @@
 title: '数字化转型的五个关键步骤'
 description: '企业数字化转型不是简单地将业务搬到线上，而是从战略、组织、流程到技术的全面升级。本文分享五个关键步骤，帮助企业有序推进数字化转型。'
 pubDate: 2026-06-20
+image: '/images/blog/digital-transformation.svg'
 tags: ['数字化转型', '企业战略', '增长运营']
 author: 'Grateful Group'
 ---
