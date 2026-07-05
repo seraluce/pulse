@@ -56,11 +56,11 @@ const iconSvg: Record<string, string> = {
 							<div class="form-row">
 								<div class="form-group">
 									<label for="name">姓名</label>
-									<input type="text" id="name" name="name" placeholder="您的姓名" required />
+									<input type="text" id="name" name="name" placeholder="您的姓名" data-required />
 								</div>
 								<div class="form-group">
 									<label for="email">邮箱</label>
-									<input type="email" id="email" name="email" placeholder="your@email.com" required />
+									<input type="email" id="email" name="email" placeholder="your@email.com" data-required />
 								</div>
 							</div>
 							<div class="form-group">
@@ -80,7 +80,7 @@ const iconSvg: Record<string, string> = {
 							</div>
 							<div class="form-group">
 								<label for="message">留言</label>
-								<textarea id="message" name="message" rows="5" placeholder="请描述您的需求..." required></textarea>
+								<textarea id="message" name="message" rows="5" placeholder="请描述您的需求..." data-required></textarea>
 							</div>
 							<button type="submit" class="btn-submit">发送留言</button>
 						</form>
@@ -429,7 +429,7 @@ const iconSvg: Record<string, string> = {
 
 			// 验证必填字段
 			let hasError = false;
-			form.querySelectorAll('[required]').forEach(el => {
+			form.querySelectorAll('[data-required]').forEach(el => {
 				if (!(el as HTMLInputElement).value.trim()) {
 					el.classList.add('error');
 					hasError = true;
