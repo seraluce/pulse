@@ -6,7 +6,7 @@ export const site = {
 	lang: 'zh-CN',
 	locale: 'zh_CN',
 	twitter: '@gratefulgroup',
-	email: 'seraluce@163.com',
+	email: 'evanyanet@gmail.com',
 	phone: '010-0000-0000',
 	address: '北京市朝阳区建国路88号',
 	founded: '2015',
@@ -30,7 +30,7 @@ export const site = {
 	logoHeight: 28,
 
 	// 表单服务（Formsubmit.co 无需注册，直接用邮箱）
-	formEndpoint: 'https://formsubmit.co/ajax/seraluce@163.com',
+	formEndpoint: 'https://formsubmit.co/ajax/evanyanet@gmail.com',
 };
 
 export type PageMeta = {
