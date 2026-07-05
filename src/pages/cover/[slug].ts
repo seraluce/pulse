@@ -16,9 +16,9 @@ export const GET: APIRoute = async ({ params }) => {
 
 	const title = post.data.title;
 
-	// 将标题拆分为多行（每行最多 12 个字符）
+	// 将标题拆分为多行（每行最多 10 个字符）
 	const lines: string[] = [];
-	const maxCharsPerLine = 12;
+	const maxCharsPerLine = 10;
 	let remaining = title;
 	while (remaining.length > 0) {
 		if (remaining.length <= maxCharsPerLine) {
@@ -52,12 +52,13 @@ export const GET: APIRoute = async ({ params }) => {
 	const colors = colorSets[title.length % colorSets.length];
 
 	// 计算标题垂直居中位置
-	const lineHeight = 72;
+	const fontSize = 76;
+	const lineHeight = 96;
 	const totalHeight = lines.length * lineHeight;
-	const startY = (675 - totalHeight) / 2 + lineHeight - 18;
+	const startY = (675 - totalHeight) / 2 + lineHeight - 22;
 
 	const titleSvg = lines.map((line, i) =>
-		`<text x="600" y="${startY + i * lineHeight}" font-family="'PingFang SC', 'Noto Sans SC', sans-serif" font-size="56" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="-1">${escapeXml(line)}</text>`
+		`<text x="600" y="${startY + i * lineHeight}" font-family="'PingFang SC', 'Noto Sans SC', sans-serif" font-size="${fontSize}" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="-1">${escapeXml(line)}</text>`
 	).join('\n');
 
 	const svg = `<?xml version="1.0" encoding="UTF-8"?>
