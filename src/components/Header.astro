@@ -334,17 +334,23 @@ import { site } from '../config';
 	const menuToggle = document.querySelector('.menu-toggle');
 	const backdrop = document.querySelector('.nav-backdrop');
 
+	function toggleMenu(open?: boolean) {
+		const isOpen = open ?? !header?.classList.contains('menu-open');
+		header?.classList.toggle('menu-open', isOpen);
+		document.body.style.overflow = isOpen ? 'hidden' : '';
+	}
+
 	menuToggle?.addEventListener('click', () => {
-		header?.classList.toggle('menu-open');
+		toggleMenu();
 	});
 
 	backdrop?.addEventListener('click', () => {
-		header?.classList.remove('menu-open');
+		toggleMenu(false);
 	});
 
 	document.querySelectorAll('.nav-mobile a').forEach(link => {
 		link.addEventListener('click', () => {
-			header?.classList.remove('menu-open');
+			toggleMenu(false);
 		});
 	});
 </script>
