@@ -1,0 +1,124 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+	const pages = await getCollection('pages');
+	return pages.map(page => ({
+		params: { slug: page.id },
+		props: { page },
+	}));
+}
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+---
+
+<Layout page={{
+	title: page.data.title,
+	path: `/legal/${page.id}`,
+}}>
+	<Header />
+	<main>
+		<article class="legal-page">
+			<div class="container">
+				<div class="legal-content">
+					<Content />
+				</div>
+			</div>
+		</article>
+	</main>
+	<Footer />
+</Layout>
+
+<style>
+	.legal-page {
+		padding-top: calc(var(--header-height) + 60px);
+		padding-bottom: 80px;
+	}
+
+	.legal-content {
+		max-width: 720px;
+		margin: 0 auto;
+		font-size: 15px;
+		line-height: 1.8;
+		color: var(--color-text);
+	}
+
+	.legal-content :global(h1) {
+		font-size: 32px;
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		margin-bottom: 8px;
+	}
+
+	.legal-content :global(h2) {
+		font-size: 20px;
+		font-weight: 600;
+		margin-top: 40px;
+		margin-bottom: 16px;
+	}
+
+	.legal-content :global(h3) {
+		font-size: 16px;
+		font-weight: 600;
+		margin-top: 24px;
+		margin-bottom: 12px;
+	}
+
+	.legal-content :global(p) {
+		margin-bottom: 16px;
+	}
+
+	.legal-content :global(ul),
+	.legal-content :global(ol) {
+		margin-bottom: 16px;
+		padding-left: 24px;
+	}
+
+	.legal-content :global(li) {
+		margin-bottom: 8px;
+	}
+
+	.legal-content :global(a) {
+		color: var(--color-text);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+
+	.legal-content :global(a:hover) {
+		opacity: 0.7;
+	}
+
+	.legal-content :global(hr) {
+		border: none;
+		border-top: 1px solid var(--color-border);
+		margin: 32px 0;
+	}
+
+	.legal-content :global(strong) {
+		font-weight: 600;
+	}
+
+	@media (max-width: 768px) {
+		.legal-page {
+			padding-top: calc(var(--header-height) + 40px);
+			padding-bottom: 60px;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.container {
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+		.legal-content {
+			font-size: 14px;
+		}
+		.legal-content :global(h1) {
+			font-size: 26px;
+		}
+	}
+</style>
