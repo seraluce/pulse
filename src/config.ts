@@ -32,6 +32,23 @@ export const site = {
 
 	// 表单服务
 	formEndpoint: 'https://formspree.io/f/xqevnyjn',
+
+	// 页脚链接
+	footer: {
+		services: [
+			{ label: '战略咨询', href: '/services' },
+			{ label: '数字化转型', href: '/services' },
+			{ label: '品牌建设', href: '/services' },
+			{ label: '数据驱动', href: '/services' },
+		],
+		company: [
+			{ label: '关于我们', href: '/about' },
+			{ label: '服务', href: '/services' },
+			{ label: '案例', href: '/cases' },
+			{ label: '博客', href: '/blog' },
+			{ label: '联系', href: '/contact' },
+		],
+	},
 };
 
 export type PageMeta = {

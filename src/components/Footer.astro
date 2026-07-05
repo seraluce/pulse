@@ -1,21 +1,5 @@
 ---
 import { site } from '../config';
-
-const links = {
-	services: [
-		{ label: '战略咨询', href: '/services' },
-		{ label: '数字化转型', href: '/services' },
-		{ label: '品牌建设', href: '/services' },
-		{ label: '数据驱动', href: '/services' },
-	],
-	company: [
-		{ label: '关于我们', href: '/about' },
-		{ label: '服务', href: '/services' },
-		{ label: '案例', href: '/cases' },
-		{ label: '博客', href: '/blog' },
-		{ label: '联系', href: '/contact' },
-	],
-};
 ---
 
 <footer class="footer">
@@ -27,34 +11,34 @@ const links = {
 					<img src={site.logo.dark} alt={site.title} width={24} height={24} class="logo-dark" />
 					<span>{site.title}</span>
 				</a>
-				<p class="footer-desc">{site.description.slice(0, 30)}…</p>
+				<p class="footer-desc">{site.description}</p>
 			</div>
 
 			<div class="footer-links">
 				<div class="footer-col">
 					<h4>服务</h4>
 					<ul>
-						{links.services.map(l => <li><a href={l.href}>{l.label}</a></li>)}
+						{site.footer.services.map(l => <li><a href={l.href}>{l.label}</a></li>)}
 					</ul>
 				</div>
 				<div class="footer-col">
 					<h4>公司</h4>
 					<ul>
-						{links.company.map(l => <li><a href={l.href}>{l.label}</a></li>)}
+						{site.footer.company.map(l => <li><a href={l.href}>{l.label}</a></li>)}
 					</ul>
 				</div>
 				<div class="footer-col">
 					<h4>联系</h4>
 					<ul>
-						<li><a href="mailto:evanyanet@gmail.com">evanyanet@gmail.com</a></li>
-						<li><a href="tel:+8610-0000-0000">010-0000-0000</a></li>
+						<li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+						<li><a href={`tel:${site.phone.replace(/-/g, '')}`}>{site.phone}</a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 
 		<div class="footer-bottom">
-			<p>&copy; {new Date().getFullYear()} Grateful Group. All rights reserved.</p>
+			<p>&copy; {new Date().getFullYear()} {site.title}. All rights reserved.</p>
 			<div class="footer-bottom-links">
 				<a href="#">隐私政策</a>
 				<a href="#">服务条款</a>
