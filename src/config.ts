@@ -29,8 +29,8 @@ export const site = {
 	logoWidth: 28,
 	logoHeight: 28,
 
-	// 表单服务
-	formspreeEndpoint: 'https://formspree.io/f/YOUR_FORM_ID',
+	// 表单服务（Formsubmit.co 无需注册，直接用邮箱）
+	formEndpoint: 'https://formsubmit.co/ajax/hello@gratefulgroup.com',
 };
 
 export type PageMeta = {
