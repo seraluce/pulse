@@ -1,7 +1,15 @@
 ---
 ---
 
-<section class="hero">
+<section class="hero" id="hero">
+	<div class="hero-orbs" id="heroOrbs">
+		<div class="orb orb-1"></div>
+		<div class="orb orb-2"></div>
+		<div class="orb orb-3"></div>
+	</div>
+	<div class="hero-sphere-wrap">
+		<div class="hero-sphere" id="heroSphere"></div>
+	</div>
 	<div class="container hero-inner">
 		<div class="hero-content">
 			<div class="hero-badge">专业 · 高效 · 可靠</div>
@@ -33,11 +41,6 @@
 				</div>
 			</div>
 		</div>
-		<div class="hero-visual">
-			<div class="orb orb-1"></div>
-			<div class="orb orb-2"></div>
-			<div class="orb orb-3"></div>
-		</div>
 	</div>
 </section>
 
@@ -46,18 +49,142 @@
 		min-height: 100dvh;
 		display: flex;
 		align-items: center;
+		justify-content: center;
 		padding-top: var(--header-height);
 		position: relative;
 		overflow: hidden;
+		text-align: center;
 	}
 
+	/* 背景光晕 */
+	.hero-orbs {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		pointer-events: none;
+	}
+
+	.orb {
+		position: absolute;
+		border-radius: 50%;
+		filter: blur(60px);
+		will-change: transform;
+		transition: transform 0.3s ease-out;
+	}
+
+	.orb-1 {
+		width: 400px;
+		height: 400px;
+		top: 10%;
+		left: 15%;
+		background: radial-gradient(circle, rgba(120,120,150,0.9) 0%, rgba(120,120,150,0.3) 40%, transparent 70%);
+		animation: float-a 14s ease-in-out infinite;
+	}
+
+	.orb-2 {
+		width: 320px;
+		height: 320px;
+		top: 45%;
+		left: 55%;
+		background: radial-gradient(circle, rgba(150,145,140,0.8) 0%, rgba(150,145,140,0.25) 40%, transparent 70%);
+		animation: float-b 18s ease-in-out infinite;
+	}
+
+	.orb-3 {
+		width: 260px;
+		height: 260px;
+		top: 5%;
+		left: 65%;
+		background: radial-gradient(circle, rgba(130,130,160,0.7) 0%, rgba(130,130,160,0.2) 40%, transparent 70%);
+		animation: float-c 12s ease-in-out infinite;
+	}
+
+	:root.dark .orb-1 {
+		background: radial-gradient(circle, rgba(100,100,140,0.8) 0%, rgba(100,100,140,0.2) 40%, transparent 70%);
+	}
+	:root.dark .orb-2 {
+		background: radial-gradient(circle, rgba(120,110,100,0.7) 0%, rgba(120,110,100,0.15) 40%, transparent 70%);
+	}
+	:root.dark .orb-3 {
+		background: radial-gradient(circle, rgba(90,90,130,0.6) 0%, rgba(90,90,130,0.15) 40%, transparent 70%);
+	}
+
+	@keyframes float-a {
+		0%, 100% { transform: translate(0, 0) scale(1); }
+		25% { transform: translate(30px, -20px) scale(1.05); }
+		50% { transform: translate(-15px, 25px) scale(0.95); }
+		75% { transform: translate(20px, 15px) scale(1.02); }
+	}
+
+	@keyframes float-b {
+		0%, 100% { transform: translate(0, 0) scale(1); }
+		33% { transform: translate(-25px, 20px) scale(1.08); }
+		66% { transform: translate(20px, -15px) scale(0.96); }
+	}
+
+	@keyframes float-c {
+		0%, 100% { transform: translate(0, 0) scale(1); }
+		50% { transform: translate(-20px, 30px) scale(1.1); }
+	}
+
+	/* 呼吸球 */
+	.hero-sphere-wrap {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 0;
+		pointer-events: none;
+	}
+
+	.hero-sphere {
+		width: 180px;
+		height: 180px;
+		border-radius: 50%;
+		background: radial-gradient(circle at 35% 35%,
+			rgba(200,200,210,0.4) 0%,
+			rgba(150,150,170,0.2) 30%,
+			rgba(100,100,130,0.1) 60%,
+			transparent 80%
+		);
+		box-shadow:
+			0 0 60px rgba(130,130,160,0.15),
+			0 0 120px rgba(130,130,160,0.08),
+			inset 0 0 40px rgba(200,200,220,0.1);
+		animation: sphere-breathe 4s ease-in-out infinite;
+	}
+
+	:root.dark .hero-sphere {
+		background: radial-gradient(circle at 35% 35%,
+			rgba(140,140,180,0.3) 0%,
+			rgba(100,100,140,0.15) 30%,
+			rgba(60,60,100,0.08) 60%,
+			transparent 80%
+		);
+		box-shadow:
+			0 0 60px rgba(100,100,150,0.12),
+			0 0 120px rgba(100,100,150,0.06),
+			inset 0 0 40px rgba(140,140,180,0.08);
+	}
+
+	@keyframes sphere-breathe {
+		0%, 100% { transform: scale(1); opacity: 0.7; }
+		50% { transform: scale(1.15); opacity: 1; }
+	}
+
+	/* 内容 */
 	.hero-inner {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 60px;
-		align-items: center;
 		position: relative;
 		z-index: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.hero-content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 
 	.hero-badge {
@@ -72,7 +199,7 @@
 	}
 
 	.hero h1 {
-		font-size: clamp(36px, 5vw, 56px);
+		font-size: clamp(36px, 5.5vw, 64px);
 		font-weight: 700;
 		line-height: 1.15;
 		letter-spacing: -0.03em;
@@ -87,7 +214,7 @@
 		font-size: 17px;
 		line-height: 1.7;
 		color: var(--color-text-secondary);
-		max-width: 480px;
+		max-width: 520px;
 		margin-bottom: 36px;
 	}
 
@@ -158,111 +285,14 @@
 		background: var(--color-border);
 	}
 
-	/* 模糊光晕 — 桌面端右侧 */
-	.hero-visual {
-		position: relative;
-		width: 100%;
-		height: 500px;
-	}
-
-	.orb {
-		position: absolute;
-		border-radius: 50%;
-		filter: blur(60px);
-		will-change: transform;
-	}
-
-	.orb-1 {
-		width: 400px;
-		height: 400px;
-		top: 5%;
-		left: 10%;
-		background: radial-gradient(circle, rgba(120,120,150,0.9) 0%, rgba(120,120,150,0.3) 40%, transparent 70%);
-		animation: float-a 14s ease-in-out infinite;
-	}
-
-	.orb-2 {
-		width: 320px;
-		height: 320px;
-		top: 35%;
-		left: 40%;
-		background: radial-gradient(circle, rgba(150,145,140,0.8) 0%, rgba(150,145,140,0.25) 40%, transparent 70%);
-		animation: float-b 18s ease-in-out infinite;
-	}
-
-	.orb-3 {
-		width: 260px;
-		height: 260px;
-		top: 0%;
-		left: 50%;
-		background: radial-gradient(circle, rgba(130,130,160,0.7) 0%, rgba(130,130,160,0.2) 40%, transparent 70%);
-		animation: float-c 12s ease-in-out infinite;
-	}
-
-	:root.dark .orb-1 {
-		background: radial-gradient(circle, rgba(100,100,140,0.8) 0%, rgba(100,100,140,0.2) 40%, transparent 70%);
-	}
-	:root.dark .orb-2 {
-		background: radial-gradient(circle, rgba(120,110,100,0.7) 0%, rgba(120,110,100,0.15) 40%, transparent 70%);
-	}
-	:root.dark .orb-3 {
-		background: radial-gradient(circle, rgba(90,90,130,0.6) 0%, rgba(90,90,130,0.15) 40%, transparent 70%);
-	}
-
-	@keyframes float-a {
-		0%, 100% { transform: translate(0, 0) scale(1); }
-		25% { transform: translate(30px, -20px) scale(1.05); }
-		50% { transform: translate(-15px, 25px) scale(0.95); }
-		75% { transform: translate(20px, 15px) scale(1.02); }
-	}
-
-	@keyframes float-b {
-		0%, 100% { transform: translate(0, 0) scale(1); }
-		33% { transform: translate(-25px, 20px) scale(1.08); }
-		66% { transform: translate(20px, -15px) scale(0.96); }
-	}
-
-	@keyframes float-c {
-		0%, 100% { transform: translate(0, 0) scale(1); }
-		50% { transform: translate(-20px, 30px) scale(1.1); }
-	}
-
-	/* 移动端：光晕作为全屏背景 */
-	@media (max-width: 900px) {
-		.hero-inner {
-			grid-template-columns: 1fr;
-			text-align: center;
+	@media (max-width: 768px) {
+		.hero-sphere {
+			width: 130px;
+			height: 130px;
 		}
-		.hero-desc { margin-left: auto; margin-right: auto; margin-bottom: 28px; }
-		.hero-actions { justify-content: center; margin-bottom: 36px; }
-		.hero-stats { justify-content: center; }
-
-		.hero-visual {
-			position: absolute;
-			inset: 0;
-			height: auto;
-			z-index: 0;
-			pointer-events: none;
-		}
-
-		.orb-1 {
-			width: 400px;
-			height: 400px;
-			top: 15%;
-			left: 5%;
-		}
-		.orb-2 {
-			width: 320px;
-			height: 320px;
-			top: 45%;
-			left: 45%;
-		}
-		.orb-3 {
-			width: 260px;
-			height: 260px;
-			top: 5%;
-			left: 55%;
-		}
+		.orb-1 { width: 300px; height: 300px; }
+		.orb-2 { width: 240px; height: 240px; }
+		.orb-3 { width: 200px; height: 200px; }
 	}
 
 	@media (max-width: 480px) {
@@ -271,9 +301,47 @@
 		.hero h1 { font-size: clamp(28px, 8vw, 40px); }
 		.hero-desc { font-size: 15px; }
 
+		.hero-sphere {
+			width: 100px;
+			height: 100px;
+		}
 		.orb { filter: blur(50px); }
-		.orb-1 { width: 300px; height: 300px; }
-		.orb-2 { width: 240px; height: 240px; }
-		.orb-3 { width: 200px; height: 200px; }
+		.orb-1 { width: 260px; height: 260px; }
+		.orb-2 { width: 200px; height: 200px; }
+		.orb-3 { width: 160px; height: 160px; }
 	}
 </style>
+
+<script>
+	const hero = document.getElementById('hero');
+	const orbs = document.getElementById('heroOrbs');
+	const sphere = document.getElementById('heroSphere');
+
+	if (hero && orbs && sphere) {
+		let mouseX = 0, mouseY = 0;
+		let currentX = 0, currentY = 0;
+
+		hero.addEventListener('mousemove', (e) => {
+			const rect = hero.getBoundingClientRect();
+			mouseX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+			mouseY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+		});
+
+		function animate() {
+			currentX += (mouseX - currentX) * 0.05;
+			currentY += (mouseY - currentY) * 0.05;
+
+			const orbEls = orbs.querySelectorAll('.orb');
+			orbEls.forEach((orb, i) => {
+				const depth = (i + 1) * 12;
+				orb.style.transform = `translate(${currentX * depth}px, ${currentY * depth}px)`;
+			});
+
+			const sphereDepth = 8;
+			sphere.style.transform = `scale(${1 + Math.sin(Date.now() * 0.001) * 0.08}) translate(${currentX * sphereDepth}px, ${currentY * sphereDepth}px)`;
+
+			requestAnimationFrame(animate);
+		}
+		animate();
+	}
+</script>
