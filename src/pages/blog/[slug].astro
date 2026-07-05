@@ -26,14 +26,14 @@ const nextPost = allPosts[currentIndex - 1];
 
 <Layout page={{
 	title: post.data.title,
-	path: `/blog/${post.slug}`,
+	path: `/blog/${post.id}`,
 	description: post.data.description,
 }}>
 	<Header />
 	<main>
 		<article class="blog-post">
-			<div class="container">
-				<header class="post-header">
+			<header class="post-header">
+				<div class="container">
 					<a href="/blog" class="post-back">← 返回博客</a>
 					<div class="post-meta">
 						<time datetime={post.data.pubDate.toISOString()}>
@@ -50,21 +50,28 @@ const nextPost = allPosts[currentIndex - 1];
 							))}
 						</div>
 					)}
-				</header>
+				</div>
+				{post.data.image && (
+					<div class="post-cover">
+						<img src={post.data.image} alt={post.data.title} />
+					</div>
+				)}
+			</header>
 
+			<div class="container">
 				<div class="post-content">
 					<Content />
 				</div>
 
 				<nav class="post-nav">
 					{prevPost && (
-						<a href={`/blog/${prevPost.slug}`} class="post-nav-link prev">
+						<a href={`/blog/${prevPost.id}`} class="post-nav-link prev">
 							<span class="post-nav-label">← 上一篇</span>
 							<span class="post-nav-title">{prevPost.data.title}</span>
 						</a>
 					)}
 					{nextPost && (
-						<a href={`/blog/${nextPost.slug}`} class="post-nav-link next">
+						<a href={`/blog/${nextPost.id}`} class="post-nav-link next">
 							<span class="post-nav-label">下一篇 →</span>
 							<span class="post-nav-title">{nextPost.data.title}</span>
 						</a>
@@ -78,13 +85,14 @@ const nextPost = allPosts[currentIndex - 1];
 
 <style>
 	.blog-post {
-		padding-top: calc(var(--header-height) + 60px);
+		padding-top: var(--header-height);
 		padding-bottom: 80px;
 	}
 
 	.post-header {
-		max-width: 720px;
-		margin: 0 auto 48px;
+		padding-top: 60px;
+		padding-bottom: 40px;
+		margin-bottom: 0;
 	}
 
 	.post-back {
@@ -128,6 +136,7 @@ const nextPost = allPosts[currentIndex - 1];
 		letter-spacing: -0.03em;
 		line-height: 1.3;
 		margin-bottom: 16px;
+		max-width: 720px;
 	}
 
 	.post-desc {
@@ -135,6 +144,7 @@ const nextPost = allPosts[currentIndex - 1];
 		line-height: 1.7;
 		color: var(--color-text-secondary);
 		margin-bottom: 20px;
+		max-width: 720px;
 	}
 
 	.post-tags {
@@ -149,6 +159,22 @@ const nextPost = allPosts[currentIndex - 1];
 		border-radius: 100px;
 		border: 1px solid var(--color-border);
 		color: var(--color-text-tertiary);
+	}
+
+	/* 封面图 */
+	.post-cover {
+		margin-top: 40px;
+		max-width: 960px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.post-cover img {
+		width: 100%;
+		height: auto;
+		border-radius: var(--radius-lg);
+		object-fit: cover;
+		max-height: 480px;
 	}
 
 	/* 文章正文样式 */
@@ -295,6 +321,7 @@ const nextPost = allPosts[currentIndex - 1];
 
 	.post-nav-link.next {
 		text-align: right;
+		align-items: flex-end;
 	}
 
 	.post-nav-label {
@@ -309,20 +336,42 @@ const nextPost = allPosts[currentIndex - 1];
 	}
 
 	@media (max-width: 768px) {
+		.post-header {
+			padding-top: 40px;
+			padding-bottom: 28px;
+		}
 		.post-nav {
 			grid-template-columns: 1fr;
 		}
 		.post-nav-link.next {
 			text-align: left;
+			align-items: flex-start;
+		}
+		.post-cover {
+			margin-top: 28px;
+		}
+		.post-cover img {
+			border-radius: var(--radius);
+			max-height: 280px;
 		}
 	}
 
 	@media (max-width: 480px) {
+		.container {
+			padding-left: 20px;
+			padding-right: 20px;
+		}
 		.post-content {
 			font-size: 15px;
 		}
 		.post-content :global(h2) {
 			font-size: 20px;
+		}
+		.post-header h1 {
+			font-size: 26px;
+		}
+		.post-desc {
+			font-size: 15px;
 		}
 	}
 </style>
