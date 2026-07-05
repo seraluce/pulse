@@ -102,31 +102,35 @@
 		position: fixed;
 		top: -20%;
 		left: -10%;
-		width: 50%;
-		height: 60%;
-		background: radial-gradient(ellipse, rgba(120, 119, 198, 0.15) 0%, transparent 70%);
+		width: 55%;
+		height: 55%;
+		background: radial-gradient(ellipse, rgba(180, 180, 200, 0.12) 0%, transparent 70%);
 		pointer-events: none;
 		z-index: -1;
+		animation: breathe-a 12s ease-in-out infinite;
+		transform: translate(calc(var(--mouse-x, 0) * 15px), calc(var(--mouse-y, 0) * 15px));
 	}
 
 	body::after {
 		content: '';
 		position: fixed;
-		bottom: -10%;
+		bottom: -15%;
 		right: -10%;
 		width: 50%;
 		height: 50%;
-		background: radial-gradient(ellipse, rgba(167, 139, 250, 0.12) 0%, transparent 70%);
+		background: radial-gradient(ellipse, rgba(200, 195, 190, 0.1) 0%, transparent 70%);
 		pointer-events: none;
 		z-index: -1;
+		animation: breathe-b 15s ease-in-out infinite;
+		transform: translate(calc(var(--mouse-x, 0) * -10px), calc(var(--mouse-y, 0) * -10px));
 	}
 
 	:root.dark body::before {
-		background: radial-gradient(ellipse, rgba(129, 140, 248, 0.12) 0%, transparent 70%);
+		background: radial-gradient(ellipse, rgba(100, 110, 140, 0.15) 0%, transparent 70%);
 	}
 
 	:root.dark body::after {
-		background: radial-gradient(ellipse, rgba(167, 139, 250, 0.08) 0%, transparent 70%);
+		background: radial-gradient(ellipse, rgba(140, 120, 110, 0.1) 0%, transparent 70%);
 	}
 
 	a {
@@ -199,6 +203,18 @@
 		to { opacity: 1; transform: translateY(0); }
 	}
 
+	@keyframes breathe-a {
+		0%, 100% { transform: translate(0, 0) scale(1); opacity: 1; }
+		33% { transform: translate(3%, 2%) scale(1.05); opacity: 0.85; }
+		66% { transform: translate(-2%, 3%) scale(0.97); opacity: 1; }
+	}
+
+	@keyframes breathe-b {
+		0%, 100% { transform: translate(0, 0) scale(1); opacity: 1; }
+		33% { transform: translate(-3%, -2%) scale(1.04); opacity: 0.9; }
+		66% { transform: translate(2%, -3%) scale(0.96); opacity: 1; }
+	}
+
 	@media (max-width: 768px) {
 		.container {
 			padding: 0 16px;
@@ -220,5 +236,38 @@
 
 	document.addEventListener('DOMContentLoaded', () => {
 		document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+		// 滚动视差 - 背景光斑随滚动轻微移动
+		let ticking = false;
+		window.addEventListener('scroll', () => {
+			if (!ticking) {
+				requestAnimationFrame(() => {
+					const scrollY = window.scrollY;
+					document.documentElement.style.setProperty('--scroll-y', scrollY + 'px');
+					ticking = false;
+				});
+				ticking = true;
+			}
+		}, { passive: true });
+
+		// 鼠标跟随视差（仅桌面端）
+		if (window.matchMedia('(min-width: 769px)').matches) {
+			let mouseX = 0, mouseY = 0;
+			let currentX = 0, currentY = 0;
+
+			document.addEventListener('mousemove', (e) => {
+				mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+				mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+			});
+
+			function animateMouse() {
+				currentX += (mouseX - currentX) * 0.05;
+				currentY += (mouseY - currentY) * 0.05;
+				document.documentElement.style.setProperty('--mouse-x', currentX + 'px');
+				document.documentElement.style.setProperty('--mouse-y', currentY + 'px');
+				requestAnimationFrame(animateMouse);
+			}
+			animateMouse();
+		}
 	});
 </script>
