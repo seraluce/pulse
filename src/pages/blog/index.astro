@@ -183,6 +183,21 @@ const posts = (await getCollection('blog')).sort(
 		.blog-grid {
 			grid-template-columns: 1fr;
 		}
+		.blog-card-body {
+			padding: 20px;
+			gap: 12px;
+		}
+		.blog-card-meta time {
+			font-size: 13px;
+		}
+		.blog-tag {
+			font-size: 11px;
+			padding: 3px 10px;
+		}
+		.blog-card-title {
+			font-size: 20px;
+			-webkit-line-clamp: 3;
+		}
 		.page-hero {
 			padding-bottom: 40px;
 		}
