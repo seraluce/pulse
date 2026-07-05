@@ -51,7 +51,6 @@
 		display: flex;
 		align-items: center;
 		padding-top: var(--header-height);
-		overflow: hidden;
 	}
 
 	.hero-inner {
@@ -168,38 +167,38 @@
 
 	.hero-graphic {
 		position: relative;
-		width: 320px;
-		height: 320px;
+		width: 450px;
+		height: 450px;
 	}
 
 	.ripple {
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		width: 20px;
-		height: 20px;
+		width: 30px;
+		height: 30px;
 		border-radius: 50%;
-		border: 1.5px solid var(--color-border);
+		border: 2px solid var(--color-border);
 		transform: translate(-50%, -50%);
 		opacity: 0;
-		animation: ripple-expand 4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+		animation: ripple-expand 5s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 	}
 
 	.ripple-1 { animation-delay: 0s; }
-	.ripple-2 { animation-delay: 1s; }
-	.ripple-3 { animation-delay: 2s; }
-	.ripple-4 { animation-delay: 3s; }
+	.ripple-2 { animation-delay: 1.25s; }
+	.ripple-3 { animation-delay: 2.5s; }
+	.ripple-4 { animation-delay: 3.75s; }
 
 	@keyframes ripple-expand {
 		0% {
-			width: 20px;
-			height: 20px;
-			opacity: 0.6;
-			border-width: 2px;
+			width: 30px;
+			height: 30px;
+			opacity: 0.7;
+			border-width: 2.5px;
 		}
 		100% {
-			width: 320px;
-			height: 320px;
+			width: 450px;
+			height: 450px;
 			opacity: 0;
 			border-width: 0.5px;
 		}
@@ -209,8 +208,8 @@
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		width: 12px;
-		height: 12px;
+		width: 14px;
+		height: 14px;
 		border-radius: 50%;
 		background: var(--color-text);
 		transform: translate(-50%, -50%);
@@ -219,7 +218,7 @@
 
 	@keyframes core-pulse {
 		0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-		50% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.7; }
+		50% { transform: translate(-50%, -50%) scale(1.4); opacity: 0.6; }
 	}
 
 	@media (max-width: 900px) {
@@ -231,44 +230,28 @@
 		.hero-actions { justify-content: center; margin-bottom: 36px; }
 		.hero-stats { justify-content: center; }
 
-		/* 移动端涟漪放到底部 */
 		.hero-visual {
-			position: absolute;
-			bottom: 0;
-			left: 50%;
-			transform: translateX(-50%);
-			width: 100%;
-			pointer-events: none;
+			margin-top: 20px;
 		}
 
 		.hero-graphic {
-			width: 240px;
-			height: 240px;
-		}
-
-		.ripple {
-			border-color: var(--color-border-light);
+			width: 300px;
+			height: 300px;
 		}
 
 		@keyframes ripple-expand {
 			0% {
-				width: 16px;
-				height: 16px;
-				opacity: 0.4;
-				border-width: 1.5px;
+				width: 20px;
+				height: 20px;
+				opacity: 0.6;
+				border-width: 2px;
 			}
 			100% {
-				width: 240px;
-				height: 240px;
+				width: 300px;
+				height: 300px;
 				opacity: 0;
-				border-width: 0.3px;
+				border-width: 0.5px;
 			}
-		}
-
-		.ripple-core {
-			width: 8px;
-			height: 8px;
-			opacity: 0.5;
 		}
 	}
 
@@ -279,20 +262,22 @@
 		.hero-desc { font-size: 15px; }
 
 		.hero-graphic {
-			width: 180px;
-			height: 180px;
+			width: 220px;
+			height: 220px;
 		}
 
 		@keyframes ripple-expand {
 			0% {
-				width: 12px;
-				height: 12px;
-				opacity: 0.35;
+				width: 16px;
+				height: 16px;
+				opacity: 0.5;
+				border-width: 1.5px;
 			}
 			100% {
-				width: 180px;
-				height: 180px;
+				width: 220px;
+				height: 220px;
 				opacity: 0;
+				border-width: 0.3px;
 			}
 		}
 	}
