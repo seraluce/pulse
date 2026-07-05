@@ -1,0 +1,139 @@
+---
+const milestones = [
+	{ year: '2015', text: '公司成立，专注企业咨询服务' },
+	{ year: '2018', text: '业务拓展至数字化转型领域' },
+	{ year: '2021', text: '服务客户突破300家' },
+	{ year: '2024', text: '全面升级智能化服务平台' },
+];
+---
+
+<section id="about" class="about section">
+	<div class="container">
+		<div class="about-grid">
+			<div class="about-content">
+				<span class="section-tag">ABOUT US</span>
+				<h2>关于 Grateful Group</h2>
+				<p class="about-lead">
+					我们是一支由行业专家组成的团队，致力于为企业提供专业、高效、可靠的服务。
+				</p>
+				<p class="about-text">
+					自创立以来，我们始终坚持以客户价值为核心驱动力。通过深度理解每个客户的独特需求，
+					我们量身定制解决方案，帮助企业在快速变化的市场中保持竞争优势。
+				</p>
+				<p class="about-text">
+					我们相信，真正的合作不只是交付成果，而是与客户共同成长。这也是"Grateful"的含义
+					—— 感恩每一次合作，珍惜每一份信任。
+				</p>
+			</div>
+			<div class="about-timeline">
+				<div class="timeline-line"></div>
+				{milestones.map((m, i) => (
+					<div class="timeline-item">
+						<div class="timeline-dot"></div>
+						<div class="timeline-year">{m.year}</div>
+						<div class="timeline-text">{m.text}</div>
+					</div>
+				))}
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.about {
+		background: var(--color-bg);
+	}
+
+	.about-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 80px;
+		align-items: start;
+	}
+
+	.section-tag {
+		display: inline-block;
+		font-size: 12px;
+		letter-spacing: 0.15em;
+		color: var(--color-text-tertiary);
+		margin-bottom: 16px;
+	}
+
+	.about-content h2 {
+		font-size: clamp(28px, 3.5vw, 40px);
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		margin-bottom: 24px;
+	}
+
+	.about-lead {
+		font-size: 18px;
+		line-height: 1.7;
+		color: var(--color-text);
+		margin-bottom: 20px;
+		font-weight: 500;
+	}
+
+	.about-text {
+		font-size: 15px;
+		line-height: 1.8;
+		color: var(--color-text-secondary);
+		margin-bottom: 16px;
+	}
+
+	/* 时间线 */
+	.about-timeline {
+		position: relative;
+		padding-left: 32px;
+	}
+
+	.timeline-line {
+		position: absolute;
+		left: 4px;
+		top: 8px;
+		bottom: 8px;
+		width: 1px;
+		background: var(--color-border);
+	}
+
+	.timeline-item {
+		position: relative;
+		padding-bottom: 36px;
+	}
+
+	.timeline-item:last-child {
+		padding-bottom: 0;
+	}
+
+	.timeline-dot {
+		position: absolute;
+		left: -32px;
+		top: 6px;
+		width: 9px;
+		height: 9px;
+		border-radius: 50%;
+		border: 2px solid var(--color-text);
+		background: var(--color-bg);
+	}
+
+	.timeline-year {
+		font-size: 13px;
+		font-weight: 600;
+		color: var(--color-text-tertiary);
+		letter-spacing: 0.05em;
+		margin-bottom: 6px;
+	}
+
+	.timeline-text {
+		font-size: 15px;
+		color: var(--color-text-secondary);
+		line-height: 1.6;
+	}
+
+	@media (max-width: 900px) {
+		.about-grid {
+			grid-template-columns: 1fr;
+			gap: 48px;
+		}
+	}
+</style>

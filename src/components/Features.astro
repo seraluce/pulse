@@ -1,0 +1,175 @@
+---
+const features = [
+	{
+		icon: 'strategy',
+		title: '战略咨询',
+		desc: '深入分析行业趋势与竞争格局，为您制定清晰可执行的发展战略。',
+	},
+	{
+		icon: 'digital',
+		title: '数字化转型',
+		desc: '端到端的数字化解决方案，从系统架构到用户体验全面升级。',
+	},
+	{
+		icon: 'brand',
+		title: '品牌建设',
+		desc: '构建有辨识度的品牌形象，从视觉设计到品牌传播一体化服务。',
+	},
+	{
+		icon: 'data',
+		title: '数据驱动',
+		desc: '基于数据洞察优化决策流程，让每一步都有据可依。',
+	},
+	{
+		icon: 'growth',
+		title: '增长运营',
+		desc: '精细化运营策略，持续优化转化漏斗，实现可量化的业务增长。',
+	},
+	{
+		icon: 'support',
+		title: '技术支持',
+		desc: '7×24小时技术保障，确保系统稳定运行，快速响应突发需求。',
+	},
+];
+---
+
+<section id="features" class="features section">
+	<div class="container">
+		<div class="section-header">
+			<span class="section-tag">OUR SERVICES</span>
+			<h2>我们的服务</h2>
+			<p>覆盖企业发展全链路的专业服务体系</p>
+		</div>
+		<div class="features-grid">
+			{features.map((f) => (
+				<div class="feature-card">
+					<div class="feature-icon">
+						{f.icon === 'strategy' && (
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
+							</svg>
+						)}
+						{f.icon === 'digital' && (
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+								<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+							</svg>
+						)}
+						{f.icon === 'brand' && (
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+							</svg>
+						)}
+						{f.icon === 'data' && (
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M18 20V10M12 20V4M6 20v-6"/>
+							</svg>
+						)}
+						{f.icon === 'growth' && (
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+								<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
+							</svg>
+						)}
+						{f.icon === 'support' && (
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+							</svg>
+						)}
+					</div>
+					<h3>{f.title}</h3>
+					<p>{f.desc}</p>
+				</div>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.features {
+		background: var(--color-bg-secondary);
+	}
+
+	.section-header {
+		text-align: center;
+		margin-bottom: 64px;
+	}
+
+	.section-tag {
+		display: inline-block;
+		font-size: 12px;
+		letter-spacing: 0.15em;
+		color: var(--color-text-tertiary);
+		margin-bottom: 16px;
+	}
+
+	.section-header h2 {
+		font-size: clamp(28px, 3.5vw, 40px);
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		margin-bottom: 12px;
+	}
+
+	.section-header p {
+		font-size: 16px;
+		color: var(--color-text-secondary);
+	}
+
+	.features-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1px;
+		background: var(--color-border-light);
+		border: 1px solid var(--color-border-light);
+		border-radius: var(--radius-lg);
+		overflow: hidden;
+	}
+
+	.feature-card {
+		background: var(--color-card-bg);
+		padding: 40px 32px;
+		transition: background var(--transition);
+	}
+
+	.feature-card:hover {
+		background: var(--color-bg-tertiary);
+	}
+
+	.feature-icon {
+		width: 48px;
+		height: 48px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius);
+		margin-bottom: 20px;
+		color: var(--color-text);
+	}
+
+	.feature-card h3 {
+		font-size: 17px;
+		font-weight: 600;
+		margin-bottom: 8px;
+		letter-spacing: -0.01em;
+	}
+
+	.feature-card p {
+		font-size: 14px;
+		line-height: 1.7;
+		color: var(--color-text-secondary);
+	}
+
+	@media (max-width: 900px) {
+		.features-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 560px) {
+		.features-grid {
+			grid-template-columns: 1fr;
+		}
+		.feature-card {
+			padding: 28px 24px;
+		}
+	}
+</style>

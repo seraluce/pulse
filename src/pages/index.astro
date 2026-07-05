@@ -1,0 +1,172 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import CTA from '../components/CTA.astro';
+import About from '../components/About.astro';
+import Footer from '../components/Footer.astro';
+
+const highlights = [
+	{
+		icon: 'strategy',
+		title: '战略咨询',
+		desc: '深入分析行业趋势，制定清晰可执行的发展战略。',
+		href: '/services',
+	},
+	{
+		icon: 'digital',
+		title: '数字化转型',
+		desc: '端到端数字化解决方案，从架构到体验全面升级。',
+		href: '/services',
+	},
+	{
+		icon: 'data',
+		title: '数据驱动',
+		desc: '基于数据洞察优化决策，让每一步都有据可依。',
+		href: '/services',
+	},
+];
+---
+
+<Layout>
+	<Header transparent />
+	<main>
+		<Hero />
+
+		<section class="highlights section">
+			<div class="container">
+				<div class="section-header">
+					<span class="section-tag">WHAT WE DO</span>
+					<h2>核心服务</h2>
+					<p>我们专注于三大核心领域，助力企业持续增长</p>
+				</div>
+				<div class="highlights-grid">
+					{highlights.map((h) => (
+						<a href={h.href} class="highlight-card">
+							<div class="highlight-icon">
+								{h.icon === 'strategy' && (
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+										<path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
+									</svg>
+								)}
+								{h.icon === 'digital' && (
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+										<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+									</svg>
+								)}
+								{h.icon === 'data' && (
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+										<path d="M18 20V10M12 20V4M6 20v-6"/>
+									</svg>
+								)}
+							</div>
+							<h3>{h.title}</h3>
+							<p>{h.desc}</p>
+							<span class="highlight-link">了解更多 →</span>
+						</a>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<About />
+		<CTA />
+	</main>
+	<Footer />
+</Layout>
+
+<style>
+	.highlights {
+		background: var(--color-bg-secondary);
+	}
+
+	.section-header {
+		text-align: center;
+		margin-bottom: 56px;
+	}
+
+	.section-tag {
+		display: inline-block;
+		font-size: 12px;
+		letter-spacing: 0.15em;
+		color: var(--color-text-tertiary);
+		margin-bottom: 16px;
+	}
+
+	.section-header h2 {
+		font-size: clamp(28px, 3.5vw, 40px);
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		margin-bottom: 12px;
+	}
+
+	.section-header p {
+		font-size: 16px;
+		color: var(--color-text-secondary);
+	}
+
+	.highlights-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 24px;
+	}
+
+	.highlight-card {
+		display: block;
+		padding: 36px 28px;
+		border: 1px solid var(--color-border-light);
+		border-radius: var(--radius-lg);
+		background: var(--color-card-bg);
+		transition: border-color var(--transition), box-shadow var(--transition);
+	}
+
+	.highlight-card:hover {
+		border-color: var(--color-border);
+		box-shadow: 0 4px 24px var(--color-card-shadow);
+	}
+
+	.highlight-icon {
+		width: 48px;
+		height: 48px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius);
+		margin-bottom: 20px;
+		color: var(--color-text);
+	}
+
+	.highlight-card h3 {
+		font-size: 18px;
+		font-weight: 600;
+		margin-bottom: 8px;
+		letter-spacing: -0.01em;
+	}
+
+	.highlight-card p {
+		font-size: 14px;
+		line-height: 1.7;
+		color: var(--color-text-secondary);
+		margin-bottom: 16px;
+	}
+
+	.highlight-link {
+		font-size: 13px;
+		font-weight: 500;
+		color: var(--color-text-tertiary);
+		transition: color var(--transition);
+	}
+
+	.highlight-card:hover .highlight-link {
+		color: var(--color-text);
+	}
+
+	@media (max-width: 900px) {
+		.highlights-grid {
+			grid-template-columns: 1fr;
+			max-width: 480px;
+			margin: 0 auto;
+		}
+	}
+</style>

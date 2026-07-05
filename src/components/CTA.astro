@@ -1,0 +1,116 @@
+---
+---
+
+<section id="contact" class="cta section">
+	<div class="container">
+		<div class="cta-box">
+			<div class="cta-content">
+				<h2>准备好开始了吗？</h2>
+				<p>无论您的项目处于哪个阶段，我们都乐意与您交流。让我们一起找到最佳方案。</p>
+			</div>
+			<div class="cta-actions">
+				<a href="mailto:hello@gratefulgroup.com" class="btn btn-primary">联系我们</a>
+				<a href="#features" class="btn btn-outline">查看服务</a>
+			</div>
+			<div class="cta-line"></div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.cta {
+		background: var(--color-bg);
+	}
+
+	.cta-box {
+		position: relative;
+		display: grid;
+		grid-template-columns: 1fr auto;
+		gap: 40px;
+		align-items: center;
+		padding: 60px;
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		overflow: hidden;
+	}
+
+	.cta-line {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 1px;
+		background: linear-gradient(90deg, transparent, var(--color-text), transparent);
+		opacity: 0.15;
+	}
+
+	.cta-content h2 {
+		font-size: clamp(24px, 3vw, 32px);
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		margin-bottom: 12px;
+	}
+
+	.cta-content p {
+		font-size: 16px;
+		color: var(--color-text-secondary);
+		line-height: 1.7;
+		max-width: 480px;
+	}
+
+	.cta-actions {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 12px 32px;
+		font-size: 15px;
+		font-weight: 500;
+		border-radius: var(--radius);
+		transition: all var(--transition);
+		white-space: nowrap;
+	}
+
+	.btn-primary {
+		background: var(--color-accent);
+		color: var(--color-bg);
+		border: 1px solid var(--color-accent);
+	}
+
+	.btn-primary:hover {
+		background: var(--color-accent-hover);
+		border-color: var(--color-accent-hover);
+	}
+
+	.btn-outline {
+		background: transparent;
+		color: var(--color-text);
+		border: 1px solid var(--color-border);
+	}
+
+	.btn-outline:hover {
+		border-color: var(--color-text);
+	}
+
+	@media (max-width: 768px) {
+		.cta-box {
+			grid-template-columns: 1fr;
+			padding: 40px 28px;
+			gap: 28px;
+		}
+		.cta-actions {
+			flex-direction: row;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.cta-actions {
+			flex-direction: column;
+		}
+	}
+</style>
