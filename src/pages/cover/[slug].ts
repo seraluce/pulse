@@ -41,15 +41,32 @@ export const GET: APIRoute = async ({ params }) => {
 		}
 	}
 
-	// 根据标题长度生成不同的渐变配色
+	// 根据 slug 哈希选择配色，每篇文章不同但构建稳定
 	const colorSets = [
-		{ c1: '#8b5cf6', c2: '#3b82f6', c3: '#ec4899' }, // 紫蓝粉
-		{ c1: '#06b6d4', c2: '#8b5cf6', c3: '#f59e0b' }, // 青紫橙
-		{ c1: '#ec4899', c2: '#8b5cf6', c3: '#06b6d4' }, // 粉紫青
-		{ c1: '#10b981', c2: '#3b82f6', c3: '#8b5cf6' }, // 绿蓝紫
-		{ c1: '#f59e0b', c2: '#ec4899', c3: '#8b5cf6' }, // 橙粉紫
+		{ c1: '#8b5cf6', c2: '#3b82f6', c3: '#ec4899' },
+		{ c1: '#06b6d4', c2: '#8b5cf6', c3: '#f59e0b' },
+		{ c1: '#ec4899', c2: '#8b5cf6', c3: '#06b6d4' },
+		{ c1: '#10b981', c2: '#3b82f6', c3: '#8b5cf6' },
+		{ c1: '#f59e0b', c2: '#ec4899', c3: '#8b5cf6' },
+		{ c1: '#ef4444', c2: '#f59e0b', c3: '#8b5cf6' },
+		{ c1: '#3b82f6', c2: '#10b981', c3: '#f59e0b' },
+		{ c1: '#d946ef', c2: '#3b82f6', c3: '#10b981' },
+		{ c1: '#f97316', c2: '#ef4444', c3: '#ec4899' },
+		{ c1: '#14b8a6', c2: '#06b6d4', c3: '#3b82f6' },
+		{ c1: '#a855f7', c2: '#ec4899', c3: '#f97316' },
+		{ c1: '#6366f1', c2: '#14b8a6', c3: '#f59e0b' },
 	];
-	const colors = colorSets[title.length % colorSets.length];
+
+	function hashStr(s: string): number {
+		let h = 0;
+		for (let i = 0; i < s.length; i++) {
+			h = ((h << 5) - h + s.charCodeAt(i)) | 0;
+		}
+		return Math.abs(h);
+	}
+
+	const hash = hashStr(slug!);
+	const colors = colorSets[hash % colorSets.length];
 
 	// 计算标题垂直居中位置
 	const fontSize = 76;
