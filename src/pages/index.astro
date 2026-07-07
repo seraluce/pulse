@@ -5,36 +5,13 @@ import Hero from '../components/Hero.astro';
 import CTA from '../components/CTA.astro';
 import About from '../components/About.astro';
 import Footer from '../components/Footer.astro';
+import { site } from '../config';
 
-const highlights = [
-	{
-		icon: 'strategy',
-		title: '战略咨询',
-		desc: '深入分析行业趋势，制定清晰可执行的发展战略。',
-		href: '/services',
-	},
-	{
-		icon: 'digital',
-		title: '数字化转型',
-		desc: '端到端数字化解决方案，从架构到体验全面升级。',
-		href: '/services',
-	},
-	{
-		icon: 'data',
-		title: '数据驱动',
-		desc: '基于数据洞察优化决策，让每一步都有据可依。',
-		href: '/services',
-	},
-];
-
-const iconMap: Record<string, string> = {
-	strategy: '<path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>',
-	digital: '<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>',
-	data: '<path d="M18 20V10M12 20V4M6 20v-6"/>',
-};
+const highlights = site.highlights.items;
+const iconMap = site.icons.highlights;
 ---
 
-<Layout page={{ title: '首页', description: 'Grateful Group - 专业企业服务平台，提供战略咨询、数字化转型、品牌建设等全方位解决方案。' }}>
+<Layout page={{ title: '首页', description: site.description }}>
 	<Header />
 	<main>
 		<Hero />
@@ -42,9 +19,9 @@ const iconMap: Record<string, string> = {
 		<section class="highlights section">
 			<div class="container">
 				<div class="section-header animate-on-scroll">
-					<span class="section-tag">WHAT WE DO</span>
-					<h2>核心服务</h2>
-					<p>我们专注于三大核心领域，助力企业持续增长</p>
+					<span class="section-tag">{site.highlights.header.tag}</span>
+					<h2>{site.highlights.header.title}</h2>
+					{site.highlights.header.subtitle && <p>{site.highlights.header.subtitle}</p>}
 				</div>
 				<div class="highlights-grid">
 					{highlights.map((h, i) => (
@@ -52,7 +29,7 @@ const iconMap: Record<string, string> = {
 							<div class="highlight-icon" set:html={`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${iconMap[h.icon]}</svg>`}></div>
 							<h3>{h.title}</h3>
 							<p>{h.desc}</p>
-							<span class="highlight-link">了解更多 →</span>
+							<span class="highlight-link">{site.highlights.linkText}</span>
 						</a>
 					))}
 				</div>
@@ -107,13 +84,33 @@ const iconMap: Record<string, string> = {
 		padding: 36px 28px;
 		border: 1px solid var(--color-border);
 		border-radius: var(--radius-lg);
-		background: var(--color-card-bg);
-		transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+		background: var(--color-card-bg-gradient);
+		transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+		position: relative;
+		overflow: hidden;
+	}
+
+	.highlight-card::after {
+		content: "";
+		position: absolute;
+		top: -50%;
+		right: -50%;
+		width: 200%;
+		height: 200%;
+		background: radial-gradient(circle, var(--color-card-glow) 0%, transparent 60%);
+		opacity: 0;
+		transition: opacity var(--transition-slow);
+		pointer-events: none;
 	}
 
 	.highlight-card:hover {
 		border-color: var(--color-text);
-		box-shadow: 0 4px 24px var(--color-card-shadow);
+		box-shadow: 0 8px 32px var(--color-card-shadow-hover);
+		transform: translateY(-3px);
+	}
+
+	.highlight-card:hover::after {
+		opacity: 1;
 	}
 
 	.highlight-icon {
@@ -126,6 +123,13 @@ const iconMap: Record<string, string> = {
 		border-radius: var(--radius);
 		margin-bottom: 20px;
 		color: var(--color-text);
+		background: var(--color-bg-tertiary);
+		transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+	}
+
+	.highlight-card:hover .highlight-icon {
+		border-color: var(--color-highlight);
+		box-shadow: 0 4px 16px var(--color-card-glow);
 	}
 
 	.highlight-card h3 {

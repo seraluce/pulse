@@ -1,16 +1,18 @@
 ---
+import { site } from '../config';
+const cta = site.cta;
 ---
 
 <section id="contact" class="cta section">
 	<div class="container">
 		<div class="cta-box animate-on-scroll">
 			<div class="cta-content">
-				<h2>准备好开始了吗？</h2>
-				<p>无论您的项目处于哪个阶段，我们都乐意与您交流。让我们一起找到最佳方案。</p>
+				<h2>{cta.title}</h2>
+				<p>{cta.description}</p>
 			</div>
 			<div class="cta-actions">
-				<a href="/contact" class="btn btn-primary">联系我们</a>
-				<a href="/services" class="btn btn-outline">查看服务</a>
+				<a href={cta.primaryButton.href} class="btn btn-primary">{cta.primaryButton.label}</a>
+				<a href={cta.secondaryButton.href} class="btn btn-outline">{cta.secondaryButton.label}</a>
 			</div>
 		</div>
 	</div>

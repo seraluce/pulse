@@ -5,16 +5,19 @@ import Features from '../components/Features.astro';
 import About from '../components/About.astro';
 import CTA from '../components/CTA.astro';
 import Footer from '../components/Footer.astro';
+import { site } from '../config';
+
+const hero = site.pages.services.hero;
 ---
 
-<Layout page={{ title: '服务', path: '/services', description: '战略咨询、数字化转型、品牌建设、数据驱动、增长运营、技术支持 — 覆盖企业发展全链路的专业服务。' }}>
+<Layout page={{ title: hero.title, path: '/services', description: site.description }}>
 	<Header />
 	<main>
 		<section class="page-hero">
 			<div class="container">
-				<span class="section-tag animate-on-scroll">OUR SERVICES</span>
-				<h1 class="animate-on-scroll delay-1">服务与能力</h1>
-				<p class="animate-on-scroll delay-2">覆盖企业发展全链路的专业服务体系，从战略规划到落地执行</p>
+				<span class="section-tag animate-on-scroll">{hero.tag}</span>
+				<h1 class="animate-on-scroll delay-1">{hero.title}</h1>
+				<p class="animate-on-scroll delay-2">{hero.subtitle}</p>
 			</div>
 		</section>
 		<Features />

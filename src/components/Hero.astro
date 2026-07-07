@@ -1,4 +1,6 @@
 ---
+import { site } from '../config';
+const hero = site.hero;
 ---
 
 <section class="hero" id="hero">
@@ -12,33 +14,26 @@
 	</div>
 	<div class="container hero-inner">
 		<div class="hero-content">
-			<div class="hero-badge">专业 · 高效 · 可靠</div>
+			<div class="hero-badge">{hero.badge}</div>
 			<h1>
-				用专业方案<br/>
-				<span>驱动业务增长</span>
+				{hero.titleMain}<br/>
+				<span>{hero.titleHighlight}</span>
 			</h1>
-			<p class="hero-desc">
-				我们为企业提供全方位的数字化解决方案，从战略规划到落地执行，帮助您在竞争中脱颖而出。
-			</p>
+			<p class="hero-desc">{hero.description}</p>
 			<div class="hero-actions">
-				<a href="/contact" class="btn btn-primary">立即咨询</a>
-				<a href="/services" class="btn btn-outline">了解更多</a>
+				<a href={hero.primaryButton.href} class="btn btn-primary">{hero.primaryButton.label}</a>
+				<a href={hero.secondaryButton.href} class="btn btn-outline">{hero.secondaryButton.label}</a>
 			</div>
 			<div class="hero-stats">
-				<div class="stat">
-					<span class="stat-num">500+</span>
-					<span class="stat-label">服务客户</span>
-				</div>
-				<div class="stat-divider"></div>
-				<div class="stat">
-					<span class="stat-num">98%</span>
-					<span class="stat-label">客户满意度</span>
-				</div>
-				<div class="stat-divider"></div>
-				<div class="stat">
-					<span class="stat-num">10+</span>
-					<span class="stat-label">年行业经验</span>
-				</div>
+				{hero.stats.map((stat, i) => (
+					<>
+						{i > 0 && <div class="stat-divider"></div>}
+						<div class="stat">
+							<span class="stat-num">{stat.num}</span>
+							<span class="stat-label">{stat.label}</span>
+						</div>
+					</>
+				))}
 			</div>
 		</div>
 	</div>

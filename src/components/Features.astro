@@ -1,53 +1,16 @@
 ---
-const features = [
-	{
-		icon: 'strategy',
-		title: '战略咨询',
-		desc: '深入分析行业趋势与竞争格局，为您制定清晰可执行的发展战略。',
-	},
-	{
-		icon: 'digital',
-		title: '数字化转型',
-		desc: '端到端的数字化解决方案，从系统架构到用户体验全面升级。',
-	},
-	{
-		icon: 'brand',
-		title: '品牌建设',
-		desc: '构建有辨识度的品牌形象，从视觉设计到品牌传播一体化服务。',
-	},
-	{
-		icon: 'data',
-		title: '数据驱动',
-		desc: '基于数据洞察优化决策流程，让每一步都有据可依。',
-	},
-	{
-		icon: 'growth',
-		title: '增长运营',
-		desc: '精细化运营策略，持续优化转化漏斗，实现可量化的业务增长。',
-	},
-	{
-		icon: 'support',
-		title: '技术支持',
-		desc: '7×24小时技术保障，确保系统稳定运行，快速响应突发需求。',
-	},
-];
-
-const iconMap: Record<string, string> = {
-	strategy: '<path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>',
-	digital: '<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>',
-	brand: '<path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>',
-	data: '<path d="M18 20V10M12 20V4M6 20v-6"/>',
-	growth: '<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>',
-	support: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
-};
+import { site } from '../config';
+const header = site.features.header;
+const features = site.features.items;
+const iconMap = site.icons.features;
 ---
 
 <section id="features" class="features section">
 	<div class="container">
 		<div class="section-header animate-on-scroll">
-			<span class="section-tag">OUR SERVICES</span>
-			<h2>我们的服务</h2>
-			<p>覆盖企业发展全链路的专业服务体系</p>
+			<span class="section-tag">{header.tag}</span>
+			<h2>{header.title}</h2>
+			{header.subtitle && <p>{header.subtitle}</p>}
 		</div>
 		<div class="features-grid">
 			{features.map((f, i) => (
@@ -103,13 +66,33 @@ const iconMap: Record<string, string> = {
 	}
 
 	.feature-card {
-		background: var(--color-card-bg);
+		background: var(--color-card-bg-gradient);
 		padding: 40px 32px;
-		transition: background var(--transition-fast);
+		transition: background var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+		position: relative;
+		overflow: hidden;
+	}
+
+	.feature-card::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 3px;
+		background: linear-gradient(90deg, transparent, var(--color-highlight), transparent);
+		opacity: 0;
+		transition: opacity var(--transition-fast);
 	}
 
 	.feature-card:hover {
-		background: var(--color-bg-tertiary);
+		background: var(--color-card-bg-hover);
+		box-shadow: 0 8px 32px var(--color-card-shadow-hover), 0 0 0 1px var(--color-card-glow);
+		transform: translateY(-2px);
+	}
+
+	.feature-card:hover::before {
+		opacity: 1;
 	}
 
 	.feature-icon {
@@ -122,6 +105,14 @@ const iconMap: Record<string, string> = {
 		border-radius: var(--radius);
 		margin-bottom: 20px;
 		color: var(--color-text);
+		background: var(--color-card-bg-gradient);
+		box-shadow: 0 2px 8px var(--color-card-shadow);
+		transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+	}
+
+	.feature-card:hover .feature-icon {
+		border-color: var(--color-highlight);
+		box-shadow: 0 4px 16px var(--color-card-glow);
 	}
 
 	.feature-card h3 {

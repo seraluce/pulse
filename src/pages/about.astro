@@ -3,46 +3,20 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import CTA from '../components/CTA.astro';
 import Footer from '../components/Footer.astro';
+import { site } from '../config';
 
-const values = [
-	{ title: '客户至上', desc: '始终将客户需求放在首位，以创造价值为导向。', icon: 'heart' },
-	{ title: '专业精进', desc: '持续学习行业前沿知识，保持专业领先。', icon: 'star' },
-	{ title: '诚信合作', desc: '以透明、真诚的态度对待每一位合作伙伴。', icon: 'shield' },
-	{ title: '创新驱动', desc: '拥抱变化，用创新思维解决复杂问题。', icon: 'bulb' },
-];
-
-const milestones = [
-	{ year: '2015', title: '创立起航', desc: '公司正式成立，专注于企业战略咨询服务。' },
-	{ year: '2017', title: '团队壮大', desc: '核心团队扩展至20人，覆盖多个专业领域。' },
-	{ year: '2018', title: '业务拓展', desc: '正式进入数字化转型领域。' },
-	{ year: '2020', title: '技术突破', desc: '自研智能化平台上线，服务效率提升300%。' },
-	{ year: '2021', title: '规模增长', desc: '服务客户突破300家，涵盖多个行业。' },
-	{ year: '2024', title: '智能时代', desc: '推出AI驱动的智能服务平台。' },
-];
-
-const team = [
-	{ name: '张明', role: '创始人 & CEO', desc: '15年企业咨询经验' },
-	{ name: '李华', role: '技术总监', desc: '前大厂技术负责人' },
-	{ name: '王芳', role: '设计总监', desc: '国际设计大奖获得者' },
-	{ name: '陈伟', role: '运营总监', desc: '10年数字营销经验' },
-];
-
-const iconSvg: Record<string, string> = {
-	heart: '<path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>',
-	star: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
-	shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
-	bulb: '<path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12.7V17h8v-2.3A7 7 0 0012 2z"/>',
-};
+const pageCfg = site.pages.about;
+const iconSvg = site.icons.values;
 ---
 
-<Layout page={{ title: '关于我们', path: '/about', description: 'Grateful Group 成立于2015年，服务超过500家企业客户，横跨金融、科技、零售、制造等多个行业。' }}>
+<Layout page={{ title: pageCfg.hero.title, path: '/about', description: site.description }}>
 	<Header />
 	<main>
 		<section class="page-hero">
 			<div class="container">
-				<span class="section-tag animate-on-scroll">ABOUT US</span>
-				<h1 class="animate-on-scroll delay-1">关于 Grateful Group</h1>
-				<p class="animate-on-scroll delay-2">感恩每一次合作，珍惜每一份信任。我们以专业创造价值，用真诚赢得信赖。</p>
+				<span class="section-tag animate-on-scroll">{pageCfg.hero.tag}</span>
+				<h1 class="animate-on-scroll delay-1">{pageCfg.hero.title}</h1>
+				<p class="animate-on-scroll delay-2">{pageCfg.hero.subtitle}</p>
 			</div>
 		</section>
 
@@ -50,28 +24,18 @@ const iconSvg: Record<string, string> = {
 			<div class="container">
 				<div class="story-grid">
 					<div class="story-content animate-on-scroll">
-						<h2>我们的故事</h2>
-						<p>Grateful Group 创立于2015年，源于一个简单的信念：企业值得拥有真正理解自己需求的合作伙伴。</p>
-						<p>从最初的企业战略咨询，到如今覆盖数字化转型、品牌建设、数据驱动的全方位服务平台，我们始终坚持以客户价值为核心驱动力。</p>
-						<p>近十年来，我们服务了超过500家企业客户，横跨金融、科技、零售、制造等多个行业。</p>
+						<h2>{pageCfg.story.title}</h2>
+						{pageCfg.story.paragraphs.map((p) => (
+							<p>{p}</p>
+						))}
 					</div>
 					<div class="story-stats animate-on-scroll delay-2">
-						<div class="stat-card">
-							<span class="stat-num">500+</span>
-							<span class="stat-label">服务客户</span>
-						</div>
-						<div class="stat-card">
-							<span class="stat-num">50+</span>
-							<span class="stat-label">专业团队</span>
-						</div>
-						<div class="stat-card">
-							<span class="stat-num">98%</span>
-							<span class="stat-label">满意度</span>
-						</div>
-						<div class="stat-card">
-							<span class="stat-num">10+</span>
-							<span class="stat-label">年深耕</span>
-						</div>
+						{pageCfg.story.stats.map((stat) => (
+							<div class="stat-card">
+								<span class="stat-num">{stat.num}</span>
+								<span class="stat-label">{stat.label}</span>
+							</div>
+						))}
 					</div>
 				</div>
 			</div>
@@ -80,12 +44,12 @@ const iconSvg: Record<string, string> = {
 		<section class="values section">
 			<div class="container">
 				<div class="section-header animate-on-scroll">
-					<span class="section-tag">OUR VALUES</span>
-					<h2>核心价值观</h2>
-					<p>指引我们前行的信念</p>
+					<span class="section-tag">{pageCfg.values.header.tag}</span>
+					<h2>{pageCfg.values.header.title}</h2>
+					{pageCfg.values.header.subtitle && <p>{pageCfg.values.header.subtitle}</p>}
 				</div>
 				<div class="values-grid">
-					{values.map((v, i) => (
+					{pageCfg.values.items.map((v, i) => (
 						<div class={`value-card animate-on-scroll delay-${i + 1}`}>
 							<div class="value-icon" set:html={`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${iconSvg[v.icon]}</svg>`}></div>
 							<h3>{v.title}</h3>
@@ -99,12 +63,12 @@ const iconSvg: Record<string, string> = {
 		<section class="timeline-section section">
 			<div class="container">
 				<div class="section-header animate-on-scroll">
-					<span class="section-tag">OUR JOURNEY</span>
-					<h2>发展历程</h2>
+					<span class="section-tag">{pageCfg.timeline.header.tag}</span>
+					<h2>{pageCfg.timeline.header.title}</h2>
 				</div>
 				<div class="timeline">
 					<div class="timeline-center-line"></div>
-					{milestones.map((m, i) => (
+					{pageCfg.timeline.items.map((m, i) => (
 						<div class={`timeline-row ${i % 2 === 0 ? 'left' : 'right'} animate-on-scroll delay-${(i % 3) + 1}`}>
 							<div class="timeline-card">
 								<span class="timeline-year">{m.year}</span>
@@ -121,11 +85,11 @@ const iconSvg: Record<string, string> = {
 		<section class="team section">
 			<div class="container">
 				<div class="section-header animate-on-scroll">
-					<span class="section-tag">OUR TEAM</span>
-					<h2>核心团队</h2>
+					<span class="section-tag">{pageCfg.team.header.tag}</span>
+					<h2>{pageCfg.team.header.title}</h2>
 				</div>
 				<div class="team-grid">
-					{team.map((t, i) => (
+					{pageCfg.team.members.map((t, i) => (
 						<div class={`team-card animate-on-scroll delay-${i + 1}`}>
 							<div class="team-avatar">{t.name[0]}</div>
 							<h3>{t.name}</h3>
@@ -222,10 +186,17 @@ const iconSvg: Record<string, string> = {
 
 	.stat-card {
 		padding: 28px 24px;
-		background: var(--color-card-bg);
+		background: var(--color-card-bg-gradient);
 		border: 1px solid var(--color-border);
 		border-radius: var(--radius-lg);
 		text-align: center;
+		transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+	}
+
+	.stat-card:hover {
+		border-color: var(--color-text);
+		box-shadow: 0 6px 24px var(--color-card-shadow-hover);
+		transform: translateY(-2px);
 	}
 
 	.stat-num {
@@ -256,13 +227,33 @@ const iconSvg: Record<string, string> = {
 
 	.value-card {
 		padding: 36px 24px;
-		background: var(--color-card-bg);
+		background: var(--color-card-bg-gradient);
 		text-align: center;
-		transition: background var(--transition-fast);
+		transition: background var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+		position: relative;
+		overflow: hidden;
+	}
+
+	.value-card::before {
+		content: "";
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 2px;
+		background: linear-gradient(90deg, transparent, var(--color-highlight), transparent);
+		opacity: 0;
+		transition: opacity var(--transition-fast);
 	}
 
 	.value-card:hover {
-		background: var(--color-bg-tertiary);
+		background: var(--color-card-bg-hover);
+		box-shadow: 0 8px 32px var(--color-card-shadow-hover);
+		transform: translateY(-2px);
+	}
+
+	.value-card:hover::before {
+		opacity: 1;
 	}
 
 	.value-icon {
@@ -275,6 +266,13 @@ const iconSvg: Record<string, string> = {
 		border-radius: var(--radius);
 		margin: 0 auto 16px;
 		color: var(--color-text);
+		background: var(--color-bg-tertiary);
+		transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+	}
+
+	.value-card:hover .value-icon {
+		border-color: var(--color-highlight);
+		box-shadow: 0 4px 16px var(--color-card-glow);
 	}
 
 	.value-card h3 {
@@ -340,9 +338,16 @@ const iconSvg: Record<string, string> = {
 
 	.timeline-card {
 		padding: 24px;
-		background: var(--color-card-bg);
+		background: var(--color-card-bg-gradient);
 		border: 1px solid var(--color-border);
 		border-radius: var(--radius-lg);
+		transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+	}
+
+	.timeline-card:hover {
+		border-color: var(--color-text);
+		box-shadow: 0 6px 24px var(--color-card-shadow-hover);
+		transform: translateY(-2px);
 	}
 
 	.timeline-year {
@@ -378,9 +383,16 @@ const iconSvg: Record<string, string> = {
 	.team-card {
 		text-align: center;
 		padding: 36px 20px;
-		background: var(--color-card-bg);
+		background: var(--color-card-bg-gradient);
 		border: 1px solid var(--color-border);
 		border-radius: var(--radius-lg);
+		transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+	}
+
+	.team-card:hover {
+		border-color: var(--color-text);
+		box-shadow: 0 8px 32px var(--color-card-shadow-hover);
+		transform: translateY(-3px);
 	}
 
 	.team-avatar {

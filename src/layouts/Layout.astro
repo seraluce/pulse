@@ -1,5 +1,5 @@
 ---
-import { site, type PageMeta, getPageMeta } from '../config';
+import { site, type PageMeta, getPageMeta } from "../config";
 
 interface Props {
 	page?: PageMeta;
@@ -8,17 +8,18 @@ interface Props {
 const { page } = Astro.props;
 const seo = getPageMeta(page);
 const jsonLd = {
-	'@context': 'https://schema.org',
-	'@type': 'Organization',
+	"@context": "https://schema.org",
+	"@type": "Organization",
 	name: site.title,
 	url: site.url,
 	description: site.description,
+	keywords: site.keywords,
 	email: site.email,
 	telephone: site.phone,
 	address: {
-		'@type': 'PostalAddress',
-		addressLocality: '北京',
-		addressCountry: 'CN',
+		"@type": "PostalAddress",
+		addressLocality: "北京",
+		addressCountry: "CN",
 		streetAddress: site.address,
 	},
 	foundingDate: site.founded,
@@ -26,7 +27,7 @@ const jsonLd = {
 };
 ---
 
-<!doctype html>
+<!-- src\layouts\Layout.astro --><!doctype html>
 <html lang={site.lang}>
 	<head>
 		<meta charset="utf-8" />
@@ -36,7 +37,7 @@ const jsonLd = {
 		<title>{seo.title}</title>
 		<meta name="title" content={seo.title} />
 		<meta name="description" content={seo.description} />
-		<meta name="keywords" content="企业咨询,数字化转型,战略咨询,品牌建设,数据驱动,增长运营,Grateful Group" />
+		<meta name="keywords" content={site.keywords} />
 		<meta name="author" content={site.title} />
 		<meta name="robots" content="index, follow" />
 		<link rel="canonical" href={seo.url} />
@@ -63,7 +64,13 @@ const jsonLd = {
 		<link rel="apple-touch-icon" href={site.appleTouchIcon} />
 
 		<!-- Fonts -->
-		<link rel="preload" href="/fonts/PingFangSC-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+		<link
+			rel="preload"
+			href="/fonts/PingFangSC-Regular.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin="anonymous"
+		/>
 		<link rel="stylesheet" href="/fonts/index.css" />
 
 		<!-- JSON-LD -->
@@ -72,10 +79,15 @@ const jsonLd = {
 		<meta name="generator" content={Astro.generator} />
 
 		<script is:inline>
-			(function() {
-				const theme = localStorage.getItem('theme');
-				if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-					document.documentElement.classList.add('dark');
+			(function () {
+				const theme = localStorage.getItem("theme");
+				if (
+					theme === "dark" ||
+					(!theme &&
+						window.matchMedia("(prefers-color-scheme: dark)")
+							.matches)
+				) {
+					document.documentElement.classList.add("dark");
 				}
 			})();
 		</script>
@@ -98,13 +110,21 @@ const jsonLd = {
 		--color-accent: #000000;
 		--color-accent-hover: #333333;
 		--color-card-bg: #ffffff;
+		--color-card-bg-gradient: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+		--color-card-bg-hover: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
 		--color-card-shadow: rgba(0, 0, 0, 0.04);
 		--color-card-shadow-hover: rgba(0, 0, 0, 0.08);
+		--color-card-glow: rgba(0, 112, 243, 0.04);
 		--color-overlay: rgba(255, 255, 255, 0.85);
 		--color-highlight: #0070f3;
 
-		--font-sans: 'PingFangSC-Regular-woff2', 'PingFangSC-Medium-woff2', 'PingFangSC-Semibold-woff2', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-		--font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
+		--font-sans:
+			"PingFangSC-Regular-woff2", "PingFangSC-Medium-woff2",
+			"PingFangSC-Semibold-woff2", -apple-system, BlinkMacSystemFont,
+			"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+		--font-mono:
+			ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas,
+			monospace;
 
 		--max-width: 1200px;
 		--header-height: 64px;
@@ -129,13 +149,18 @@ const jsonLd = {
 		--color-accent: #ffffff;
 		--color-accent-hover: #cccccc;
 		--color-card-bg: #0a0a0a;
+		--color-card-bg-gradient: linear-gradient(135deg, #0f0f0f 0%, #0a0a0a 100%);
+		--color-card-bg-hover: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
 		--color-card-shadow: rgba(0, 0, 0, 0.3);
 		--color-card-shadow-hover: rgba(255, 255, 255, 0.05);
+		--color-card-glow: rgba(0, 112, 243, 0.06);
 		--color-overlay: rgba(0, 0, 0, 0.8);
 		--color-highlight: #0070f3;
 	}
 
-	*, *::before, *::after {
+	*,
+	*::before,
+	*::after {
 		box-sizing: border-box;
 		margin: 0;
 		padding: 0;
@@ -152,46 +177,70 @@ const jsonLd = {
 		background-color: var(--color-bg);
 		color: var(--color-text);
 		line-height: 1.6;
-		transition: background-color var(--transition-slow), color var(--transition);
+		transition:
+			background-color var(--transition-slow),
+			color var(--transition);
 		min-height: 100vh;
 		overflow-x: hidden;
 		position: relative;
 	}
 
 	body::before {
-		content: '';
+		content: "";
 		position: fixed;
 		top: -20%;
 		left: -10%;
 		width: 55%;
 		height: 55%;
-		background: radial-gradient(ellipse, rgba(180, 180, 200, 0.12) 0%, transparent 70%);
+		background: radial-gradient(
+			ellipse,
+			rgba(180, 180, 200, 0.12) 0%,
+			transparent 70%
+		);
 		pointer-events: none;
 		z-index: -1;
 		animation: breathe-a 12s ease-in-out infinite;
-		transform: translate(calc(var(--mouse-x, 0) * 15px), calc(var(--mouse-y, 0) * 15px));
+		transform: translate(
+			calc(var(--mouse-x, 0) * 15px),
+			calc(var(--mouse-y, 0) * 15px)
+		);
 	}
 
 	body::after {
-		content: '';
+		content: "";
 		position: fixed;
 		bottom: -15%;
 		right: -10%;
 		width: 50%;
 		height: 50%;
-		background: radial-gradient(ellipse, rgba(200, 195, 190, 0.1) 0%, transparent 70%);
+		background: radial-gradient(
+			ellipse,
+			rgba(200, 195, 190, 0.1) 0%,
+			transparent 70%
+		);
 		pointer-events: none;
 		z-index: -1;
 		animation: breathe-b 15s ease-in-out infinite;
-		transform: translate(calc(var(--mouse-x, 0) * -10px), calc(var(--mouse-y, 0) * -10px));
+		transform: translate(
+			calc(var(--mouse-x, 0) * -10px),
+			calc(var(--mouse-y, 0) * -10px)
+		);
 	}
 
 	:root.dark body::before {
-		background: radial-gradient(ellipse, rgba(100, 110, 140, 0.15) 0%, transparent 70%);
+		background: radial-gradient(
+			ellipse,
+			rgba(100, 110, 140, 0.15) 0%,
+			transparent 70%
+		);
 	}
 
 	:root.dark body::after {
-		background: radial-gradient(ellipse, rgba(140, 120, 110, 0.1) 0%, transparent 70%);
+		background: radial-gradient(
+			ellipse,
+			rgba(140, 120, 110, 0.1) 0%,
+			transparent 70%
+		);
 	}
 
 	a {
@@ -230,7 +279,9 @@ const jsonLd = {
 	.animate-on-scroll {
 		opacity: 0;
 		transform: translateY(24px);
-		transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+		transition:
+			opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+			transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
 	.animate-on-scroll.visible {
@@ -238,42 +289,93 @@ const jsonLd = {
 		transform: translateY(0);
 	}
 
-	.animate-on-scroll.delay-1 { transition-delay: 0.1s; }
-	.animate-on-scroll.delay-2 { transition-delay: 0.2s; }
-	.animate-on-scroll.delay-3 { transition-delay: 0.3s; }
-	.animate-on-scroll.delay-4 { transition-delay: 0.4s; }
-	.animate-on-scroll.delay-5 { transition-delay: 0.5s; }
+	.animate-on-scroll.delay-1 {
+		transition-delay: 0.1s;
+	}
+	.animate-on-scroll.delay-2 {
+		transition-delay: 0.2s;
+	}
+	.animate-on-scroll.delay-3 {
+		transition-delay: 0.3s;
+	}
+	.animate-on-scroll.delay-4 {
+		transition-delay: 0.4s;
+	}
+	.animate-on-scroll.delay-5 {
+		transition-delay: 0.5s;
+	}
 
 	@keyframes float {
-		0%, 100% { transform: translateY(0); }
-		50% { transform: translateY(-10px); }
+		0%,
+		100% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(-10px);
+		}
 	}
 
 	@keyframes pulse-ring {
-		0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
-		100% { transform: translate(-50%, -50%) scale(1.15); opacity: 0; }
+		0% {
+			transform: translate(-50%, -50%) scale(1);
+			opacity: 0.5;
+		}
+		100% {
+			transform: translate(-50%, -50%) scale(1.15);
+			opacity: 0;
+		}
 	}
 
 	@keyframes shimmer {
-		0% { background-position: -200% 0; }
-		100% { background-position: 200% 0; }
+		0% {
+			background-position: -200% 0;
+		}
+		100% {
+			background-position: 200% 0;
+		}
 	}
 
 	@keyframes fade-in-up {
-		from { opacity: 0; transform: translateY(20px); }
-		to { opacity: 1; transform: translateY(0); }
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 
 	@keyframes breathe-a {
-		0%, 100% { transform: translate(0, 0) scale(1); opacity: 1; }
-		33% { transform: translate(3%, 2%) scale(1.05); opacity: 0.85; }
-		66% { transform: translate(-2%, 3%) scale(0.97); opacity: 1; }
+		0%,
+		100% {
+			transform: translate(0, 0) scale(1);
+			opacity: 1;
+		}
+		33% {
+			transform: translate(3%, 2%) scale(1.05);
+			opacity: 0.85;
+		}
+		66% {
+			transform: translate(-2%, 3%) scale(0.97);
+			opacity: 1;
+		}
 	}
 
 	@keyframes breathe-b {
-		0%, 100% { transform: translate(0, 0) scale(1); opacity: 1; }
-		33% { transform: translate(-3%, -2%) scale(1.04); opacity: 0.9; }
-		66% { transform: translate(2%, -3%) scale(0.96); opacity: 1; }
+		0%,
+		100% {
+			transform: translate(0, 0) scale(1);
+			opacity: 1;
+		}
+		33% {
+			transform: translate(-3%, -2%) scale(1.04);
+			opacity: 0.9;
+		}
+		66% {
+			transform: translate(2%, -3%) scale(0.96);
+			opacity: 1;
+		}
 	}
 
 	@media (max-width: 768px) {
@@ -287,36 +389,50 @@ const jsonLd = {
 </style>
 
 <script>
-	const observer = new IntersectionObserver((entries) => {
-		entries.forEach(entry => {
-			if (entry.isIntersecting) {
-				entry.target.classList.add('visible');
-			}
-		});
-	}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+	const observer = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add("visible");
+				}
+			});
+		},
+		{ threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
+	);
 
-	document.addEventListener('DOMContentLoaded', () => {
-		document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+	document.addEventListener("DOMContentLoaded", () => {
+		document
+			.querySelectorAll(".animate-on-scroll")
+			.forEach((el) => observer.observe(el));
 
 		// 滚动视差 - 背景光斑随滚动轻微移动
 		let ticking = false;
-		window.addEventListener('scroll', () => {
-			if (!ticking) {
-				requestAnimationFrame(() => {
-					const scrollY = window.scrollY;
-					document.documentElement.style.setProperty('--scroll-y', scrollY + 'px');
-					ticking = false;
-				});
-				ticking = true;
-			}
-		}, { passive: true });
+		window.addEventListener(
+			"scroll",
+			() => {
+				if (!ticking) {
+					requestAnimationFrame(() => {
+						const scrollY = window.scrollY;
+						document.documentElement.style.setProperty(
+							"--scroll-y",
+							scrollY + "px",
+						);
+						ticking = false;
+					});
+					ticking = true;
+				}
+			},
+			{ passive: true },
+		);
 
 		// 鼠标跟随视差（仅桌面端）
-		if (window.matchMedia('(min-width: 769px)').matches) {
-			let mouseX = 0, mouseY = 0;
-			let currentX = 0, currentY = 0;
+		if (window.matchMedia("(min-width: 769px)").matches) {
+			let mouseX = 0,
+				mouseY = 0;
+			let currentX = 0,
+				currentY = 0;
 
-			document.addEventListener('mousemove', (e) => {
+			document.addEventListener("mousemove", (e) => {
 				mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
 				mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
 			});
@@ -324,8 +440,14 @@ const jsonLd = {
 			function animateMouse() {
 				currentX += (mouseX - currentX) * 0.05;
 				currentY += (mouseY - currentY) * 0.05;
-				document.documentElement.style.setProperty('--mouse-x', currentX + 'px');
-				document.documentElement.style.setProperty('--mouse-y', currentY + 'px');
+				document.documentElement.style.setProperty(
+					"--mouse-x",
+					currentX + "px",
+				);
+				document.documentElement.style.setProperty(
+					"--mouse-y",
+					currentY + "px",
+				);
 				requestAnimationFrame(animateMouse);
 			}
 			animateMouse();

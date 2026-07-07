@@ -4,29 +4,19 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../config';
 
-const contactInfo = [
-	{ icon: 'mail', title: '邮箱', value: 'evanyanet@gmail.com', href: 'mailto:evanyanet@gmail.com' },
-	{ icon: 'phone', title: '电话', value: '010-0000-0000', href: 'tel:+8610-0000-0000' },
-	{ icon: 'location', title: '地址', value: '北京市朝阳区建国路88号', href: '#' },
-	{ icon: 'clock', title: '工作时间', value: '周一至周五 9:00-18:00', href: '#' },
-];
-
-const iconSvg: Record<string, string> = {
-	mail: '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/>',
-	phone: '<path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>',
-	location: '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>',
-	clock: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
-};
+const pageCfg = site.pages.contact;
+const iconSvg = site.icons.contact;
+const faq = pageCfg.faq;
 ---
 
-<Layout page={{ title: '联系我们', path: '/contact', description: '联系 Grateful Group，获取专业企业咨询服务。邮箱：evanyanet@gmail.com' }}>
+<Layout page={{ title: pageCfg.pageHero.title, path: '/contact', description: site.description }}>
 	<Header />
 	<main>
 		<section class="page-hero">
 			<div class="container">
-				<span class="section-tag animate-on-scroll">CONTACT US</span>
-				<h1 class="animate-on-scroll delay-1">联系我们</h1>
-				<p class="animate-on-scroll delay-2">无论您有什么需求或想法，都欢迎与我们交流</p>
+				<span class="section-tag animate-on-scroll">{pageCfg.pageHero.tag}</span>
+				<h1 class="animate-on-scroll delay-1">{pageCfg.pageHero.title}</h1>
+				<p class="animate-on-scroll delay-2">{pageCfg.pageHero.subtitle}</p>
 			</div>
 		</section>
 
@@ -34,10 +24,10 @@ const iconSvg: Record<string, string> = {
 			<div class="container">
 				<div class="contact-grid">
 					<div class="contact-info animate-on-scroll">
-						<h2>与我们取得联系</h2>
-						<p class="contact-desc">我们的团队随时准备为您提供帮助。您可以通过以下方式联系我们，或直接填写表单留言。</p>
+						<h2>{pageCfg.infoTitle}</h2>
+						<p class="contact-desc">{pageCfg.infoDesc}</p>
 						<div class="info-list">
-							{contactInfo.map((item) => (
+							{pageCfg.contactInfo.map((item) => (
 								<a href={item.href} class="info-item">
 									<div class="info-icon" set:html={`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${iconSvg[item.icon]}</svg>`}></div>
 									<div>
@@ -50,39 +40,48 @@ const iconSvg: Record<string, string> = {
 					</div>
 
 					<div class="contact-form-wrap animate-on-scroll delay-2">
-						<form class="contact-form" id="contactForm" action={site.formEndpoint} method="POST" data-netlify="true" netlify-honeypot="bot-field">
+						<form class="contact-form" id="contactForm" action={site.formEndpoint} method="POST" data-netlify="true" netlify-honeypot="bot-field"
+							data-success={pageCfg.successMessage}
+							data-fail={pageCfg.failMessage}
+							data-required={pageCfg.requiredMessage}
+							data-sending={pageCfg.sendingText}
+							data-network-error={pageCfg.networkErrorMessage}
+						>
 							<input type="hidden" name="form-name" value="contact" />
 							<p hidden><label>Don't fill this out: <input name="bot-field" /></label></p>
-							<div class="form-row">
-								<div class="form-group">
-									<label for="name">姓名</label>
-									<input type="text" id="name" name="name" placeholder="您的姓名" data-required />
+							{pageCfg.formRows.map((row, rowIndex) => (
+								<div class={row.length > 1 ? 'form-row' : ''}>
+									{row.map((field) => {
+										if (field.type === 'select') {
+											return (
+												<div class="form-group">
+													<label for={field.name}>{field.label}</label>
+													<select id={field.name} name={field.name}>
+														{field.options?.map((opt) => (
+															<option value={opt.value}>{opt.label}</option>
+														))}
+													</select>
+												</div>
+											);
+										}
+										if (field.type === 'textarea') {
+											return (
+												<div class="form-group">
+													<label for={field.name}>{field.label}</label>
+													<textarea id={field.name} name={field.name} rows={field.rows || 5} placeholder={field.placeholder || ''} data-required={field.required ? '' : undefined}></textarea>
+												</div>
+											);
+										}
+										return (
+											<div class="form-group">
+												<label for={field.name}>{field.label}</label>
+												<input type={field.type} id={field.name} name={field.name} placeholder={field.placeholder || ''} data-required={field.required ? '' : undefined} />
+											</div>
+										);
+									})}
 								</div>
-								<div class="form-group">
-									<label for="email">邮箱</label>
-									<input type="email" id="email" name="email" placeholder="your@email.com" data-required />
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="company">公司</label>
-								<input type="text" id="company" name="company" placeholder="公司名称（选填）" />
-							</div>
-							<div class="form-group">
-								<label for="subject">主题</label>
-								<select id="subject" name="subject">
-									<option value="">请选择咨询类型</option>
-									<option value="strategy">战略咨询</option>
-									<option value="digital">数字化转型</option>
-									<option value="brand">品牌建设</option>
-									<option value="data">数据分析</option>
-									<option value="other">其他</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label for="message">留言</label>
-								<textarea id="message" name="message" rows="5" placeholder="请描述您的需求..." data-required></textarea>
-							</div>
-							<button type="submit" class="btn-submit">发送留言</button>
+							))}
+							<button type="submit" class="btn-submit">{pageCfg.submitText}</button>
 						</form>
 					</div>
 				</div>
@@ -92,26 +91,16 @@ const iconSvg: Record<string, string> = {
 		<section class="faq section">
 			<div class="container">
 				<div class="section-header animate-on-scroll">
-					<span class="section-tag">FAQ</span>
-					<h2>常见问题</h2>
+					<span class="section-tag">{faq.header.tag}</span>
+					<h2>{faq.header.title}</h2>
 				</div>
 				<div class="faq-grid">
-					<div class="faq-item animate-on-scroll delay-1">
-						<h3>合作流程是怎样的？</h3>
-						<p>我们通常从初步沟通开始，了解您的需求后进行方案策划，双方确认后签订合同并启动项目。</p>
-					</div>
-					<div class="faq-item animate-on-scroll delay-2">
-						<h3>项目周期一般多长？</h3>
-						<p>根据项目复杂度不同，通常咨询项目为2-4周，数字化转型项目为2-6个月。</p>
-					</div>
-					<div class="faq-item animate-on-scroll delay-3">
-						<h3>如何收费？</h3>
-						<p>我们根据项目范围和复杂度提供定制报价。初次咨询免费。</p>
-					</div>
-					<div class="faq-item animate-on-scroll delay-4">
-						<h3>是否提供售后支持？</h3>
-						<p>是的，所有项目交付后都提供免费维护支持，并可签订长期服务协议。</p>
-					</div>
+					{faq.items.map((item, i) => (
+						<div class={`faq-item animate-on-scroll delay-${i + 1}`}>
+							<h3>{item.question}</h3>
+							<p>{item.answer}</p>
+						</div>
+					))}
 				</div>
 			</div>
 		</section>
@@ -187,11 +176,14 @@ const iconSvg: Record<string, string> = {
 		padding: 16px;
 		border: 1px solid var(--color-border);
 		border-radius: var(--radius);
-		transition: border-color var(--transition-fast);
+		background: var(--color-card-bg-gradient);
+		transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
 	}
 
 	.info-item:hover {
 		border-color: var(--color-text);
+		box-shadow: 0 4px 16px var(--color-card-shadow-hover);
+		transform: translateX(4px);
 	}
 
 	.info-icon {
@@ -203,7 +195,14 @@ const iconSvg: Record<string, string> = {
 		border: 1px solid var(--color-border);
 		border-radius: var(--radius);
 		color: var(--color-text);
+		background: var(--color-bg-tertiary);
 		flex-shrink: 0;
+		transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+	}
+
+	.info-item:hover .info-icon {
+		border-color: var(--color-highlight);
+		box-shadow: 0 2px 12px var(--color-card-glow);
 	}
 
 	.info-label {
@@ -386,9 +385,16 @@ const iconSvg: Record<string, string> = {
 
 	.faq-item {
 		padding: 28px;
-		background: var(--color-card-bg);
+		background: var(--color-card-bg-gradient);
 		border: 1px solid var(--color-border);
 		border-radius: var(--radius-lg);
+		transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+	}
+
+	.faq-item:hover {
+		border-color: var(--color-text);
+		box-shadow: 0 6px 24px var(--color-card-shadow-hover);
+		transform: translateY(-2px);
 	}
 
 	.faq-item h3 {
@@ -427,7 +433,14 @@ const iconSvg: Record<string, string> = {
 		form.addEventListener('submit', async (e) => {
 			e.preventDefault();
 
-			// 验证必填字段
+			const msgs = {
+				success: form.dataset.success || '留言已收到，我们会尽快回复您！',
+				fail: form.dataset.fail || '发送失败，请稍后重试',
+				required: form.dataset.required || '请填写所有必填项',
+				sending: form.dataset.sending || '发送中...',
+				networkError: form.dataset.networkError || '网络错误，请检查连接后重试',
+			};
+
 			let hasError = false;
 			form.querySelectorAll('[data-required]').forEach(el => {
 				if (!(el as HTMLInputElement).value.trim()) {
@@ -437,14 +450,14 @@ const iconSvg: Record<string, string> = {
 			});
 
 			if (hasError) {
-				showToast('请填写所有必填项', 'fail');
+				showToast(msgs.required, 'fail');
 				return;
 			}
 
 			const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
 			const originalText = btn.textContent;
 			btn.disabled = true;
-			btn.textContent = '发送中...';
+			btn.textContent = msgs.sending;
 
 			const formData = new FormData(form);
 			const data = Object.fromEntries(formData.entries());
@@ -463,10 +476,10 @@ const iconSvg: Record<string, string> = {
 					onSuccess();
 				} else {
 					const result = await response.json().catch(() => null);
-					showToast(result?.error || '发送失败，请稍后重试', 'fail');
+					showToast(result?.error || msgs.fail, 'fail');
 				}
 			} catch {
-				showToast('网络错误，请检查连接后重试', 'fail');
+				showToast(msgs.networkError, 'fail');
 			} finally {
 				btn.disabled = false;
 				btn.textContent = originalText;
@@ -475,7 +488,7 @@ const iconSvg: Record<string, string> = {
 			function onSuccess() {
 				form.reset();
 				form.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
-				showToast('留言已收到，我们会尽快回复您！', 'success');
+				showToast(msgs.success, 'success');
 			}
 		});
 	}

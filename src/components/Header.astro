@@ -1,5 +1,6 @@
 ---
 import { site } from '../config';
+const iconMap = site.icons.nav;
 ---
 
 <header class="header">
@@ -11,12 +12,9 @@ import { site } from '../config';
 		</a>
 
 		<nav class="nav-desktop">
-			<a href="/">首页</a>
-			<a href="/services">服务</a>
-			<a href="/cases">案例</a>
-			<a href="/blog">博客</a>
-			<a href="/about">关于</a>
-			<a href="/contact">联系</a>
+			{site.nav.map((item) => (
+				<a href={item.href}>{item.label}</a>
+			))}
 		</nav>
 
 		<div class="header-actions">
@@ -28,7 +26,7 @@ import { site } from '../config';
 					<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
 				</svg>
 			</button>
-			<a href="/contact" class="btn-header">开始合作</a>
+			<a href={site.headerCta.href} class="btn-header">{site.headerCta.label}</a>
 			<button class="menu-toggle" aria-label="菜单">
 				<span></span><span></span><span></span>
 			</button>
@@ -38,35 +36,17 @@ import { site } from '../config';
 	<div class="nav-mobile">
 		<div class="nav-mobile-inner">
 			<nav>
-				<a href="/" class="nav-mobile-link">
-					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-					<span>首页</span>
-				</a>
-				<a href="/services" class="nav-mobile-link">
-					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
-					<span>服务</span>
-				</a>
-				<a href="/cases" class="nav-mobile-link">
-					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
-					<span>案例</span>
-				</a>
-				<a href="/blog" class="nav-mobile-link">
-					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-					<span>博客</span>
-				</a>
-				<a href="/about" class="nav-mobile-link">
-					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-					<span>关于</span>
-				</a>
-				<a href="/contact" class="nav-mobile-link">
-					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
-					<span>联系</span>
-				</a>
+				{site.nav.map((item) => (
+					<a href={item.href} class="nav-mobile-link">
+						<span set:html={item.icon ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${iconMap[item.icon]}</svg>` : ''}></span>
+						<span>{item.label}</span>
+					</a>
+				))}
 			</nav>
 			<div class="nav-mobile-divider"></div>
-			<a href="/contact" class="nav-mobile-cta">
+			<a href={site.headerCta.href} class="nav-mobile-cta">
 				<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-				开始合作
+				{site.headerCta.label}
 			</a>
 		</div>
 	</div>
@@ -82,8 +62,8 @@ import { site } from '../config';
 		right: 0;
 		height: var(--header-height);
 		background: rgba(255, 255, 255, 0.85);
-		backdrop-filter: blur(30px);
-		-webkit-backdrop-filter: blur(20px);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
 		border-bottom: 1px solid transparent;
 		z-index: 1000;
 		transition: background var(--transition), border-color var(--transition);
