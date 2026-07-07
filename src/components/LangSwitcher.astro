@@ -1,0 +1,201 @@
+---
+---
+
+<div class="lang-switcher-wrap">
+  <button class="lang-switcher" id="langSwitcher" aria-label="切换语言" data-i18n-aria-label="language.switch">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <line x1="2" y1="12" x2="22" y2="12"/>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+    </svg>
+    <span class="lang-label" id="langLabel">中文</span>
+    <svg class="lang-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"/>
+    </svg>
+  </button>
+
+  <div class="lang-dropdown" id="langDropdown">
+    <button class="lang-option" data-lang="zh">
+      <span class="lang-name" data-i18n="language.zh">中文</span>
+      <span class="lang-check">✓</span>
+    </button>
+    <button class="lang-option" data-lang="en">
+      <span class="lang-name" data-i18n="language.en">English</span>
+      <span class="lang-check">✓</span>
+    </button>
+  </div>
+</div>
+
+<style>
+  .lang-switcher-wrap {
+    position: relative;
+  }
+
+  .lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 36px;
+    padding: 0 10px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .lang-switcher:hover {
+    color: var(--color-text);
+    background: var(--color-bg-tertiary);
+  }
+
+  .lang-switcher.active {
+    color: var(--color-highlight);
+    border-color: var(--color-highlight);
+  }
+
+  .lang-label {
+    min-width: 36px;
+  }
+
+  .lang-arrow {
+    transition: transform var(--transition-fast);
+  }
+
+  .lang-switcher.active .lang-arrow {
+    transform: rotate(180deg);
+  }
+
+  .lang-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 140px;
+    padding: 6px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-card-bg-gradient);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px var(--color-card-shadow);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all var(--transition-fast);
+    z-index: 200;
+  }
+
+  .lang-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .lang-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 12px;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    font-size: 13px;
+    text-align: left;
+    transition: all var(--transition-fast);
+  }
+
+  .lang-option:hover {
+    background: var(--color-card-bg-hover);
+    color: var(--color-text);
+  }
+
+  .lang-option.active {
+    color: var(--color-highlight);
+  }
+
+  .lang-check {
+    opacity: 0;
+    font-size: 12px;
+  }
+
+  .lang-option.active .lang-check {
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    .lang-switcher {
+      height: 32px;
+      padding: 0 8px;
+      font-size: 12px;
+    }
+    .lang-label {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const btn = document.getElementById('langSwitcher');
+  const dropdown = document.getElementById('langDropdown');
+  const label = document.getElementById('langLabel');
+  const options = document.querySelectorAll('.lang-option');
+
+  function updateLangUI() {
+    const locale = (window as any).__getLocale?.() || 'zh';
+    const dict = (window as any).__I18N_DATA__?.[locale] || (window as any).__I18N_DATA__?.zh;
+
+    if (label) {
+      label.textContent = locale === 'zh' ? '中文' : 'English';
+    }
+
+    options.forEach((opt) => {
+      const lang = opt.getAttribute('data-lang');
+      opt.classList.toggle('active', lang === locale);
+    });
+  }
+
+  function closeDropdown() {
+    btn?.classList.remove('active');
+    dropdown?.classList.remove('show');
+  }
+
+  btn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = dropdown?.classList.contains('show');
+    if (isOpen) {
+      closeDropdown();
+    } else {
+      btn.classList.add('active');
+      dropdown?.classList.add('show');
+    }
+  });
+
+  options.forEach((opt) => {
+    opt.addEventListener('click', () => {
+      const lang = opt.getAttribute('data-lang');
+      if (lang && (window as any).__setLocale) {
+        (window as any).__setLocale(lang);
+        updateLangUI();
+      }
+      closeDropdown();
+    });
+  });
+
+  document.addEventListener('click', () => {
+    closeDropdown();
+  });
+
+  dropdown?.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+
+  document.addEventListener('DOMContentLoaded', updateLangUI);
+  document.addEventListener('localechange', updateLangUI);
+  if ((window as any).__locale__) updateLangUI();
+</script>

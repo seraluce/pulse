@@ -7,12 +7,13 @@ const cta = site.cta;
 	<div class="container">
 		<div class="cta-box animate-on-scroll">
 			<div class="cta-content">
-				<h2>{cta.title}</h2>
-				<p>{cta.description}</p>
+				<span class="section-tag" data-i18n="cta.tag">{cta.tag}</span>
+				<h2 data-i18n="cta.title">{cta.title}</h2>
+				<p data-i18n="cta.description">{cta.description}</p>
 			</div>
 			<div class="cta-actions">
-				<a href={cta.primaryButton.href} class="btn btn-primary">{cta.primaryButton.label}</a>
-				<a href={cta.secondaryButton.href} class="btn btn-outline">{cta.secondaryButton.label}</a>
+				<a href={cta.primaryButton.href} class="btn btn-primary" data-i18n="cta.primaryButton">{cta.primaryButton.label}</a>
+				<a href={cta.secondaryButton.href} class="btn btn-outline" data-i18n="cta.secondaryButton">{cta.secondaryButton.label}</a>
 			</div>
 		</div>
 	</div>

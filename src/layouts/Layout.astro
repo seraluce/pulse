@@ -1,5 +1,6 @@
 ---
 import { site, type PageMeta, getPageMeta } from "../config";
+import { translations, defaultLocale } from "../i18n";
 
 interface Props {
 	page?: PageMeta;
@@ -7,6 +8,7 @@ interface Props {
 
 const { page } = Astro.props;
 const seo = getPageMeta(page);
+const i18nData = JSON.stringify(translations);
 const jsonLd = {
 	"@context": "https://schema.org",
 	"@type": "Organization",
@@ -118,6 +120,104 @@ const jsonLd = {
 				};
 			})();
 		</script>
+
+		<script is:inline set:html={`window.__I18N_DATA__ = ${i18nData};
+window.__I18N_DEFAULT__ = "${defaultLocale}";
+
+(function () {
+	function getBrowserLocale() {
+		const lang = (navigator.language || "zh").toLowerCase();
+		if (lang.startsWith("zh")) return "zh";
+		if (lang.startsWith("en")) return "en";
+		return window.__I18N_DEFAULT__;
+	}
+
+	function getStoredLocale() {
+		try {
+			const s = localStorage.getItem("locale");
+			if (s === "zh" || s === "en") return s;
+		} catch (e) {}
+		return null;
+	}
+
+	function getCurrentLocale() {
+		return getStoredLocale() || getBrowserLocale();
+	}
+
+	function getNestedValue(obj, path) {
+		return path.split(".").reduce(function (acc, key) {
+			if (acc && typeof acc === "object" && key in acc) {
+				return acc[key];
+			}
+			return undefined;
+		}, obj);
+	}
+
+	function t(key, vars) {
+		const locale = window.__locale__ || window.__I18N_DEFAULT__;
+		const dict = window.__I18N_DATA__[locale] || window.__I18N_DATA__[window.__I18N_DEFAULT__];
+		let value = getNestedValue(dict, key);
+		if (value === undefined) return key;
+		if (vars && typeof value === "string") {
+			Object.keys(vars).forEach(function (k) {
+				value = value.replace(new RegExp("\\\\{" + k + "\\\\}", "g"), vars[k]);
+			});
+		}
+		return value;
+	}
+
+	function applyTranslations() {
+		const locale = window.__locale__ || window.__I18N_DEFAULT__;
+		const dict = window.__I18N_DATA__[locale] || window.__I18N_DATA__[window.__I18N_DEFAULT__];
+
+		document.querySelectorAll("[data-i18n]").forEach(function (el) {
+			const key = el.getAttribute("data-i18n");
+			const value = getNestedValue(dict, key);
+			if (typeof value === "string") {
+				el.textContent = value;
+			}
+		});
+
+		document.querySelectorAll("[data-i18n-placeholder]").forEach(function (el) {
+			const key = el.getAttribute("data-i18n-placeholder");
+			const value = getNestedValue(dict, key);
+			if (typeof value === "string") {
+				el.placeholder = value;
+			}
+		});
+
+		document.querySelectorAll("[data-i18n-aria-label]").forEach(function (el) {
+			const key = el.getAttribute("data-i18n-aria-label");
+			const value = getNestedValue(dict, key);
+			if (typeof value === "string") {
+				el.setAttribute("aria-label", value);
+			}
+		});
+
+		document.documentElement.setAttribute("lang", locale === "zh" ? "zh-CN" : "en");
+	}
+
+	function setLocale(locale) {
+		if (locale !== "zh" && locale !== "en") return;
+		try {
+			localStorage.setItem("locale", locale);
+		} catch (e) {}
+		window.__locale__ = locale;
+		applyTranslations();
+		document.dispatchEvent(new CustomEvent("localechange", { detail: { locale: locale } }));
+	}
+
+	window.__locale__ = getCurrentLocale();
+	window.__setLocale = setLocale;
+	window.__t = t;
+	window.__getLocale = getCurrentLocale;
+
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", applyTranslations);
+	} else {
+		applyTranslations();
+	}
+})();`} />
 	</head>
 	<body>
 		<slot />

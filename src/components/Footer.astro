@@ -9,18 +9,18 @@ import { site } from '../config';
         <a href="/" class="footer-logo">
           <img src={site.logo.light} alt={site.title} width={24} height={24} class="logo-light" />
           <img src={site.logo.dark} alt={site.title} width={24} height={24} class="logo-dark" />
-          <span>{site.title}</span>
+          <span data-i18n="site.title">{site.title}</span>
         </a>
-        <p class="footer-desc">{site.description}</p>
+        <p class="footer-desc" data-i18n="footer.description">{site.description}</p>
       </div>
 
       <div class="footer-links">
-        {site.footer.map((column) => (
+        {site.footer.map((column, colIdx) => (
           <div class="footer-col">
-            <h4>{column.title}</h4>
+            <h4 data-i18n={`footer.columns.${colIdx}.title`}>{column.title}</h4>
             <ul>
-              {column.links.map((link) => (
-                <li><a href={link.href}>{link.label}</a></li>
+              {column.links.map((link, linkIdx) => (
+                <li><a href={link.href} data-i18n={`footer.columns.${colIdx}.links.${linkIdx}.label`}>{link.label}</a></li>
               ))}
             </ul>
           </div>
@@ -29,17 +29,17 @@ import { site } from '../config';
     </div>
 
     <div class="footer-bottom">
-      <p>&copy; {new Date().getFullYear()} <a href={site.url}>{site.title}</a> All rights reserved.</p>
+      <p data-i18n-footer-copyright>&copy; {new Date().getFullYear()} {site.title}. All rights reserved.</p>
       <div class="footer-bottom-links">
-        {site.footerBottomLinks.map((link) => (
-          <a href={link.href} target={link.target} rel={link.target === '_blank' ? 'noopener noreferrer' : undefined}>{link.label}</a>
+        {site.footerBottomLinks.map((link, i) => (
+          <a href={link.href} target={link.target} rel={link.target === '_blank' ? 'noopener noreferrer' : undefined} data-i18n={`footer.bottomLinks.${i}.label`}>{link.label}</a>
         ))}
       </div>
     </div>
   </div>
 </footer>
 
-<button class="back-to-top" id="backToTop" aria-label="回到顶部">
+<button class="back-to-top" id="backToTop" aria-label="回到顶部" data-i18n-aria-label="footer.backToTop">
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M12 19V5M5 12l7-7 7 7"/>
   </svg>

@@ -14,23 +14,27 @@ const hero = site.hero;
 	</div>
 	<div class="container hero-inner">
 		<div class="hero-content">
-			<div class="hero-badge">{hero.badge}</div>
+			<div class="hero-badge" data-i18n="hero.badge">{hero.badge}</div>
 			<h1>
-				{hero.titleMain}<br/>
-				<span>{hero.titleHighlight}</span>
+				<span data-i18n="hero.titleMain">{hero.titleMain}</span><br/>
+				<span data-i18n="hero.titleHighlight">{hero.titleHighlight}</span>
 			</h1>
-			<p class="hero-desc">{hero.description}</p>
+			<p class="hero-desc" data-i18n="hero.description">{hero.description}</p>
 			<div class="hero-actions">
-				<a href={hero.primaryButton.href} class="btn btn-primary">{hero.primaryButton.label}</a>
-				<a href={hero.secondaryButton.href} class="btn btn-outline">{hero.secondaryButton.label}</a>
+				<a href={hero.primaryButton.href} class="btn btn-primary" data-i18n="hero.primaryButton">{hero.primaryButton.label}</a>
+				<a href={hero.secondaryButton.href} class="btn btn-outline" data-i18n="hero.secondaryButton">{hero.secondaryButton.label}</a>
 			</div>
-			<div class="hero-stats">
+			<div class="hero-stats" data-i18n-repeat="hero.stats">
+				<div class="stat" data-i18n-template style="display:none">
+					<span class="stat-num" data-i18n-field="num"></span>
+					<span class="stat-label" data-i18n-field="label"></span>
+				</div>
 				{hero.stats.map((stat, i) => (
 					<>
 						{i > 0 && <div class="stat-divider"></div>}
-						<div class="stat">
-							<span class="stat-num">{stat.num}</span>
-							<span class="stat-label">{stat.label}</span>
+						<div class="stat" data-i18n-item>
+							<span class="stat-num" data-i18n-field="num">{stat.num}</span>
+							<span class="stat-label" data-i18n-field="label">{stat.label}</span>
 						</div>
 					</>
 				))}
@@ -72,7 +76,7 @@ const hero = site.hero;
 		height: 500px;
 		top: 5%;
 		left: 10%;
-		background: radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, rgba(59, 130, 246, 0.08) 40%, transparent 70%);
+		background: radial-gradient(circle, rgba(0, 220, 130, 0.25) 0%, rgba(0, 220, 130, 0.08) 40%, transparent 70%);
 		animation: float-a 14s ease-in-out infinite;
 	}
 
@@ -81,7 +85,7 @@ const hero = site.hero;
 		height: 420px;
 		top: 40%;
 		right: 10%;
-		background: radial-gradient(circle, rgba(139, 92, 246, 0.22) 0%, rgba(139, 92, 246, 0.06) 40%, transparent 70%);
+		background: radial-gradient(circle, rgba(255, 138, 76, 0.22) 0%, rgba(255, 138, 76, 0.06) 40%, transparent 70%);
 		animation: float-b 18s ease-in-out infinite;
 	}
 
@@ -90,18 +94,18 @@ const hero = site.hero;
 		height: 360px;
 		bottom: 10%;
 		left: 30%;
-		background: radial-gradient(circle, rgba(6, 182, 212, 0.18) 0%, rgba(6, 182, 212, 0.05) 40%, transparent 70%);
+		background: radial-gradient(circle, rgba(255, 217, 61, 0.18) 0%, rgba(255, 217, 61, 0.05) 40%, transparent 70%);
 		animation: float-c 12s ease-in-out infinite;
 	}
 
 	:root.dark .orb-1 {
-		background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, rgba(59, 130, 246, 0.08) 40%, transparent 70%);
+		background: radial-gradient(circle, rgba(0, 220, 130, 0.3) 0%, rgba(0, 220, 130, 0.08) 40%, transparent 70%);
 	}
 	:root.dark .orb-2 {
-		background: radial-gradient(circle, rgba(139, 92, 246, 0.25) 0%, rgba(139, 92, 246, 0.06) 40%, transparent 70%);
+		background: radial-gradient(circle, rgba(255, 138, 76, 0.25) 0%, rgba(255, 138, 76, 0.06) 40%, transparent 70%);
 	}
 	:root.dark .orb-3 {
-		background: radial-gradient(circle, rgba(6, 182, 212, 0.2) 0%, rgba(6, 182, 212, 0.05) 40%, transparent 70%);
+		background: radial-gradient(circle, rgba(255, 217, 61, 0.2) 0%, rgba(255, 217, 61, 0.05) 40%, transparent 70%);
 	}
 
 	@keyframes float-a {
@@ -137,29 +141,29 @@ const hero = site.hero;
 		height: 220px;
 		border-radius: 50%;
 		background: radial-gradient(circle at 35% 35%,
-			rgba(59, 130, 246, 0.25) 0%,
-			rgba(139, 92, 246, 0.15) 35%,
-			rgba(6, 182, 212, 0.08) 65%,
+			rgba(0, 220, 130, 0.25) 0%,
+			rgba(255, 138, 76, 0.15) 35%,
+			rgba(255, 217, 61, 0.08) 65%,
 			transparent 80%
 		);
 		box-shadow:
-			0 0 80px rgba(59, 130, 246, 0.15),
-			0 0 160px rgba(139, 92, 246, 0.08),
-			inset 0 0 60px rgba(59, 130, 246, 0.1);
+			0 0 80px rgba(0, 220, 130, 0.15),
+			0 0 160px rgba(255, 138, 76, 0.08),
+			inset 0 0 60px rgba(0, 220, 130, 0.1);
 		animation: sphere-breathe 4s ease-in-out infinite;
 	}
 
 	:root.dark .hero-sphere {
 		background: radial-gradient(circle at 35% 35%,
-			rgba(59, 130, 246, 0.3) 0%,
-			rgba(139, 92, 246, 0.18) 35%,
-			rgba(6, 182, 212, 0.1) 65%,
+			rgba(0, 220, 130, 0.3) 0%,
+			rgba(255, 138, 76, 0.18) 35%,
+			rgba(255, 217, 61, 0.1) 65%,
 			transparent 80%
 		);
 		box-shadow:
-			0 0 80px rgba(59, 130, 246, 0.18),
-			0 0 160px rgba(139, 92, 246, 0.1),
-			inset 0 0 60px rgba(59, 130, 246, 0.12);
+			0 0 80px rgba(0, 220, 130, 0.18),
+			0 0 160px rgba(255, 138, 76, 0.1),
+			inset 0 0 60px rgba(0, 220, 130, 0.12);
 	}
 
 	@keyframes sphere-breathe {
@@ -206,11 +210,11 @@ const hero = site.hero;
 		font-size: 13px;
 		font-weight: 500;
 		letter-spacing: 0.02em;
-		color: var(--color-highlight);
-		border: 1px solid rgba(59, 130, 246, 0.2);
+		color: #00DC82;
+		border: 1px solid rgba(0, 220, 130, 0.25);
 		border-radius: 100px;
 		margin-bottom: 28px;
-		background: rgba(59, 130, 246, 0.04);
+		background: rgba(0, 220, 130, 0.06);
 		backdrop-filter: blur(8px);
 	}
 
@@ -219,8 +223,8 @@ const hero = site.hero;
 		width: 6px;
 		height: 6px;
 		border-radius: 50%;
-		background: var(--color-highlight);
-		box-shadow: 0 0 8px var(--color-highlight);
+		background: #00DC82;
+		box-shadow: 0 0 8px rgba(0, 220, 130, 0.6);
 		animation: badge-pulse 2s ease-in-out infinite;
 	}
 
@@ -238,7 +242,7 @@ const hero = site.hero;
 	}
 
 	.hero h1 span {
-		background: linear-gradient(135deg, var(--color-highlight) 0%, var(--color-highlight-secondary) 50%, var(--color-highlight-tertiary) 100%);
+		background: linear-gradient(135deg, #00DC82 0%, #1664FF 50%, #FFD93D 100%);
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		background-clip: text;
@@ -272,10 +276,10 @@ const hero = site.hero;
 	}
 
 	.btn-primary {
-		background: linear-gradient(135deg, var(--color-highlight) 0%, var(--color-highlight-secondary) 100%);
+		background: linear-gradient(135deg, #00DC82 0%, #1664FF 100%);
 		color: white;
 		border: none;
-		box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+		box-shadow: 0 4px 20px rgba(0, 220, 130, 0.3);
 		position: relative;
 		overflow: hidden;
 	}
@@ -293,7 +297,7 @@ const hero = site.hero;
 
 	.btn-primary:hover {
 		transform: translateY(-2px);
-		box-shadow: 0 8px 32px rgba(59, 130, 246, 0.4);
+		box-shadow: 0 8px 32px rgba(0, 220, 130, 0.4);
 	}
 
 	.btn-primary:hover::before {
@@ -308,10 +312,10 @@ const hero = site.hero;
 	}
 
 	.btn-outline:hover {
-		border-color: var(--color-highlight);
-		color: var(--color-highlight);
+		border-color: #00DC82;
+		color: #00DC82;
 		transform: translateY(-2px);
-		box-shadow: 0 4px 20px rgba(59, 130, 246, 0.1);
+		box-shadow: 0 4px 20px rgba(0, 220, 130, 0.1);
 	}
 
 	.hero-stats {
@@ -338,7 +342,7 @@ const hero = site.hero;
 		font-size: 28px;
 		font-weight: 700;
 		letter-spacing: -0.02em;
-		background: linear-gradient(135deg, var(--color-highlight), var(--color-highlight-secondary));
+		background: linear-gradient(135deg, #00DC82, #1664FF);
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		background-clip: text;

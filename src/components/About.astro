@@ -7,24 +7,24 @@ const about = site.about;
 	<div class="container">
 		<div class="about-grid">
 			<div class="about-content animate-on-scroll">
-				<span class="section-tag">{about.header.tag}</span>
-				<h2>{about.header.title}</h2>
-				<p class="about-lead">{about.description}</p>
+				<span class="section-tag" data-i18n="aboutSection.header.tag">{about.header.tag}</span>
+				<h2 data-i18n="aboutSection.header.title">{about.header.title}</h2>
+				<p class="about-lead" data-i18n="aboutSection.description">{about.description}</p>
 				<div class="about-highlights">
-					{about.highlights.map((h) => (
-						<span class="about-highlight">{h}</span>
+					{about.highlights.map((h, i) => (
+						<span class="about-highlight" data-i18n={`aboutSection.highlights.${i}`}>{h}</span>
 					))}
 				</div>
-				<a href={about.ctaHref} class="about-link">{about.ctaText}</a>
+				<a href={about.ctaHref} class="about-link" data-i18n="aboutSection.ctaText">{about.ctaText}</a>
 			</div>
 			<div class="about-timeline animate-on-scroll delay-2">
 				<div class="timeline-line"></div>
-				{about.milestones.map((m) => (
+				{about.milestones.map((m, i) => (
 					<div class="timeline-item">
 						<div class="timeline-dot"></div>
-						<div class="timeline-year">{m.year}</div>
-						<div class="timeline-title">{m.title}</div>
-						<div class="timeline-text">{m.desc}</div>
+						<div class="timeline-year" data-i18n={`aboutSection.milestones.${i}.year`}>{m.year}</div>
+						<div class="timeline-title" data-i18n={`aboutSection.milestones.${i}.title`}>{m.title}</div>
+						<div class="timeline-text" data-i18n={`aboutSection.milestones.${i}.desc`}>{m.desc}</div>
 					</div>
 				))}
 			</div>
