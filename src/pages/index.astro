@@ -76,12 +76,12 @@ const iconMap = site.icons.highlights;
 	.highlights-grid {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
-		gap: 24px;
+		gap: 28px;
 	}
 
 	.highlight-card {
 		display: block;
-		padding: 36px 28px;
+		padding: 44px 32px;
 		border: 1px solid var(--color-border);
 		border-radius: var(--radius-lg);
 		background: var(--color-card-bg-gradient);
@@ -90,23 +90,43 @@ const iconMap = site.icons.highlights;
 		overflow: hidden;
 	}
 
-	.highlight-card::after {
+	.highlight-card::before {
 		content: "";
 		position: absolute;
 		top: -50%;
 		right: -50%;
 		width: 200%;
 		height: 200%;
-		background: radial-gradient(circle, var(--color-card-glow) 0%, transparent 60%);
+		background: radial-gradient(circle at 80% 20%, var(--card-accent, var(--color-card-glow)) 0%, transparent 55%);
 		opacity: 0;
 		transition: opacity var(--transition-slow);
 		pointer-events: none;
 	}
 
+	.highlight-card::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 2px;
+		height: 100%;
+		background: var(--card-accent-line, var(--color-highlight));
+		opacity: 0;
+		transition: opacity var(--transition-fast);
+	}
+
+	.highlight-card:nth-child(1) { --card-accent: rgba(59, 130, 246, 0.08); --card-accent-line: #3b82f6; }
+	.highlight-card:nth-child(2) { --card-accent: rgba(139, 92, 246, 0.08); --card-accent-line: #8b5cf6; }
+	.highlight-card:nth-child(3) { --card-accent: rgba(6, 182, 212, 0.08); --card-accent-line: #06b6d4; }
+
 	.highlight-card:hover {
-		border-color: var(--color-text);
-		box-shadow: 0 8px 32px var(--color-card-shadow-hover);
-		transform: translateY(-3px);
+		border-color: var(--card-accent-line, var(--color-text));
+		box-shadow: 0 12px 40px var(--color-card-shadow-hover);
+		transform: translateY(-4px);
+	}
+
+	.highlight-card:hover::before {
+		opacity: 1;
 	}
 
 	.highlight-card:hover::after {
@@ -114,22 +134,26 @@ const iconMap = site.icons.highlights;
 	}
 
 	.highlight-icon {
-		width: 48px;
-		height: 48px;
+		width: 52px;
+		height: 52px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		border: 1px solid var(--color-border);
 		border-radius: var(--radius);
-		margin-bottom: 20px;
+		margin-bottom: 22px;
 		color: var(--color-text);
 		background: var(--color-bg-tertiary);
-		transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+		transition: border-color var(--transition-fast), box-shadow var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+		position: relative;
+		z-index: 1;
 	}
 
 	.highlight-card:hover .highlight-icon {
-		border-color: var(--color-highlight);
-		box-shadow: 0 4px 16px var(--color-card-glow);
+		border-color: var(--card-accent-line, var(--color-highlight));
+		box-shadow: 0 4px 16px var(--card-accent, var(--color-card-glow));
+		color: var(--card-accent-line, var(--color-highlight));
+		transform: scale(1.05);
 	}
 
 	.highlight-card h3 {

@@ -99,11 +99,11 @@ const pageCfg = site.pages.cases;
 	.cases-grid {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
-		gap: 24px;
+		gap: 28px;
 	}
 
 	.case-card {
-		padding: 32px 28px;
+		padding: 40px 32px;
 		background: var(--color-card-bg-gradient);
 		border: 1px solid var(--color-border);
 		border-radius: var(--radius-lg);
@@ -119,19 +119,42 @@ const pageCfg = site.pages.cases;
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background: linear-gradient(135deg, var(--color-card-glow) 0%, transparent 50%);
+		background: radial-gradient(ellipse at 100% 0%, var(--card-accent, var(--color-card-glow)) 0%, transparent 50%);
 		opacity: 0;
 		transition: opacity var(--transition-slow);
 		pointer-events: none;
 	}
 
+	.case-card::after {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		width: 3px;
+		background: var(--card-accent-line, var(--color-highlight));
+		opacity: 0;
+		transition: opacity var(--transition-fast);
+	}
+
+	.case-card:nth-child(1) { --card-accent: rgba(59, 130, 246, 0.1); --card-accent-line: #3b82f6; }
+	.case-card:nth-child(2) { --card-accent: rgba(139, 92, 246, 0.1); --card-accent-line: #8b5cf6; }
+	.case-card:nth-child(3) { --card-accent: rgba(6, 182, 212, 0.1); --card-accent-line: #06b6d4; }
+	.case-card:nth-child(4) { --card-accent: rgba(245, 158, 11, 0.1); --card-accent-line: #f59e0b; }
+	.case-card:nth-child(5) { --card-accent: rgba(16, 185, 129, 0.1); --card-accent-line: #10b981; }
+	.case-card:nth-child(6) { --card-accent: rgba(236, 72, 153, 0.1); --card-accent-line: #ec4899; }
+
 	.case-card:hover {
-		border-color: var(--color-text);
-		box-shadow: 0 8px 32px var(--color-card-shadow-hover);
-		transform: translateY(-3px);
+		border-color: var(--card-accent-line, var(--color-text));
+		box-shadow: 0 12px 40px var(--color-card-shadow-hover);
+		transform: translateY(-4px);
 	}
 
 	.case-card:hover::before {
+		opacity: 1;
+	}
+
+	.case-card:hover::after {
 		opacity: 1;
 	}
 
@@ -139,7 +162,7 @@ const pageCfg = site.pages.cases;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		margin-bottom: 16px;
+		margin-bottom: 18px;
 		position: relative;
 		z-index: 1;
 	}
@@ -148,7 +171,7 @@ const pageCfg = site.pages.cases;
 		font-size: 12px;
 		font-weight: 500;
 		color: var(--color-text-secondary);
-		padding: 4px 10px;
+		padding: 4px 12px;
 		border: 1px solid var(--color-border);
 		border-radius: 100px;
 		background: var(--color-card-bg);
@@ -157,13 +180,13 @@ const pageCfg = site.pages.cases;
 	.case-result {
 		font-size: 13px;
 		font-weight: 600;
-		color: var(--color-highlight);
+		color: var(--card-accent-line, var(--color-highlight));
 	}
 
 	.case-card h3 {
 		font-size: 18px;
 		font-weight: 600;
-		margin-bottom: 8px;
+		margin-bottom: 10px;
 		letter-spacing: -0.01em;
 		position: relative;
 		z-index: 1;
@@ -173,7 +196,7 @@ const pageCfg = site.pages.cases;
 		font-size: 14px;
 		line-height: 1.7;
 		color: var(--color-text-secondary);
-		margin-bottom: 16px;
+		margin-bottom: 18px;
 		position: relative;
 		z-index: 1;
 	}

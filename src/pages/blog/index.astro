@@ -32,7 +32,7 @@ const posts = (await getCollection('blog')).sort(
 								<h2 class="blog-card-title">{post.data.title}</h2>
 								<div class="blog-card-meta">
 									<time datetime={post.data.pubDate.toISOString()}>
-										{post.data.pubDate.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' })}
+										{post.data.pubDate.toLocaleDateString('zh-CN', { year: 'numeric', month: 'numeric', day: 'numeric' }).replace(/-/g, '/')}
 									</time>
 									{post.data.tags.length > 0 && (
 										<div class="blog-tags">
@@ -90,8 +90,8 @@ const posts = (await getCollection('blog')).sort(
 	.blog-grid {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
-		gap: 16px;
-		max-width: 1080px;
+		gap: 28px;
+		max-width: 1140px;
 		margin: 0 auto;
 	}
 
@@ -99,42 +99,88 @@ const posts = (await getCollection('blog')).sort(
 		position: relative;
 		display: flex;
 		flex-direction: column;
-		background: var(--color-card-bg);
+		background: var(--color-card-bg-gradient);
 		border: 1px solid var(--color-border);
 		border-radius: var(--radius-lg);
-		transition: border-color var(--transition-fast), transform var(--transition-fast);
+		transition: all var(--transition-fast);
 		text-decoration: none;
 		color: inherit;
 		overflow: hidden;
 	}
 
+	.blog-card::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: radial-gradient(ellipse at 100% 0%, var(--card-accent, var(--color-card-glow)) 0%, transparent 50%);
+		opacity: 0;
+		transition: opacity var(--transition-slow);
+		pointer-events: none;
+	}
+
+	.blog-card::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 2px;
+		background: var(--card-accent-line, var(--color-highlight));
+		opacity: 0;
+		transition: opacity var(--transition-fast);
+	}
+
+	.blog-card:nth-child(1) { --card-accent: rgba(59, 130, 246, 0.1); --card-accent-line: #3b82f6; }
+	.blog-card:nth-child(2) { --card-accent: rgba(139, 92, 246, 0.1); --card-accent-line: #8b5cf6; }
+	.blog-card:nth-child(3) { --card-accent: rgba(6, 182, 212, 0.1); --card-accent-line: #06b6d4; }
+	.blog-card:nth-child(4) { --card-accent: rgba(245, 158, 11, 0.1); --card-accent-line: #f59e0b; }
+	.blog-card:nth-child(5) { --card-accent: rgba(16, 185, 129, 0.1); --card-accent-line: #10b981; }
+	.blog-card:nth-child(6) { --card-accent: rgba(236, 72, 153, 0.1); --card-accent-line: #ec4899; }
+
 	.blog-card:hover {
-		border-color: var(--color-text);
-		transform: translateY(-2px);
+		border-color: var(--card-accent-line, var(--color-text));
+		transform: translateY(-4px);
+		box-shadow: 0 16px 48px var(--color-card-shadow-hover);
+	}
+
+	.blog-card:hover::before {
+		opacity: 1;
+	}
+
+	.blog-card:hover::after {
+		opacity: 1;
 	}
 
 	.blog-card-cover {
 		width: 100%;
 		aspect-ratio: 16 / 9;
 		overflow: hidden;
+		position: relative;
+		z-index: 1;
 	}
 
 	.blog-card-cover img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		transition: transform 0.3s ease;
+		transition: transform 0.4s ease;
 	}
 
 	.blog-card:hover .blog-card-cover img {
-		transform: scale(1.03);
+		transform: scale(1.06);
 	}
 
 	.blog-card-body {
-		padding: 16px;
+		padding: 24px 22px 22px;
 		display: flex;
 		flex-direction: column;
-		gap: 8px;
+		gap: 12px;
+		position: relative;
+		z-index: 1;
+		flex: 1;
 	}
 
 	.blog-card-meta {

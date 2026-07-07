@@ -58,17 +58,15 @@ const iconMap = site.icons.features;
 	.features-grid {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
-		gap: 1px;
-		background: var(--color-border);
-		border: 1px solid var(--color-border);
-		border-radius: var(--radius-lg);
-		overflow: hidden;
+		gap: 24px;
 	}
 
 	.feature-card {
 		background: var(--color-card-bg-gradient);
-		padding: 40px 32px;
-		transition: background var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+		padding: 48px 36px;
+		border-radius: var(--radius-lg);
+		border: 1px solid var(--color-border);
+		transition: background var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
 		position: relative;
 		overflow: hidden;
 	}
@@ -76,43 +74,72 @@ const iconMap = site.icons.features;
 	.feature-card::before {
 		content: "";
 		position: absolute;
+		top: -40%;
+		right: -30%;
+		width: 120%;
+		height: 100%;
+		background: radial-gradient(ellipse at 70% 30%, var(--card-accent, var(--color-card-glow)) 0%, transparent 55%);
+		opacity: 0;
+		transition: opacity var(--transition-slow);
+		pointer-events: none;
+	}
+
+	.feature-card::after {
+		content: "";
+		position: absolute;
 		top: 0;
 		left: 0;
 		right: 0;
-		height: 3px;
-		background: linear-gradient(90deg, transparent, var(--color-highlight), transparent);
+		height: 2px;
+		background: var(--card-accent-line, var(--color-highlight));
 		opacity: 0;
 		transition: opacity var(--transition-fast);
 	}
 
+	.feature-card:nth-child(1) { --card-accent: rgba(59, 130, 246, 0.1); --card-accent-line: #3b82f6; }
+	.feature-card:nth-child(2) { --card-accent: rgba(139, 92, 246, 0.1); --card-accent-line: #8b5cf6; }
+	.feature-card:nth-child(3) { --card-accent: rgba(6, 182, 212, 0.1); --card-accent-line: #06b6d4; }
+	.feature-card:nth-child(4) { --card-accent: rgba(245, 158, 11, 0.1); --card-accent-line: #f59e0b; }
+	.feature-card:nth-child(5) { --card-accent: rgba(16, 185, 129, 0.1); --card-accent-line: #10b981; }
+	.feature-card:nth-child(6) { --card-accent: rgba(236, 72, 153, 0.1); --card-accent-line: #ec4899; }
+
 	.feature-card:hover {
 		background: var(--color-card-bg-hover);
-		box-shadow: 0 8px 32px var(--color-card-shadow-hover), 0 0 0 1px var(--color-card-glow);
-		transform: translateY(-2px);
+		box-shadow: 0 12px 40px var(--color-card-shadow-hover), 0 0 0 1px var(--card-accent, var(--color-card-glow));
+		transform: translateY(-3px);
+		border-color: var(--card-accent-line, var(--color-highlight));
 	}
 
 	.feature-card:hover::before {
 		opacity: 1;
 	}
 
+	.feature-card:hover::after {
+		opacity: 1;
+	}
+
 	.feature-icon {
-		width: 48px;
-		height: 48px;
+		width: 52px;
+		height: 52px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		border: 1px solid var(--color-border);
 		border-radius: var(--radius);
-		margin-bottom: 20px;
+		margin-bottom: 22px;
 		color: var(--color-text);
 		background: var(--color-card-bg-gradient);
 		box-shadow: 0 2px 8px var(--color-card-shadow);
-		transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+		transition: border-color var(--transition-fast), box-shadow var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+		position: relative;
+		z-index: 1;
 	}
 
 	.feature-card:hover .feature-icon {
-		border-color: var(--color-highlight);
-		box-shadow: 0 4px 16px var(--color-card-glow);
+		border-color: var(--card-accent-line, var(--color-highlight));
+		box-shadow: 0 4px 16px var(--card-accent, var(--color-card-glow));
+		color: var(--card-accent-line, var(--color-highlight));
+		transform: scale(1.05);
 	}
 
 	.feature-card h3 {

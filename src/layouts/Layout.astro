@@ -80,15 +80,42 @@ const jsonLd = {
 
 		<script is:inline>
 			(function () {
-				const theme = localStorage.getItem("theme");
-				if (
-					theme === "dark" ||
-					(!theme &&
-						window.matchMedia("(prefers-color-scheme: dark)")
-							.matches)
-				) {
-					document.documentElement.classList.add("dark");
+				const savedTheme = localStorage.getItem("theme");
+				const theme = savedTheme || "auto";
+				document.documentElement.setAttribute("data-theme", theme);
+
+				function applyTheme() {
+					const t = document.documentElement.getAttribute("data-theme");
+					const isDark =
+						t === "dark" ||
+						(t === "auto" &&
+							window.matchMedia("(prefers-color-scheme: dark)").matches);
+					document.documentElement.classList.toggle("dark", isDark);
 				}
+
+				applyTheme();
+
+				const mql = window.matchMedia("(prefers-color-scheme: dark)");
+				mql.addEventListener("change", () => {
+					if (document.documentElement.getAttribute("data-theme") === "auto") {
+						applyTheme();
+					}
+				});
+
+				window.__toggleTheme = function () {
+					const current =
+						document.documentElement.getAttribute("data-theme") || "auto";
+					const next =
+						current === "light"
+							? "dark"
+							: current === "dark"
+								? "auto"
+								: "light";
+					document.documentElement.setAttribute("data-theme", next);
+					localStorage.setItem("theme", next);
+					applyTheme();
+					return next;
+				};
 			})();
 		</script>
 	</head>
@@ -110,13 +137,22 @@ const jsonLd = {
 		--color-accent: #000000;
 		--color-accent-hover: #333333;
 		--color-card-bg: #ffffff;
-		--color-card-bg-gradient: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
-		--color-card-bg-hover: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+		--color-card-bg-gradient: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+		--color-card-bg-hover: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
 		--color-card-shadow: rgba(0, 0, 0, 0.04);
 		--color-card-shadow-hover: rgba(0, 0, 0, 0.08);
-		--color-card-glow: rgba(0, 112, 243, 0.04);
+		--color-card-glow: rgba(0, 112, 243, 0.06);
 		--color-overlay: rgba(255, 255, 255, 0.85);
 		--color-highlight: #0070f3;
+		--color-highlight-secondary: #7c3aed;
+		--color-highlight-tertiary: #06b6d4;
+		--gradient-aurora-1: rgba(59, 130, 246, 0.08);
+		--gradient-aurora-2: rgba(124, 58, 237, 0.06);
+		--gradient-aurora-3: rgba(6, 182, 212, 0.06);
+		--card-padding-y: 40px;
+		--card-padding-x: 32px;
+		--card-gap: 28px;
+		--section-padding: 72px;
 
 		--font-sans:
 			"PingFangSC-Regular-woff2", "PingFangSC-Medium-woff2",
@@ -139,23 +175,28 @@ const jsonLd = {
 
 	:root.dark {
 		--color-bg: #000000;
-		--color-bg-secondary: #111111;
-		--color-bg-tertiary: #1a1a1a;
+		--color-bg-secondary: #0a0a0a;
+		--color-bg-tertiary: #141414;
 		--color-text: #ededed;
-		--color-text-secondary: #888888;
+		--color-text-secondary: #a0a0a0;
 		--color-text-tertiary: #666666;
-		--color-border: #222222;
+		--color-border: #1f1f1f;
 		--color-border-light: #1a1a1a;
 		--color-accent: #ffffff;
 		--color-accent-hover: #cccccc;
 		--color-card-bg: #0a0a0a;
-		--color-card-bg-gradient: linear-gradient(135deg, #0f0f0f 0%, #0a0a0a 100%);
-		--color-card-bg-hover: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
-		--color-card-shadow: rgba(0, 0, 0, 0.3);
-		--color-card-shadow-hover: rgba(255, 255, 255, 0.05);
-		--color-card-glow: rgba(0, 112, 243, 0.06);
-		--color-overlay: rgba(0, 0, 0, 0.8);
-		--color-highlight: #0070f3;
+		--color-card-bg-gradient: linear-gradient(135deg, #111111 0%, #0a0a0a 100%);
+		--color-card-bg-hover: linear-gradient(135deg, #1a1a1a 0%, #111111 100%);
+		--color-card-shadow: rgba(0, 0, 0, 0.4);
+		--color-card-shadow-hover: rgba(0, 0, 0, 0.6);
+		--color-card-glow: rgba(59, 130, 246, 0.12);
+		--color-overlay: rgba(0, 0, 0, 0.85);
+		--color-highlight: #3b82f6;
+		--color-highlight-secondary: #8b5cf6;
+		--color-highlight-tertiary: #06b6d4;
+		--gradient-aurora-1: rgba(59, 130, 246, 0.12);
+		--gradient-aurora-2: rgba(139, 92, 246, 0.1);
+		--gradient-aurora-3: rgba(6, 182, 212, 0.08);
 	}
 
 	*,
@@ -190,57 +231,76 @@ const jsonLd = {
 		position: fixed;
 		top: -20%;
 		left: -10%;
-		width: 55%;
-		height: 55%;
+		width: 60%;
+		height: 60%;
 		background: radial-gradient(
-			ellipse,
-			rgba(180, 180, 200, 0.12) 0%,
-			transparent 70%
+			ellipse at 30% 40%,
+			var(--gradient-aurora-1) 0%,
+			transparent 60%
+		),
+		radial-gradient(
+			ellipse at 70% 60%,
+			var(--gradient-aurora-2) 0%,
+			transparent 55%
 		);
 		pointer-events: none;
 		z-index: -1;
-		animation: breathe-a 12s ease-in-out infinite;
-		transform: translate(
-			calc(var(--mouse-x, 0) * 15px),
-			calc(var(--mouse-y, 0) * 15px)
-		);
+		animation: aurora-a 18s ease-in-out infinite;
+		will-change: transform;
+		border-radius: 50%;
 	}
 
 	body::after {
 		content: "";
 		position: fixed;
-		bottom: -15%;
-		right: -10%;
-		width: 50%;
-		height: 50%;
+		bottom: -20%;
+		right: -15%;
+		width: 55%;
+		height: 55%;
 		background: radial-gradient(
-			ellipse,
-			rgba(200, 195, 190, 0.1) 0%,
-			transparent 70%
+			ellipse at 60% 50%,
+			var(--gradient-aurora-3) 0%,
+			transparent 60%
+		),
+		radial-gradient(
+			ellipse at 30% 70%,
+			var(--gradient-aurora-1) 0%,
+			transparent 50%
 		);
 		pointer-events: none;
 		z-index: -1;
-		animation: breathe-b 15s ease-in-out infinite;
-		transform: translate(
-			calc(var(--mouse-x, 0) * -10px),
-			calc(var(--mouse-y, 0) * -10px)
-		);
+		animation: aurora-b 22s ease-in-out infinite;
+		will-change: transform;
 	}
 
-	:root.dark body::before {
-		background: radial-gradient(
-			ellipse,
-			rgba(100, 110, 140, 0.15) 0%,
-			transparent 70%
-		);
+	@keyframes aurora-a {
+		0%, 100% {
+			transform: translate(0, 0) scale(1);
+			opacity: 0.8;
+		}
+		33% {
+			transform: translate(40px, -30px) scale(1.05);
+			opacity: 1;
+		}
+		66% {
+			transform: translate(-30px, 20px) scale(0.95);
+			opacity: 0.9;
+		}
 	}
 
-	:root.dark body::after {
-		background: radial-gradient(
-			ellipse,
-			rgba(140, 120, 110, 0.1) 0%,
-			transparent 70%
-		);
+	@keyframes aurora-b {
+		0%, 100% {
+			transform: translate(0, 0) scale(1);
+			opacity: 0.7;
+		}
+		33% {
+			transform: translate(-40px, 30px) scale(1.08);
+			opacity: 0.9;
+		}
+		66% {
+			transform: translate(30px, -20px) scale(0.92);
+			opacity: 0.8;
+		}
 	}
 
 	a {
@@ -269,7 +329,7 @@ const jsonLd = {
 	}
 
 	.section {
-		padding: 100px 0;
+		padding: 72px 0;
 	}
 
 	.gradient-text {
@@ -346,44 +406,12 @@ const jsonLd = {
 		}
 	}
 
-	@keyframes breathe-a {
-		0%,
-		100% {
-			transform: translate(0, 0) scale(1);
-			opacity: 1;
-		}
-		33% {
-			transform: translate(3%, 2%) scale(1.05);
-			opacity: 0.85;
-		}
-		66% {
-			transform: translate(-2%, 3%) scale(0.97);
-			opacity: 1;
-		}
-	}
-
-	@keyframes breathe-b {
-		0%,
-		100% {
-			transform: translate(0, 0) scale(1);
-			opacity: 1;
-		}
-		33% {
-			transform: translate(-3%, -2%) scale(1.04);
-			opacity: 0.9;
-		}
-		66% {
-			transform: translate(2%, -3%) scale(0.96);
-			opacity: 1;
-		}
-	}
-
 	@media (max-width: 768px) {
 		.container {
 			padding: 0 16px;
 		}
 		.section {
-			padding: 64px 0;
+			padding: 56px 0;
 		}
 	}
 </style>

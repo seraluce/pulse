@@ -7,6 +7,7 @@ export interface NavLink {
 export interface FooterLink {
   label: string;
   href: string;
+  target?: string;
 }
 
 export interface FooterColumn {
@@ -142,7 +143,7 @@ export interface FormOption {
 export interface FormField {
   name: string;
   label: string;
-  type: string;
+  type: 'text' | 'email' | 'tel' | 'number' | 'textarea' | 'select';
   placeholder?: string;
   required?: boolean;
   options?: FormOption[];
@@ -317,6 +318,7 @@ export const site: SiteConfig = {
     { label: "首页", href: "/", icon: "home" },
     { label: "服务", href: "/services", icon: "services" },
     { label: "案例", href: "/cases", icon: "cases" },
+    { label: "博客", href: "/blog", icon: "blog" },
     { label: "关于", href: "/about", icon: "about" },
     { label: "联系", href: "/contact", icon: "contact" },
   ],
@@ -365,6 +367,7 @@ export const site: SiteConfig = {
   footerBottomLinks: [
     { label: "隐私政策", href: "/legal/privacy" },
     { label: "服务条款", href: "/legal/terms" },
+    { label: "闽ICP备2021011984号", href: "https://beian.miit.gov.cn/", target: "_blank" },
   ],
   hero: {
     badge: "企业增长伙伴",
