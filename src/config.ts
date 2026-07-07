@@ -3,6 +3,7 @@ export const site = {
 	title: 'Grateful Group',
 	slogan: '专业企业服务平台',
 	description: '专业企业服务平台，提供战略咨询、数字化转型、品牌建设、数据驱动等全方位解决方案，助力企业持续增长。',
+  keywords: 'Kovel,seo',
 	url: 'https://gratefulgroup.com',
 	lang: 'zh-CN',
 	locale: 'zh_CN',
@@ -24,6 +25,7 @@ export const site = {
 	logo: {
 		light: '/logo-light.svg',
 		dark: '/logo-dark.svg',
+   alt: 'loho',
 	},
 
 	// Logo 尺寸
