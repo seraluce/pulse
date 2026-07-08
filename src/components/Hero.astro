@@ -424,13 +424,14 @@ const hero = site.hero;
 			currentX += (mouseX - currentX) * 0.05;
 			currentY += (mouseY - currentY) * 0.05;
 
-			const orbEls = orbs.querySelectorAll('.orb');
+			const orbEls = orbs!.querySelectorAll('.orb');
 			orbEls.forEach((orb, i) => {
 				const depth = (i + 1) * 12;
-				orb.style.transform = `translate(${currentX * depth}px, ${currentY * depth}px)`;
+				(orb as HTMLElement).style.transform = `translate(${currentX * depth}px, ${currentY * depth}px)`;
 			});
 
 			const sphereDepth = 8;
+			if (!sphere) return;
 			sphere.style.transform = `scale(${1 + Math.sin(Date.now() * 0.001) * 0.08}) translate(${currentX * sphereDepth}px, ${currentY * sphereDepth}px)`;
 
 			requestAnimationFrame(animate);

@@ -1,3 +1,4 @@
+// @ts-expect-error - Cloudflare Pages runtime provides this type
 export const onRequestPost: PagesFunction = async (context) => {
 	const { request } = context;
 
@@ -17,7 +18,7 @@ export const onRequestPost: PagesFunction = async (context) => {
 		/*
 		const emailService = {
 			apiKey: context.env.EMAIL_API_KEY,
-			from: context.env.EMAIL_FROM || 'noreply@gratefulgroup.com',
+			from: context.env.EMAIL_FROM || 'noreply@pulse-deploy.com',
 			to: context.env.EMAIL_TO || 'evanyanet@gmail.com',
 		};
 

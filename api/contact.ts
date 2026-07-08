@@ -16,7 +16,7 @@ export default async function handler(request: VercelRequest, response: VercelRe
 	/*
 	const emailService = {
 		apiKey: process.env.EMAIL_API_KEY,
-		from: process.env.EMAIL_FROM || 'noreply@gratefulgroup.com',
+		from: process.env.EMAIL_FROM || 'noreply@pulse-deploy.com',
 		to: process.env.EMAIL_TO || 'evanyanet@gmail.com',
 	};
 
