@@ -294,7 +294,7 @@ export const site: SiteConfig = {
   slogan: "专业企业服务平台",
   description: "专业企业服务平台，提供战略咨询、数字化转型、品牌建设、数据驱动等全方位解决方案，助力企业持续增长。",
   keywords: "Kovel,企业咨询,数字化转型,战略咨询,品牌建设,数据驱动,增长运营,Grateful Group",
-  url: "https://gratefulgroup.com",
+  url: ".",
   lang: "zh-CN",
   locale: "zh_CN",
   twitter: "@gratefulgroup",
@@ -305,7 +305,7 @@ export const site: SiteConfig = {
   favicon: "/favicon.svg",
   faviconIco: "/favicon.ico",
   appleTouchIcon: "/apple-touch-icon.png",
-  ogImage: "/og-image.png",
+  ogImage: "/og-image.svg",
   logo: {
     light: "/logo-light.svg",
     dark: "/logo-dark.svg",
@@ -651,12 +651,13 @@ export const site: SiteConfig = {
   },
 };
 
-export function getPageMeta(meta: PageMeta = {}) {
+export function getPageMeta(meta: PageMeta = {}, baseUrl?: string) {
   const title = meta.title && meta.title !== "首页"
     ? `${meta.title} - ${site.title}`
     : `${site.title} - ${site.slogan}`;
   const description = meta.description || site.description;
-  const url = meta.path ? `${site.url}${meta.path}` : site.url;
-  const image = meta.image ? `${site.url}${meta.image}` : `${site.url}${site.ogImage}`;
+  const origin = baseUrl || site.url;
+  const url = meta.path ? `${origin}${meta.path}` : origin;
+  const image = meta.image ? `${origin}${meta.image}` : `${origin}${site.ogImage}`;
   return { title, description, url, image };
 }

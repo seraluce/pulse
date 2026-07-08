@@ -3,6 +3,13 @@ import { site } from '../config';
 import LangSwitcher from './LangSwitcher.astro';
 const iconMap = site.icons.nav;
 const navKeys = ['home', 'services', 'cases', 'blog', 'about', 'contact'];
+
+const currentPath = Astro.url.pathname;
+
+function isActive(href: string): boolean {
+	if (href === '/') return currentPath === '/';
+	return currentPath.startsWith(href);
+}
 ---
 
 <header class="header">
@@ -15,7 +22,7 @@ const navKeys = ['home', 'services', 'cases', 'blog', 'about', 'contact'];
 
 		<nav class="nav-desktop">
 			{site.nav.map((item, i) => (
-				<a href={item.href} data-i18n={`nav.${navKeys[i]}`}>{item.label}</a>
+				<a href={item.href} class:list={[{ active: isActive(item.href) }]} data-i18n={`nav.${navKeys[i]}`}>{item.label}</a>
 			))}
 		</nav>
 
@@ -46,7 +53,7 @@ const navKeys = ['home', 'services', 'cases', 'blog', 'about', 'contact'];
 		<div class="nav-mobile-inner">
 			<nav>
 				{site.nav.map((item, i) => (
-					<a href={item.href} class="nav-mobile-link">
+					<a href={item.href} class:list={["nav-mobile-link", { active: isActive(item.href) }]}>
 						<span set:html={item.icon ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${iconMap[item.icon]}</svg>` : ''}></span>
 						<span data-i18n={`nav.${navKeys[i]}`}>{item.label}</span>
 					</a>
@@ -70,20 +77,27 @@ const navKeys = ['home', 'services', 'cases', 'blog', 'about', 'contact'];
 		left: 0;
 		right: 0;
 		height: var(--header-height);
-		background: rgba(255, 255, 255, 0.85);
-		backdrop-filter: blur(10px);
-		-webkit-backdrop-filter: blur(10px);
+		background: transparent;
+		backdrop-filter: blur(0px);
+		-webkit-backdrop-filter: blur(0px);
 		border-bottom: 1px solid transparent;
 		z-index: 1000;
-		transition: background var(--transition), border-color var(--transition);
+		transition: background var(--transition), backdrop-filter var(--transition), border-color var(--transition);
 	}
 
 	:root.dark .header {
-		background: rgba(0, 0, 0, 0.8);
+		background: transparent;
 	}
 
 	.header.scrolled {
+		background: rgba(255, 255, 255, 0.92);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
 		border-bottom-color: var(--color-border);
+	}
+
+	:root.dark .header.scrolled {
+		background: rgba(0, 0, 0, 0.88);
 	}
 
 	.header-inner {
@@ -110,20 +124,21 @@ const navKeys = ['home', 'services', 'cases', 'blog', 'about', 'contact'];
 
 	.nav-desktop {
 		display: flex;
-		gap: 2px;
+		gap: 28px;
 	}
 
 	.nav-desktop a {
 		font-size: 14px;
 		color: var(--color-text-secondary);
-		padding: 6px 12px;
-		border-radius: var(--radius);
-		transition: color var(--transition-fast), background var(--transition-fast);
+		transition: color var(--transition-fast);
 	}
 
 	.nav-desktop a:hover {
 		color: var(--color-text);
-		background: var(--color-bg-tertiary);
+	}
+
+	.nav-desktop a.active {
+		color: var(--color-text);
 	}
 
 	.header-actions {
@@ -278,6 +293,15 @@ const navKeys = ['home', 'services', 'cases', 'blog', 'about', 'contact'];
 		opacity: 1;
 	}
 
+	.nav-mobile-link.active {
+		color: var(--color-highlight);
+		background: var(--color-bg-tertiary);
+	}
+
+	.nav-mobile-link.active svg {
+		opacity: 1;
+	}
+
 	.nav-mobile-divider {
 		height: 1px;
 		background: var(--color-border);
@@ -340,9 +364,11 @@ const navKeys = ['home', 'services', 'cases', 'blog', 'about', 'contact'];
 	});
 
 	const header = document.querySelector('.header');
-	window.addEventListener('scroll', () => {
+	const handleScroll = () => {
 		header?.classList.toggle('scrolled', window.scrollY > 10);
-	});
+	};
+	window.addEventListener('scroll', handleScroll, { passive: true });
+	handleScroll();
 
 	const menuToggle = document.querySelector('.menu-toggle');
 	const backdrop = document.querySelector('.nav-backdrop');

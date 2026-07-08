@@ -7,13 +7,14 @@ interface Props {
 }
 
 const { page } = Astro.props;
-const seo = getPageMeta(page);
+const baseUrl = Astro.url.origin;
+const seo = getPageMeta(page, baseUrl);
 const i18nData = JSON.stringify(translations);
 const jsonLd = {
 	"@context": "https://schema.org",
 	"@type": "Organization",
 	name: site.title,
-	url: site.url,
+	url: baseUrl,
 	description: site.description,
 	keywords: site.keywords,
 	email: site.email,

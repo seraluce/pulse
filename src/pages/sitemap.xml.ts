@@ -1,6 +1,5 @@
 import { getCollection } from 'astro:content';
-
-const siteUrl = 'https://gratefulgroup.com';
+import type { APIRoute } from 'astro';
 
 const staticPages = [
 	{ path: '/', changefreq: 'weekly', priority: '1.0' },
@@ -11,7 +10,8 @@ const staticPages = [
 	{ path: '/contact', changefreq: 'monthly', priority: '0.6' },
 ];
 
-export async function GET() {
+export const GET: APIRoute = async ({ url }) => {
+	const siteUrl = url.origin;
 	const posts = await getCollection('blog');
 
 	const blogUrls = posts.map(post => `  <url>
