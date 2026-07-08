@@ -2,7 +2,7 @@
   "name": "pulse",
   "type": "module",
   "version": "0.0.1",
-  "description": "AI Agents & FreeLLMAPI 聚合平台部署服务",
+  "description": "AI Agents & ModelHub 聚合平台部署服务",
   "engines": {
     "node": ">=22.12.0"
   },

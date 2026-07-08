@@ -291,9 +291,9 @@ const iconNav: IconMap = {
 
 export const site: SiteConfig = {
   title: "Pulse",
-  slogan: "AI Agents & FreeLLMAPI 部署专家",
-  description: "专注 AI 智能体部署与 FreeLLMAPI 聚合平台搭建，为个人和企业提供一站式 AI Agents 安装、配置、运维服务。",
-  keywords: "AI Agents,AI智能体部署,FreeLLMAPI,聚合平台,AI部署,AIAgent安装,API聚合,Pulse",
+  slogan: "AI Agents & ModelHub 部署专家",
+  description: "专注 AI 智能体部署与 ModelHub 聚合平台搭建，为个人和企业提供一站式 AI Agents 安装、配置、运维服务。",
+  keywords: "AI Agents,AI智能体部署,ModelHub,聚合平台,AI部署,AIAgent安装,API聚合,Pulse",
   url: ".",
   lang: "zh-CN",
   locale: "zh_CN",
@@ -331,7 +331,7 @@ export const site: SiteConfig = {
       title: "服务",
       links: [
         { label: "AI Agent 部署", href: "/services" },
-        { label: "FreeLLMAPI 接入", href: "/services" },
+        { label: "ModelHub 接入", href: "/services" },
         { label: "自定义开发", href: "/services" },
         { label: "服务器运维", href: "/services" },
       ],
@@ -372,7 +372,7 @@ export const site: SiteConfig = {
     badge: "AI 部署专家",
     titleMain: "部署 AI 智能体",
     titleHighlight: "轻松搞定",
-    description: "专业提供 AI Agents 安装、FreeLLMAPI 聚合平台搭建、多平台部署与运维服务，让您专注于业务而不是基础设施。",
+    description: "专业提供 AI Agents 安装、ModelHub 聚合平台搭建、多平台部署与运维服务，让您专注于业务而不是基础设施。",
     primaryButton: { label: "开始部署", href: "/contact" },
     secondaryButton: { label: "了解更多", href: "/services" },
     stats: [
@@ -391,7 +391,7 @@ export const site: SiteConfig = {
     },
     items: [
       { title: "AI Agent 部署", desc: "快速安装配置各类 AI 智能体，支持主流框架和模型", icon: "agent", href: "/services" },
-      { title: "FreeLLMAPI 接入", desc: "聚合平台搭建与接入，统一管理多个 LLM API 接口", icon: "api", href: "/services" },
+      { title: "ModelHub 接入", desc: "聚合平台搭建与接入，统一管理多个 LLM API 接口", icon: "api", href: "/services" },
       { title: "自定义 Agent 开发", desc: "根据需求定制开发专属 AI Agent，满足特定业务场景", icon: "custom", href: "/services" },
       { title: "多平台部署", desc: "支持 VPS、云服务器、边缘设备等多平台一键部署", icon: "platform", href: "/services" },
       { title: "服务器运维", desc: "7×24 小时服务器监控与维护，确保服务稳定运行", icon: "server", href: "/services" },
@@ -407,7 +407,7 @@ export const site: SiteConfig = {
     linkText: "了解更多 →",
     items: [
       { title: "专业部署团队", desc: "深耕 AI 部署领域，精通各类 Agent 框架和 API 聚合方案", icon: "deploy", href: "/about" },
-      { title: "成熟聚合方案", desc: "丰富的 FreeLLMAPI 接入经验，快速实现多模型统一管理", icon: "integration", href: "/services" },
+      { title: "成熟聚合方案", desc: "丰富的 ModelHub 接入经验，快速实现多模型统一管理", icon: "integration", href: "/services" },
       { title: "全天候运维", desc: "完善的监控告警体系，确保部署服务持续稳定运行", icon: "ops", href: "/services" },
     ],
   },
@@ -417,7 +417,7 @@ export const site: SiteConfig = {
       title: "关于我们",
       subtitle: "专注 AI 部署，让技术触手可及",
     },
-    description: "Pulse 是一家专注于 AI 智能体部署与 FreeLLMAPI 聚合平台搭建的技术服务团队。我们致力于降低 AI 应用门槛，让个人开发者和企业能够快速部署和使用 AI Agents，无需关注底层基础设施的复杂性。",
+    description: "Pulse 是一家专注于 AI 智能体部署与 ModelHub 聚合平台搭建的技术服务团队。我们致力于降低 AI 应用门槛，让个人开发者和企业能够快速部署和使用 AI Agents，无需关注底层基础设施的复杂性。",
     highlights: [
       "200+ 成功部署案例",
       "50+ 平台/框架支持",
@@ -426,7 +426,7 @@ export const site: SiteConfig = {
     ],
     milestones: [
       { year: "2025 Q1", title: "团队成立", desc: "Pulse 团队成立，专注 AI Agents 部署服务" },
-      { year: "2025 Q2", title: "FreeLLMAPI 方案", desc: "推出 FreeLLMAPI 聚合平台部署方案，支持多模型统一接入" },
+      { year: "2025 Q2", title: "ModelHub 方案", desc: "推出 ModelHub 聚合平台部署方案，支持多模型统一接入" },
       { year: "2025 Q3", title: "业务扩展", desc: "服务覆盖海外 VPS 部署，支持全球节点分发" },
       { year: "2026 Q1", title: "生态建设", desc: "建立完善的部署文档和社区支持体系" },
     ],
@@ -457,7 +457,7 @@ export const site: SiteConfig = {
         title: "我们的故事",
         paragraphs: [
           "Pulse 诞生于 2025 年初，由一群对 AI 技术充满热情的开发者创立。我们发现，虽然大语言模型和 AI Agents 技术飞速发展，但部署和使用的门槛仍然很高——复杂的环境配置、API 接入、服务器运维等问题让许多人望而却步。",
-          "于是我们决定专注于 AI 部署服务，帮助个人和企业快速搭建 AI Agents 和 FreeLLMAPI 聚合平台。从最初的几台 VPS，到如今支持 50+ 平台和框架，我们始终秉持「让部署变得简单」的使命。",
+          "于是我们决定专注于 AI 部署服务，帮助个人和企业快速搭建 AI Agents 和 ModelHub 聚合平台。从最初的几台 VPS，到如今支持 50+ 平台和框架，我们始终秉持「让部署变得简单」的使命。",
           "至今，我们已经成功完成 200+ 个部署项目，服务覆盖中国大陆、香港、新加坡、美国等多个地区。我们的客户包括独立开发者、初创公司和中型企业。",
         ],
         stats: [
@@ -488,7 +488,7 @@ export const site: SiteConfig = {
         },
         items: [
           { year: "2025 Q1", title: "团队成立", desc: "Pulse 团队成立，专注 AI Agents 部署服务，首批 3 位核心成员" },
-          { year: "2025 Q2", title: "FreeLLMAPI 上线", desc: "推出 FreeLLMAPI 聚合平台部署方案，完成首批 10 个部署项目" },
+          { year: "2025 Q2", title: "ModelHub 上线", desc: "推出 ModelHub 聚合平台部署方案，完成首批 10 个部署项目" },
           { year: "2025 Q3", title: "海外扩展", desc: "新增海外 VPS 部署支持，服务覆盖东南亚和北美市场" },
           { year: "2025 Q4", title: "生态完善", desc: "部署项目突破 100+，建立标准化部署流程和自动化运维体系" },
           { year: "2026 Q1", title: "品牌升级", desc: "全面升级服务体系，推出 7×24 运维保障计划" },
@@ -524,10 +524,10 @@ export const site: SiteConfig = {
       },
       cases: [
         {
-          title: "多模型 FreeLLMAPI 聚合平台",
+          title: "多模型 ModelHub 聚合平台",
           category: "API 聚合",
-          desc: "为客户搭建基于 FreeLLMAPI 的多模型聚合平台，统一管理 OpenAI、Claude、Gemini 等接口。",
-          tags: ["FreeLLMAPI", "API 聚合", "负载均衡"],
+          desc: "为客户搭建基于 ModelHub 的多模型聚合平台，统一管理 OpenAI、Claude、Gemini 等接口。",
+          tags: ["ModelHub", "API 聚合", "负载均衡"],
           result: "10+ 模型统一接入",
         },
         {
@@ -610,7 +610,7 @@ export const site: SiteConfig = {
             options: [
               { value: "", label: "请选择服务类型" },
               { value: "agent-deploy", label: "AI Agent 部署" },
-              { value: "freellmapi", label: "FreeLLMAPI 接入" },
+              { value: "modelhub", label: "ModelHub 接入" },
               { value: "custom-dev", label: "自定义开发" },
               { value: "server-ops", label: "服务器运维" },
               { value: "other", label: "其他" },
@@ -635,7 +635,7 @@ export const site: SiteConfig = {
         items: [
           { question: "部署一个 AI Agent 需要多久？", answer: "根据复杂程度，标准部署通常在 30 分钟到 2 小时内完成。定制开发项目需要额外评估。" },
           { question: "支持哪些平台和框架？", answer: "我们支持 Docker、VPS、云服务器等多种部署方式，支持 OpenAI API、Claude、Gemini、Ollama 等主流框架。" },
-          { question: "FreeLLMAPI 是什么？", answer: "FreeLLMAPI 是一个 LLM API 聚合平台，可以统一管理多个模型的 API 接口，实现负载均衡和成本优化。" },
+          { question: "ModelHub 是什么？", answer: "ModelHub 是一个 LLM API 聚合平台，可以统一管理多个模型的 API 接口，实现负载均衡和成本优化。" },
           { question: "是否提供售后运维？", answer: "是的，所有部署项目均提供 30 天免费运维保障，并可续费长期运维服务。" },
         ],
       },

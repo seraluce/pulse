@@ -1,13 +1,13 @@
 ---
-title: 'FreeLLMAPI 聚合平台搭建完整指南'
-description: 'FreeLLMAPI 是一个强大的 LLM API 聚合平台，让你通过一个接口管理多个大模型。本文详细介绍如何搭建和配置 FreeLLMAPI 聚合平台。'
+title: 'ModelHub 聚合平台搭建完整指南'
+description: 'ModelHub 是一个强大的 LLM API 聚合平台，让你通过一个接口管理多个大模型。本文详细介绍如何搭建和配置 ModelHub 聚合平台。'
 pubDate: 2026-06-15
-image: '/images/blog/freellmapi-guide.png'
-tags: ['FreeLLMAPI', 'API 聚合', 'LLM']
+image: '/images/blog/modelhub-guide.png'
+tags: ['ModelHub', 'API 聚合', 'LLM']
 author: 'Pulse'
 ---
 
-FreeLLMAPI 让你能够通过统一的 API 接口访问多个大语言模型，实现负载均衡、成本优化和故障转移。
+ModelHub 让你能够通过统一的 API 接口访问多个大语言模型，实现负载均衡、成本优化和故障转移。
 
 ## 为什么需要 API 聚合？
 
@@ -42,16 +42,16 @@ curl -fsSL https://get.docker.com | sh
 apt install docker-compose-plugin
 ```
 
-### 部署 FreeLLMAPI
+### 部署 ModelHub
 
 ```yaml
 # docker-compose.yml
 version: '3.8'
 
 services:
-  freellmapi:
-    image: freellmapi/server:latest
-    container_name: freellmapi
+  modelhub:
+    image: modelhub/server:latest
+    container_name: modelhub
     restart: always
     ports:
       - "3000:3000"
@@ -94,7 +94,7 @@ strategy:
 
 ### 监控面板
 
-FreeLLMAPI 自带 Web 管理界面，你可以：
+ModelHub 自带 Web 管理界面，你可以：
 - 实时查看 API 调用量
 - 监控各模型响应时间
 - 查看错误率和故障记录
@@ -108,6 +108,6 @@ FreeLLMAPI 自带 Web 管理界面，你可以：
 
 ## 总结
 
-FreeLLMAPI 聚合平台是管理多模型 API 的最佳方案。通过统一接口、负载均衡和故障转移，大幅提升系统的稳定性和可用性。
+ModelHub 聚合平台是管理多模型 API 的最佳方案。通过统一接口、负载均衡和故障转移，大幅提升系统的稳定性和可用性。
 
-需要专业的 FreeLLMAPI 部署服务？[联系我们](/contact)获取一站式部署方案。
+需要专业的 ModelHub 部署服务？[联系我们](/contact)获取一站式部署方案。

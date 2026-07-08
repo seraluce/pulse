@@ -1,8 +1,8 @@
 # Pulse
 
-AI Agents & FreeLLMAPI 聚合平台部署服务网站，基于 [Astro 7](https://astro.build) 构建。
+AI Agents & ModelHub 聚合平台部署服务网站，基于 [Astro 7](https://astro.build) 构建。
 
-为有需要的人提供 AI 智能体安装、FreeLLMAPI 聚合平台部署等专业服务。
+为有需要的人提供 AI 智能体安装、ModelHub 聚合平台部署等专业服务。
 
 ## 技术栈
 

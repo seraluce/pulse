@@ -16,7 +16,7 @@ pubDate: 2024-01-01
 ### 我们提供的服务
 
 - AI Agent 部署服务
-- FreeLLMAPI 聚合平台搭建
+- ModelHub 聚合平台搭建
 - 自定义 AI Agent 开发
 - 服务器运维与技术支持
 

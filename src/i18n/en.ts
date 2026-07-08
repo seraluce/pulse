@@ -1,9 +1,9 @@
 export const en = {
   site: {
     title: "Pulse",
-    slogan: "AI Agents & FreeLLMAPI Deployment Expert",
-    description: "Professional AI Agent deployment and FreeLLMAPI aggregation platform setup services. One-stop deployment, configuration, and maintenance for individuals and businesses.",
-    keywords: "AI Agents,AI Agent deployment,FreeLLMAPI,aggregation platform,AI deployment,API aggregation,Pulse",
+    slogan: "AI Agents & ModelHub Deployment Expert",
+    description: "Professional AI Agent deployment and ModelHub aggregation platform setup services. One-stop deployment, configuration, and maintenance for individuals and businesses.",
+    keywords: "AI Agents,AI Agent deployment,ModelHub,aggregation platform,AI deployment,API aggregation,Pulse",
   },
   nav: {
     home: "Home",
@@ -20,7 +20,7 @@ export const en = {
     badge: "AI Deployment Expert",
     titleMain: "Deploy AI Agents",
     titleHighlight: "Effortlessly",
-    description: "Professional AI Agent installation, FreeLLMAPI aggregation platform setup, multi-platform deployment and maintenance services. Focus on your business, not infrastructure.",
+    description: "Professional AI Agent installation, ModelHub aggregation platform setup, multi-platform deployment and maintenance services. Focus on your business, not infrastructure.",
     primaryButton: "Get Started",
     secondaryButton: "Learn More",
     stats: [
@@ -38,7 +38,7 @@ export const en = {
     },
     items: [
       { title: "AI Agent Deployment", desc: "Quick installation and configuration of various AI agents, supporting mainstream frameworks and models", icon: "agent" },
-      { title: "FreeLLMAPI Integration", desc: "Aggregation platform setup with unified management of multiple LLM API endpoints", icon: "api" },
+      { title: "ModelHub Integration", desc: "Aggregation platform setup with unified management of multiple LLM API endpoints", icon: "api" },
       { title: "Custom Agent Dev", desc: "Custom AI Agent development tailored to your specific business needs", icon: "custom" },
       { title: "Multi-platform Deploy", desc: "One-click deployment across VPS, cloud servers, edge devices and more", icon: "platform" },
       { title: "Server Maintenance", desc: "24/7 server monitoring and maintenance ensuring stable operation", icon: "server" },
@@ -54,7 +54,7 @@ export const en = {
     linkText: "Learn More →",
     items: [
       { title: "Expert Team", desc: "Deep expertise in AI deployment, proficient in all major Agent frameworks and API aggregation", icon: "deploy" },
-      { title: "Mature Solutions", desc: "Rich FreeLLMAPI integration experience for unified multi-model management", icon: "integration" },
+      { title: "Mature Solutions", desc: "Rich ModelHub integration experience for unified multi-model management", icon: "integration" },
       { title: "24/7 Operations", desc: "Comprehensive monitoring and alerting system for continuous stable service", icon: "ops" },
     ],
   },
@@ -64,7 +64,7 @@ export const en = {
       title: "About Us",
       subtitle: "Focused on AI deployment, making technology accessible",
     },
-    description: "Pulse is a technical service team specializing in AI Agent deployment and FreeLLMAPI aggregation platform setup. We are committed to lowering the barrier to AI adoption, enabling individuals and businesses to quickly deploy AI Agents without worrying about infrastructure complexity.",
+    description: "Pulse is a technical service team specializing in AI Agent deployment and ModelHub aggregation platform setup. We are committed to lowering the barrier to AI adoption, enabling individuals and businesses to quickly deploy AI Agents without worrying about infrastructure complexity.",
     highlights: [
       "200+ successful deployments",
       "50+ platforms/frameworks supported",
@@ -73,7 +73,7 @@ export const en = {
     ],
     milestones: [
       { year: "2025 Q1", title: "Team Founded", desc: "Pulse team established, focusing on AI Agents deployment services" },
-      { year: "2025 Q2", title: "FreeLLMAPI Launch", desc: "Launched FreeLLMAPI aggregation platform deployment solution" },
+      { year: "2025 Q2", title: "ModelHub Launch", desc: "Launched ModelHub aggregation platform deployment solution" },
       { year: "2025 Q3", title: "Global Expansion", desc: "Added overseas VPS deployment support, covering Southeast Asia and North America" },
       { year: "2026 Q1", title: "Ecosystem Growth", desc: "Established comprehensive deployment documentation and community support" },
     ],
@@ -98,7 +98,7 @@ export const en = {
         title: "Services",
         links: [
           { label: "AI Agent Deploy", href: "/services" },
-          { label: "FreeLLMAPI Setup", href: "/services" },
+          { label: "ModelHub Setup", href: "/services" },
           { label: "Custom Development", href: "/services" },
           { label: "Server Ops", href: "/services" },
         ],
@@ -130,7 +130,7 @@ export const en = {
         ],
       },
     ],
-    description: "Professional AI Agent deployment and FreeLLMAPI aggregation platform services.",
+    description: "Professional AI Agent deployment and ModelHub aggregation platform services.",
     bottomLinks: [
       { label: "Privacy Policy", href: "/legal/privacy" },
       { label: "Terms of Service", href: "/legal/terms" },
@@ -149,7 +149,7 @@ export const en = {
         title: "Our Story",
         paragraphs: [
           "Pulse was born in early 2025, founded by a group of developers passionate about AI technology. We noticed that while LLMs and AI Agents were advancing rapidly, the deployment barrier remained high—complex environment configuration, API integration, and server maintenance prevented many from getting started.",
-          "So we decided to focus on AI deployment services, helping individuals and businesses quickly set up AI Agents and FreeLLMAPI aggregation platforms. From a few VPS instances to supporting 50+ platforms and frameworks, we've always upheld the mission of 'making deployment simple'.",
+          "So we decided to focus on AI deployment services, helping individuals and businesses quickly set up AI Agents and ModelHub aggregation platforms. From a few VPS instances to supporting 50+ platforms and frameworks, we've always upheld the mission of 'making deployment simple'.",
           "To date, we have successfully completed 200+ deployment projects across Mainland China, Hong Kong, Singapore, and the United States. Our clients include independent developers, startups, and mid-sized enterprises.",
         ],
         stats: [
@@ -180,7 +180,7 @@ export const en = {
         },
         items: [
           { year: "2025 Q1", title: "Team Founded", desc: "Pulse team established with 3 core members, focusing on AI Agents deployment" },
-          { year: "2025 Q2", title: "FreeLLMAPI Launch", desc: "Launched FreeLLMAPI aggregation platform, completed first 10 deployments" },
+          { year: "2025 Q2", title: "ModelHub Launch", desc: "Launched ModelHub aggregation platform, completed first 10 deployments" },
           { year: "2025 Q3", title: "Global Expansion", desc: "Added overseas VPS deployment, covering Southeast Asia and North America" },
           { year: "2025 Q4", title: "Ecosystem Growth", desc: "Reached 100+ deployments, established standardized deployment workflow" },
           { year: "2026 Q1", title: "Brand Upgrade", desc: "Launched 24/7 operations support plan with upgraded service system" },
@@ -216,10 +216,10 @@ export const en = {
       },
       cases: [
         {
-          title: "Multi-Model FreeLLMAPI Platform",
+          title: "Multi-Model ModelHub Platform",
           category: "API Aggregation",
-          desc: "Built a FreeLLMAPI-based multi-model aggregation platform with unified management of OpenAI, Claude, Gemini and more.",
-          tags: ["FreeLLMAPI", "API Aggregation", "Load Balancing"],
+          desc: "Built a ModelHub-based multi-model aggregation platform with unified management of OpenAI, Claude, Gemini and more.",
+          tags: ["ModelHub", "API Aggregation", "Load Balancing"],
           result: "10+ Models Unified",
         },
         {
@@ -297,7 +297,7 @@ export const en = {
         subjectPlaceholder: "Select service type",
         subjectOptions: [
           { value: "agent-deploy", label: "AI Agent Deployment" },
-          { value: "freellmapi", label: "FreeLLMAPI Integration" },
+          { value: "modelhub", label: "ModelHub Integration" },
           { value: "custom-dev", label: "Custom Development" },
           { value: "server-ops", label: "Server Maintenance" },
           { value: "other", label: "Other" },
@@ -319,7 +319,7 @@ export const en = {
         items: [
           { question: "How long does AI Agent deployment take?", answer: "Standard deployment typically takes 30 minutes to 2 hours depending on complexity. Custom projects require additional evaluation." },
           { question: "What platforms and frameworks do you support?", answer: "We support Docker, VPS, cloud servers, and more. Compatible with OpenAI API, Claude, Gemini, Ollama, and other major frameworks." },
-          { question: "What is FreeLLMAPI?", answer: "FreeLLMAPI is an LLM API aggregation platform that enables unified management of multiple model APIs with load balancing and cost optimization." },
+          { question: "What is ModelHub?", answer: "ModelHub is an LLM API aggregation platform that enables unified management of multiple model APIs with load balancing and cost optimization." },
           { question: "Do you provide post-deployment support?", answer: "Yes, all deployment projects include 30 days of free maintenance support, with extended maintenance plans available." },
         ],
       },
