@@ -1,7 +1,6 @@
 ---
 title: 'Claude Sonnet 5 发布：Anthropic 的 Agent 时代来了'
 description: 'Anthropic 发布 Claude Sonnet 5，以 $2/百万 token 的入门价提供接近 Opus 4.8 的性能，Agentic 编码基准达到 63.2%，标志着 AI 从对话工具向自主 Agent 的转型。'
-slug: '20260709'
 pubDate: 2026-07-09
 image: '/images/blog/brand-building.png'
 tags: ['Anthropic', 'Claude', 'AI 模型', 'Agent']

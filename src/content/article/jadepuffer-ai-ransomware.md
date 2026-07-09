@@ -1,7 +1,6 @@
 ---
 title: 'JADEPUFFER 深度解析：首个完全自主的 AI 勒索软件'
 description: '安全公司 Sysdig 确认了首个由 AI 代理完全自主执行的勒索软件攻击——JADEPUFFER。从入侵到加密数据库，全程无人类操控，标志着网络安全的根本性转折。'
-slug: '20260711'
 pubDate: 2026-07-11
 image: '/images/blog/data-driven.png'
 tags: ['AI 安全', '勒索软件', '网络攻击', 'Langflow']

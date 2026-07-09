@@ -1,7 +1,6 @@
 ---
 title: 'GPT-5.6 被美国政府锁定：AI 安全治理的分水岭'
 description: '美国政府要求 OpenAI 限制 GPT-5.6 的发布，仅有约 20 家政府批准的组织可访问。这是历史上首次美国政府对前沿 AI 模型实施发布管控，标志着 AI 安全治理进入新时代。'
-slug: '20260710'
 pubDate: 2026-07-10
 image: '/images/blog/digital-transformation.svg'
 tags: ['OpenAI', 'GPT-5.6', 'AI 安全', 'AI 治理']

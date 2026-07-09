@@ -1,7 +1,6 @@
 ---
 title: 'AI Agent 部署：从零开始的实战指南'
 description: '部署 AI Agent 听起来复杂，但只要掌握正确的方法，30 分钟内就能完成。本文从环境准备、框架选择到上线运维，手把手教你完成第一次部署。'
-slug: '20260701'
 pubDate: 2026-07-01
 image: '/images/blog/brand-building.png'
 tags: ['AI Agent', '部署指南', '入门教程']

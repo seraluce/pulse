@@ -1,7 +1,6 @@
 ---
 title: 'Anthropic 签下 190 亿美元算力租约：AI 基础设施军备竞赛白热化'
 description: 'Anthropic 与 TeraWulf 签署 20 年、190 亿美元的数据中心租约，在肯塔基州前铝厂旧址建设 401MW AI 算力设施。同时 CoreWeave、Crusoe 等公司也在大规模融资扩张。'
-slug: '20260713'
 pubDate: 2026-07-13
 image: '/images/blog/digital-transformation.svg'
 tags: ['AI 基础设施', '数据中心', 'Anthropic', '算力']

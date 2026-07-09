@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { getCollection } from 'astro:content';
+import { getEffectiveSlug } from '../../lib/slug';
 
 const posts = (await getCollection('article')).sort(
 	(a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
@@ -24,7 +25,7 @@ const posts = (await getCollection('article')).sort(
 			<div class="container">
 				<div class="blog-grid">
 					{posts.map((post) => {
-					const slug = post.data.slug || post.id;
+					const slug = getEffectiveSlug(post);
 					return (
 						<a href={`/article/${slug}`} class="blog-card animate-on-scroll" title={post.data.title}>
 							<div class="blog-card-cover">

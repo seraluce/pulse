@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
+import { getEffectiveSlug } from '../../lib/slug';
 import { site } from '../../config';
 
 export const GET: APIRoute = async ({ params }) => {
@@ -9,7 +10,7 @@ export const GET: APIRoute = async ({ params }) => {
 	}
 
 	const posts = await getCollection('article');
-	const post = posts.find(p => (p.data.slug || p.id) === slugParam);
+	const post = posts.find(p => getEffectiveSlug(p) === slugParam);
 
 	if (!post) {
 		return new Response('Post not found', { status: 404 });

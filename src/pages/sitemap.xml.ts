@@ -1,4 +1,5 @@
 import { getCollection } from 'astro:content';
+import { getEffectiveSlug } from '../lib/slug';
 import type { APIRoute } from 'astro';
 
 const staticPages = [
@@ -15,7 +16,7 @@ export const GET: APIRoute = async ({ url }) => {
 	const posts = await getCollection('article');
 
 	const blogUrls = posts.map(post => `  <url>
-    <loc>${siteUrl}/article/${post.data.slug || post.id}</loc>
+    <loc>${siteUrl}/article/${getEffectiveSlug(post)}</loc>
     <lastmod>${post.data.pubDate.toISOString().split('T')[0]}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

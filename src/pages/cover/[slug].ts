@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
+import { getEffectiveSlug } from '../../lib/slug';
 
 export const GET: APIRoute = async ({ params }) => {
 	const { slug: slugParam } = params;
@@ -8,7 +9,7 @@ export const GET: APIRoute = async ({ params }) => {
 	}
 
 	const posts = await getCollection('article');
-	const post = posts.find(p => (p.data.slug || p.id) === slugParam);
+	const post = posts.find(p => getEffectiveSlug(p) === slugParam);
 
 	if (!post) {
 		return new Response('Post not found', { status: 404 });
@@ -65,7 +66,7 @@ export const GET: APIRoute = async ({ params }) => {
 		return Math.abs(h);
 	}
 
-	const hash = hashStr(post.data.slug || post.id);
+	const hash = hashStr(getEffectiveSlug(post));
 	const colors = colorSets[hash % colorSets.length];
 
 	// 计算标题垂直居中位置

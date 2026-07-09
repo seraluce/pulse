@@ -1,7 +1,6 @@
 ---
 title: 'xAI 正式更名为 SpaceXAI：AI 行业上市潮来袭'
 description: 'xAI 更名为 SpaceXAI 并纳入纳斯达克 100 指数，SK Hynix 即将在纽交所 IPO，Anthropic 和 OpenAI 也在为 Q4 上市做准备。AI 产业正在经历从私募到公开市场的全面转变。'
-slug: '20260712'
 pubDate: 2026-07-12
 image: '/images/blog/brand-building.png'
 tags: ['xAI', 'SpaceXAI', 'IPO', 'AI 市场']

@@ -1,7 +1,6 @@
 ---
 title: 'ModelHub 聚合平台搭建完整指南'
 description: 'ModelHub 是一个强大的 LLM API 聚合平台，让你通过一个接口管理多个大模型。本文详细介绍如何搭建和配置 ModelHub 聚合平台。'
-slug: '20260615'
 pubDate: 2026-06-15
 image: '/images/blog/data-driven.png'
 tags: ['ModelHub', 'API 聚合', 'LLM']
