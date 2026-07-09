@@ -76,7 +76,7 @@ const hero = site.hero;
 		height: 500px;
 		top: 5%;
 		left: 10%;
-		background: radial-gradient(circle, rgba(0, 220, 130, 0.25) 0%, rgba(0, 220, 130, 0.08) 40%, transparent 70%);
+		background: radial-gradient(circle, rgba(0, 180, 100, 0.4) 0%, rgba(0, 180, 100, 0.15) 40%, transparent 70%);
 		animation: float-a 14s ease-in-out infinite;
 	}
 
@@ -85,7 +85,7 @@ const hero = site.hero;
 		height: 420px;
 		top: 40%;
 		right: 10%;
-		background: radial-gradient(circle, rgba(255, 138, 76, 0.22) 0%, rgba(255, 138, 76, 0.06) 40%, transparent 70%);
+		background: radial-gradient(circle, rgba(255, 138, 76, 0.35) 0%, rgba(255, 138, 76, 0.12) 40%, transparent 70%);
 		animation: float-b 18s ease-in-out infinite;
 	}
 
@@ -94,7 +94,7 @@ const hero = site.hero;
 		height: 360px;
 		bottom: 10%;
 		left: 30%;
-		background: radial-gradient(circle, rgba(255, 217, 61, 0.18) 0%, rgba(255, 217, 61, 0.05) 40%, transparent 70%);
+		background: radial-gradient(circle, rgba(255, 200, 50, 0.3) 0%, rgba(255, 200, 50, 0.1) 40%, transparent 70%);
 		animation: float-c 12s ease-in-out infinite;
 	}
 
@@ -141,15 +141,15 @@ const hero = site.hero;
 		height: 220px;
 		border-radius: 50%;
 		background: radial-gradient(circle at 35% 35%,
-			rgba(0, 220, 130, 0.25) 0%,
-			rgba(255, 138, 76, 0.15) 35%,
-			rgba(255, 217, 61, 0.08) 65%,
+			rgba(0, 180, 100, 0.4) 0%,
+			rgba(255, 138, 76, 0.25) 35%,
+			rgba(255, 180, 50, 0.15) 65%,
 			transparent 80%
 		);
 		box-shadow:
-			0 0 80px rgba(0, 220, 130, 0.15),
-			0 0 160px rgba(255, 138, 76, 0.08),
-			inset 0 0 60px rgba(0, 220, 130, 0.1);
+			0 0 80px rgba(0, 180, 100, 0.3),
+			0 0 160px rgba(255, 138, 76, 0.15),
+			inset 0 0 60px rgba(0, 180, 100, 0.2);
 		animation: sphere-breathe 4s ease-in-out infinite;
 	}
 
@@ -210,12 +210,18 @@ const hero = site.hero;
 		font-size: 13px;
 		font-weight: 500;
 		letter-spacing: 0.02em;
-		color: #00DC82;
-		border: 1px solid rgba(0, 220, 130, 0.25);
+		color: #059669;
+		border: 1px solid rgba(5, 150, 105, 0.3);
 		border-radius: 100px;
 		margin-bottom: 28px;
-		background: rgba(0, 220, 130, 0.06);
+		background: rgba(5, 150, 105, 0.1);
 		backdrop-filter: blur(8px);
+	}
+
+	:root.dark .hero-badge {
+		color: #00DC82;
+		border: 1px solid rgba(0, 220, 130, 0.25);
+		background: rgba(0, 220, 130, 0.06);
 	}
 
 	.hero-badge::before {
@@ -242,6 +248,13 @@ const hero = site.hero;
 	}
 
 	.hero h1 span {
+		background: linear-gradient(330deg, #059669 0%, #2563EB 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	:root.dark .hero h1 span {
 		background: linear-gradient(330deg, #00DC82 0%, #1664FF 100%);
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
@@ -276,12 +289,17 @@ const hero = site.hero;
 	}
 
 	.btn-primary {
-		background: linear-gradient(135deg, #00DC82 0%, #1664FF 100%);
+		background: linear-gradient(135deg, #059669 0%, #2563EB 100%);
 		color: white;
 		border: none;
-		box-shadow: 0 4px 20px rgba(0, 220, 130, 0.3);
+		box-shadow: 0 4px 20px rgba(5, 150, 105, 0.35);
 		position: relative;
 		overflow: hidden;
+	}
+
+	:root.dark .btn-primary {
+		background: linear-gradient(135deg, #00DC82 0%, #1664FF 100%);
+		box-shadow: 0 4px 20px rgba(0, 220, 130, 0.3);
 	}
 
 	.btn-primary::before {
@@ -297,6 +315,10 @@ const hero = site.hero;
 
 	.btn-primary:hover {
 		transform: translateY(-2px);
+		box-shadow: 0 8px 32px rgba(5, 150, 105, 0.45);
+	}
+
+	:root.dark .btn-primary:hover {
 		box-shadow: 0 8px 32px rgba(0, 220, 130, 0.4);
 	}
 
@@ -312,9 +334,15 @@ const hero = site.hero;
 	}
 
 	.btn-outline:hover {
+		border-color: #059669;
+		color: #059669;
+		transform: translateY(-2px);
+		box-shadow: 0 4px 20px rgba(5, 150, 105, 0.15);
+	}
+
+	:root.dark .btn-outline:hover {
 		border-color: #00DC82;
 		color: #00DC82;
-		transform: translateY(-2px);
 		box-shadow: 0 4px 20px rgba(0, 220, 130, 0.1);
 	}
 
@@ -342,6 +370,13 @@ const hero = site.hero;
 		font-size: 28px;
 		font-weight: 700;
 		letter-spacing: -0.02em;
+		background: linear-gradient(135deg, #059669, #2563EB);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	:root.dark .stat-num {
 		background: linear-gradient(135deg, #00DC82, #1664FF);
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
