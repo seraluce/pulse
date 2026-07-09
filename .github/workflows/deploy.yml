@@ -67,6 +67,17 @@ jobs:
           name: build-artifacts
           path: dist/
 
+      - name: Remove unused KV binding from wrangler.json
+        run: |
+          node -e "
+            const fs = require('fs');
+            const p = 'dist/server/wrangler.json';
+            const cfg = JSON.parse(fs.readFileSync(p, 'utf-8'));
+            cfg.kv_namespaces = [];
+            if (cfg.previews) cfg.previews.kv_namespaces = [];
+            fs.writeFileSync(p, JSON.stringify(cfg, null, 2));
+          "
+
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
         with:
@@ -110,6 +121,17 @@ jobs:
         with:
           name: build-artifacts
           path: dist/
+
+      - name: Remove unused KV binding from wrangler.json
+        run: |
+          node -e "
+            const fs = require('fs');
+            const p = 'dist/server/wrangler.json';
+            const cfg = JSON.parse(fs.readFileSync(p, 'utf-8'));
+            cfg.kv_namespaces = [];
+            if (cfg.previews) cfg.previews.kv_namespaces = [];
+            fs.writeFileSync(p, JSON.stringify(cfg, null, 2));
+          "
 
       - name: Deploy preview to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
