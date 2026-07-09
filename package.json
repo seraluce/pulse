@@ -10,7 +10,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "deploy": "astro build && wrangler deploy --config dist/server/wrangler.json",
+    "deploy": "pnpm build && wrangler deploy --config dist/server/wrangler.json",
+    "deploy:preview": "pnpm build && wrangler deploy --config dist/server/wrangler.json --env preview",
+    "type-check": "astro check",
     "astro": "astro"
   },
   "dependencies": {
