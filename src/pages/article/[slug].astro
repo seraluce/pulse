@@ -329,6 +329,10 @@ const nextPost = allPosts[currentIndex - 1];
 		position: relative;
 	}
 
+	.post-content :global(blockquote p:last-child) {
+		margin-bottom: 0;
+	}
+
 	.post-content :global(blockquote::before) {
 		content: '"';
 		position: absolute;
@@ -361,6 +365,26 @@ const nextPost = allPosts[currentIndex - 1];
 		box-shadow: 0 4px 16px var(--color-card-shadow);
 	}
 
+	@media (max-width: 480px) {
+		.post-content :global(pre) {
+			padding: 16px;
+			margin-left: -20px;
+			margin-right: -20px;
+			border-radius: 0;
+			border-left: none;
+			border-right: none;
+			font-size: 13px;
+		}
+		.post-content :global(blockquote) {
+			padding: 18px 20px;
+			margin: 24px -20px;
+			border-radius: 0;
+			border-left: none;
+			border-right: none;
+			font-size: 14px;
+		}
+	}
+
 	.post-content :global(pre code) {
 		padding: 0;
 		background: none;
@@ -389,6 +413,22 @@ const nextPost = allPosts[currentIndex - 1];
 	.post-content :global(th) {
 		font-weight: 600;
 		background: var(--color-bg-secondary);
+	}
+
+	@media (max-width: 480px) {
+		.post-content :global(table) {
+			font-size: 13px;
+			margin-left: -20px;
+			margin-right: -20px;
+			border-radius: 0;
+			border-left: none;
+			border-right: none;
+			width: calc(100% + 40px);
+		}
+		.post-content :global(th),
+		.post-content :global(td) {
+			padding: 10px 12px;
+		}
 	}
 
 	.post-content :global(tr:last-child td) {
@@ -487,44 +527,105 @@ const nextPost = allPosts[currentIndex - 1];
 
 	@media (max-width: 768px) {
 		.post-header {
-			padding-top: 40px;
+			padding-top: 32px;
 			padding-bottom: 32px;
+		}
+		.post-header h1 {
+			font-size: 26px;
+		}
+		.post-back {
+			margin-bottom: 20px;
+		}
+		.post-meta {
+			margin-bottom: 14px;
+		}
+		.post-desc {
+			margin-bottom: 18px;
 		}
 		.post-nav {
 			grid-template-columns: 1fr;
+			gap: 12px;
+			margin-top: 48px;
+			padding-top: 28px;
+		}
+		.post-nav-link {
+			padding: 18px 16px;
 		}
 		.post-nav-link.next {
 			text-align: left;
 			align-items: flex-start;
 		}
 		.post-cover {
-			margin-top: 32px;
+			margin-top: 28px;
 		}
 		.post-cover img {
 			border-radius: var(--radius);
-			max-height: 280px;
-		}
-		.post-header h1 {
-			font-size: 28px;
+			max-height: 220px;
 		}
 	}
 
 	@media (max-width: 480px) {
-		.container {
-			padding-left: 20px;
-			padding-right: 20px;
+		.post-header {
+			padding-top: 20px;
+			padding-bottom: 20px;
+		}
+		.post-header h1 {
+			font-size: 22px;
+			margin-bottom: 12px;
+		}
+		.post-back {
+			margin-bottom: 14px;
+			font-size: 12px;
+			padding: 4px 10px;
+		}
+		.post-meta {
+			gap: 8px;
+			margin-bottom: 10px;
+		}
+		.post-meta time {
+			font-size: 11px;
+			padding: 3px 8px;
+		}
+		.post-author {
+			font-size: 11px;
+		}
+		.post-desc {
+			font-size: 14px;
+			margin-bottom: 14px;
+			line-height: 1.6;
+		}
+		.post-tag {
+			font-size: 11px;
+			padding: 3px 10px;
+		}
+		.post-cover {
+			margin-top: 16px;
+		}
+		.post-cover img {
+			max-height: 160px;
+			border-radius: var(--radius);
+			box-shadow: 0 12px 40px var(--color-card-shadow-hover);
 		}
 		.post-content {
 			font-size: 15px;
+			line-height: 1.75;
 		}
 		.post-content :global(h2) {
-			font-size: 20px;
+			font-size: 19px;
+			margin-top: 32px;
 		}
-		.post-header h1 {
-			font-size: 24px;
+		.post-content :global(h3) {
+			font-size: 17px;
 		}
-		.post-desc {
-			font-size: 15px;
+		.post-nav {
+			margin-top: 36px;
+			padding-top: 24px;
+		}
+		.post-nav-link {
+			padding: 14px 14px;
+		}
+		.post-nav-title {
+			font-size: 14px;
 		}
 	}
 </style>
