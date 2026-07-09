@@ -72,6 +72,7 @@ export interface PageHeroConfig {
   tag: string;
   title: string;
   subtitle: string;
+  description?: string;
 }
 
 export interface StoryConfig {
@@ -294,7 +295,7 @@ export const site: SiteConfig = {
   slogan: "AI Agents & ModelHub 部署专家",
   description: "专注 AI 智能体部署与 ModelHub 聚合平台搭建，为个人和企业提供一站式 AI Agents 安装、配置、运维服务。",
   keywords: "AI Agents,AI智能体部署,ModelHub,聚合平台,AI部署,AIAgent安装,API聚合,Pulse",
-  url: ".",
+  url: "https://pulse.seraluce.workers.dev",
   lang: "zh-CN",
   locale: "zh_CN",
   twitter: "@pulse_deploy",
@@ -304,7 +305,7 @@ export const site: SiteConfig = {
   founded: "2025-01-01",
   favicon: "/favicon.svg",
   faviconIco: "/favicon.ico",
-  appleTouchIcon: "/apple-touch-icon.png",
+  appleTouchIcon: "/favicon.svg",
   ogImage: "/og-image.svg",
   logo: {
     light: "/logo-light.svg",
@@ -447,11 +448,12 @@ export const site: SiteConfig = {
     secondaryButton: { label: "查看案例", href: "/cases" },
   },
   pages: {
-    about: {
+	about: {
       hero: {
         tag: "ABOUT US",
         title: "关于我们",
         subtitle: "了解 Pulse 的故事、愿景和团队",
+        description: "了解 Pulse 团队的故事、核心价值观和发展历程。我们专注于 AI 智能体部署与 ModelHub 聚合平台搭建。",
       },
       story: {
         title: "我们的故事",
@@ -509,18 +511,20 @@ export const site: SiteConfig = {
         ],
       },
     },
-    services: {
+	services: {
       hero: {
         tag: "OUR SERVICES",
         title: "部署服务",
         subtitle: "从 AI Agent 到聚合平台，全方位部署解决方案",
+        description: "提供 AI Agent 部署、ModelHub 聚合平台搭建、自定义开发、多平台部署及服务器运维等一站式服务。",
       },
     },
-    cases: {
+	cases: {
       hero: {
         tag: "OUR WORK",
         title: "部署案例",
         subtitle: "每一个部署项目都是我们与客户共同创造的成果",
+        description: "查看 Pulse 的成功部署案例，涵盖 AI Agent 部署、ModelHub 聚合平台、企业 LLM 网关等多个领域。",
       },
       cases: [
         {
@@ -580,19 +584,20 @@ export const site: SiteConfig = {
         ],
       },
     },
-    contact: {
+	contact: {
       pageHero: {
         tag: "CONTACT US",
         title: "联系我们",
         subtitle: "无论您要部署什么，都欢迎与我们交流",
+        description: "联系我们获取 AI Agent 部署和 ModelHub 聚合平台搭建服务。专业团队为您提供一站式部署解决方案。",
       },
       infoTitle: "与我们取得联系",
       infoDesc: "我们的团队随时准备为您提供部署支持。您可以通过以下方式联系我们，或直接填写表单留言。",
       contactInfo: [
         { icon: "mail", title: "邮箱", value: "evanyanet@gmail.com", href: "mailto:evanyanet@gmail.com" },
         { icon: "phone", title: "电话", value: "400-000-0000", href: "tel:+864000000000" },
-        { icon: "location", title: "地址", value: "中国·深圳", href: "#" },
-        { icon: "clock", title: "工作时间", value: "周一至周日 9:00-23:00", href: "#" },
+	{ icon: "location", title: "地址", value: "中国·深圳", href: "" },
+	{ icon: "clock", title: "工作时间", value: "周一至周日 9:00-23:00", href: "" },
       ],
       formRows: [
         [

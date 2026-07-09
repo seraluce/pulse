@@ -2,7 +2,7 @@
 title: '从工具到伙伴：人工智能发展的三次跃迁与未来图景'
 description: '当机器开始“理解”而非“计算”，人类与AI的关系正站在历史性的转折点上。'
 pubDate: 2026-07-08
-image: '/images/blog/next-frontierg.png'
+image: ''
 tags: ['人工智能', '未来愿景', '深度学习']
 author: 'Pulse'
 ---

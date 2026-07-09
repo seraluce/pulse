@@ -9,7 +9,7 @@ const iconSvg = site.icons.contact;
 const faq = pageCfg.faq;
 ---
 
-<Layout page={{ title: pageCfg.pageHero.title, path: '/contact', description: site.description }}>
+<Layout page={{ title: pageCfg.pageHero.title, path: '/contact', description: pageCfg.pageHero.description ?? site.description }}>
 	<Header />
 	<main>
 		<section class="page-hero">

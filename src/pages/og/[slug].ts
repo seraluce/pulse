@@ -88,13 +88,6 @@ export const GET: APIRoute = async ({ params }) => {
 	});
 };
 
-export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	return posts.map(post => ({
-		params: { slug: post.id },
-	}));
-}
-
 function escapeXml(str: string): string {
 	return str
 		.replace(/&/g, '&amp;')

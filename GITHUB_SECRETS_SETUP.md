@@ -83,7 +83,7 @@
    - 点击查看详细日志
 
 3. **验证部署**：
-   - 等待部署完成后，访问：https://pulse.sralce.workers.dev
+   - 等待部署完成后，访问：https://pulse.seraluce.workers.dev
    - 确认网站正常访问
 
 ## 🔍 查看已配置的 Secrets

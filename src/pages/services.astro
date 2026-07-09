@@ -10,7 +10,7 @@ import { site } from '../config';
 const hero = site.pages.services.hero;
 ---
 
-<Layout page={{ title: hero.title, path: '/services', description: site.description }}>
+<Layout page={{ title: hero.title, path: '/services', description: hero.description ?? site.description }}>
 	<Header />
 	<main>
 		<section class="page-hero">

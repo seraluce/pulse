@@ -9,7 +9,7 @@ const pageCfg = site.pages.about;
 const iconSvg = site.icons.values;
 ---
 
-<Layout page={{ title: pageCfg.hero.title, path: '/about', description: site.description }}>
+<Layout page={{ title: pageCfg.hero.title, path: '/about', description: pageCfg.hero.description ?? site.description }}>
 	<Header />
 	<main>
 		<section class="page-hero">

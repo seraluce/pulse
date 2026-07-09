@@ -8,7 +8,7 @@ import { site } from '../config';
 const pageCfg = site.pages.cases;
 ---
 
-<Layout page={{ title: pageCfg.hero.title, path: '/cases', description: site.description }}>
+<Layout page={{ title: pageCfg.hero.title, path: '/cases', description: pageCfg.hero.description ?? site.description }}>
 	<Header />
 	<main>
 		<section class="page-hero">

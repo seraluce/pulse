@@ -1,60 +1,19 @@
 name = "pulse"
 compatibility_date = "2026-07-09"
 
-[build]
-command = "pnpm build"
-watch_dir = "./src"
-
-[build.upload]
-format = "modules"
-main = "./dist/server/entry.mjs"
-dir = "./dist/server"
-
 [env.production]
 name = "pulse-production"
 compatibility_date = "2026-07-09"
 
-[[env.production.kv_namespaces]]
-binding = "SESSION"
-id = "YOUR_KV_NAMESPACE_ID"
-
-[[env.production.r2_buckets]]
-binding = "ASSETS"
-bucket_name = "pulse-assets"
-
-[[env.production.d1_databases]]
-binding = "DB"
-database_name = "pulse-db"
-database_id = "YOUR_D1_DATABASE_ID"
-
 [env.production.env_vars]
 NODE_ENV = "production"
-
-[env.production.secrets]
-CLOUDFLARE_API_TOKEN = ""
 
 [env.preview]
 name = "pulse-preview"
 compatibility_date = "2026-07-09"
 
-[[env.preview.kv_namespaces]]
-binding = "SESSION"
-id = "YOUR_KV_NAMESPACE_ID"
-
-[[env.preview.r2_buckets]]
-binding = "ASSETS"
-bucket_name = "pulse-assets"
-
-[[env.preview.d1_databases]]
-binding = "DB"
-database_name = "pulse-db"
-database_id = "YOUR_D1_DATABASE_ID"
-
 [env.preview.env_vars]
 NODE_ENV = "preview"
-
-[env.preview.secrets]
-CLOUDFLARE_API_TOKEN = ""
 
 [observability]
 enabled = true

@@ -2,7 +2,7 @@
 title: 'AI 服务器运维：保障服务稳定运行的五个关键实践'
 description: 'AI 服务部署上线只是开始，持续的运维才是保障服务稳定运行的关键。本文分享五个经过验证的运维实践。'
 pubDate: 2026-06-25
-image: '/images/blog/ai-server-ops.png'
+image: '/images/blog/digital-transformation.svg'
 tags: ['服务器运维', 'AI 部署', 'DevOps']
 author: 'Pulse'
 ---
