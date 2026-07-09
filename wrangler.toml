@@ -21,6 +21,18 @@ enabled = true
 [triggers]
 crons = []
 
+[[kv_namespaces]]
+binding = "SESSION"
+id = "6f78704f3e674ad5b2e2365f11a2520e"
+
+[env.production.kv_namespaces]
+binding = "SESSION"
+id = "6f78704f3e674ad5b2e2365f11a2520e"
+
+[env.preview.kv_namespaces]
+binding = "SESSION"
+id = "6f78704f3e674ad5b2e2365f11a2520e"
+
 [vars]
 # 环境变量配置
 NODE_ENV = "development"
