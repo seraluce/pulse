@@ -3,13 +3,13 @@ import { getCollection } from 'astro:content';
 import { site } from '../../config';
 
 export const GET: APIRoute = async ({ params }) => {
-	const { slug } = params;
-	if (!slug) {
+	const { slug: slugParam } = params;
+	if (!slugParam) {
 		return new Response('Not found', { status: 404 });
 	}
 
-	const posts = await getCollection('blog');
-	const post = posts.find(p => p.id === slug);
+	const posts = await getCollection('article');
+	const post = posts.find(p => (p.data.slug || p.id) === slugParam);
 
 	if (!post) {
 		return new Response('Post not found', { status: 404 });

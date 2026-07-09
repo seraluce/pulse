@@ -109,13 +109,13 @@ export const zh = {
           { label: "关于我们", href: "/about" },
           { label: "服务", href: "/services" },
           { label: "案例", href: "/cases" },
-          { label: "博客", href: "/blog" },
+          { label: "博客", href: "/article" },
         ],
       },
       {
         title: "资源",
         links: [
-          { label: "博客文章", href: "/blog" },
+          { label: "博客文章", href: "/article" },
           { label: "部署案例", href: "/cases" },
           { label: "常见问题", href: "/contact#faq" },
           { label: "联系我们", href: "/contact" },

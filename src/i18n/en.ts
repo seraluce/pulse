@@ -109,13 +109,13 @@ export const en = {
           { label: "About Us", href: "/about" },
           { label: "Services", href: "/services" },
           { label: "Cases", href: "/cases" },
-          { label: "Blog", href: "/blog" },
+          { label: "Blog", href: "/article" },
         ],
       },
       {
         title: "Resources",
         links: [
-          { label: "Blog Articles", href: "/blog" },
+          { label: "Blog Articles", href: "/article" },
           { label: "Deploy Cases", href: "/cases" },
           { label: "FAQ", href: "/contact#faq" },
           { label: "Contact Us", href: "/contact" },

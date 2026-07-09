@@ -4,12 +4,12 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { getCollection, render } from 'astro:content';
 
-const { slug } = Astro.params;
-const allPosts = (await getCollection('blog')).sort(
+const { slug: slugParam } = Astro.params;
+const allPosts = (await getCollection('article')).sort(
 	(a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
 );
 
-const post = allPosts.find(p => p.id === slug);
+const post = allPosts.find(p => (p.data.slug || p.id) === slugParam);
 
 if (!post) {
 	return Astro.redirect('/404');
@@ -17,23 +17,24 @@ if (!post) {
 
 const { Content } = await render(post);
 
-const currentIndex = allPosts.findIndex(p => p.id === post.id);
+const postSlug = post.data.slug || post.id;
+const currentIndex = allPosts.findIndex(p => (p.data.slug || p.id) === postSlug);
 const prevPost = allPosts[currentIndex + 1];
 const nextPost = allPosts[currentIndex - 1];
 ---
 
 <Layout page={{
 	title: post.data.title,
-	path: `/blog/${post.id}`,
+	path: `/article/${postSlug}`,
 	description: post.data.description,
-	image: `/og/${post.id}`,
+	image: `/og/${postSlug}`,
 }}>
 	<Header />
 	<main>
 		<article class="blog-post">
 			<header class="post-header">
 				<div class="container">
-					<a href="/blog" class="post-back">← 返回博客</a>
+					<a href="/article" class="post-back">← 返回博客</a>
 					<div class="post-meta">
 						<time datetime={post.data.pubDate.toISOString()}>
 							{post.data.pubDate.toLocaleDateString('zh-CN', { year: 'numeric', month: 'numeric', day: 'numeric' }).replace(/-/g, '/')}
@@ -51,7 +52,7 @@ const nextPost = allPosts[currentIndex - 1];
 					)}
 				</div>
 				<div class="post-cover">
-					<img src={`/cover/${post.id}`} alt={post.data.title} />
+					<img src={`/cover/${postSlug}`} alt={post.data.title} />
 				</div>
 			</header>
 
@@ -62,16 +63,16 @@ const nextPost = allPosts[currentIndex - 1];
 
 				<nav class="post-nav">
 					{prevPost && (
-						<a href={`/blog/${prevPost.id}`} class="post-nav-link prev">
-							<span class="post-nav-label">← 上一篇</span>
-							<span class="post-nav-title">{prevPost.data.title}</span>
-						</a>
+<a href={`/article/${prevPost.data.slug || prevPost.id}`} class="post-nav-link prev">
+		<span class="post-nav-label">← 上一篇</span>
+		<span class="post-nav-title">{prevPost.data.title}</span>
+	</a>
 					)}
 					{nextPost && (
-						<a href={`/blog/${nextPost.id}`} class="post-nav-link next">
-							<span class="post-nav-label">下一篇 →</span>
-							<span class="post-nav-title">{nextPost.data.title}</span>
-						</a>
+<a href={`/article/${nextPost.data.slug || nextPost.id}`} class="post-nav-link next">
+		<span class="post-nav-label">下一篇 →</span>
+		<span class="post-nav-title">{nextPost.data.title}</span>
+	</a>
 					)}
 				</nav>
 			</div>

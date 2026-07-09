@@ -4,12 +4,12 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('blog')).sort(
+const posts = (await getCollection('article')).sort(
 	(a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
 );
 ---
 
-<Layout page={{ title: '博客', path: '/blog', description: 'Pulse 博客，分享 AI Agent 部署、ModelHub 聚合平台、AI 技术趋势等领域的专业指南和实战经验。' }}>
+<Layout page={{ title: '博客', path: '/article', description: 'Pulse 博客，分享 AI Agent 部署、ModelHub 聚合平台、AI 技术趋势等领域的专业指南和实战经验。' }}>
 	<Header />
 	<main>
 		<section class="page-hero">
@@ -23,10 +23,12 @@ const posts = (await getCollection('blog')).sort(
 		<section class="blog-list section">
 			<div class="container">
 				<div class="blog-grid">
-					{posts.map((post) => (
-						<a href={`/blog/${post.id}`} class="blog-card animate-on-scroll" title={post.data.title}>
+					{posts.map((post) => {
+					const slug = post.data.slug || post.id;
+					return (
+						<a href={`/article/${slug}`} class="blog-card animate-on-scroll" title={post.data.title}>
 							<div class="blog-card-cover">
-								<img src={`/cover/${post.id}`} alt={post.data.title} />
+								<img src={`/cover/${slug}`} alt={post.data.title} />
 							</div>
 							<div class="blog-card-body">
 								<h2 class="blog-card-title">{post.data.title}</h2>
@@ -44,7 +46,8 @@ const posts = (await getCollection('blog')).sort(
 								</div>
 							</div>
 						</a>
-					))}
+					);
+				})}
 				</div>
 			</div>
 		</section>
